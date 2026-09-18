@@ -491,7 +491,217 @@ button:focus-visible,.zoogle-wrap:focus-visible,.meteor-glow:focus-visible,#eggC
 <style id="tutorialStyles">
 .tutorial-card{position:fixed;left:50%;bottom:92px;transform:translate(-50%,16px);z-index:125;width:min(390px,calc(100vw - 24px));padding:14px 46px 14px 16px;border-radius:20px;background:linear-gradient(180deg,rgba(255,251,226,.98),rgba(244,220,165,.98));border:4px solid #6e411b;box-shadow:inset 0 2px 0 rgba(255,255,255,.65),0 14px 30px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:.2s opacity,.2s transform;color:#3c2813}.tutorial-card.show{opacity:1;pointer-events:auto;transform:translate(-50%,0)}.tutorial-step{font-size:13px;font-weight:1000;text-transform:uppercase;letter-spacing:.55px;color:#6b451d;margin-bottom:3px}.tutorial-text{font-size:15px;font-weight:800;line-height:1.35}.tutorial-action{margin-top:9px;width:100%}.tutorial-skip{position:absolute;right:8px;top:8px;width:31px;height:31px;border-radius:10px;background:linear-gradient(#f0d39b,#c58b45);border:2px solid #74471f;font-size:20px;font-weight:1000;line-height:1}@media(max-width:560px){.tutorial-card{bottom:72px;width:calc(100vw - 16px);padding:11px 42px 11px 12px}.tutorial-text{font-size:13px}.tutorial-action{padding:7px 8px}.tutorial-step{font-size:11px}}
 </style>
-<script type="text/javascript" nonce="8ac94d834751484b80c04d7b452" src="//local.adguard.org?ts=1789750740806&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_000000005f088210bdb6f0bd41089388%26ts%3D497153%26p%3Dfs%26cid%3D1%26sig%3D38b2713f1eaca1558017457669c2a4b2260709e16407fa2b3536117af7318be9%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1Mi4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJDaHJvbWl1bSIsInZlcnNpb24iOiIxNTIifSwgeyJicmFuZCI6Ik5vdD9BX0JyYW5kIiwidmVyc2lvbiI6IjI0In0sIHsiYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MiJ9XQ==&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="8ac94d834751484b80c04d7b452" src="//local.adguard.org?ts=1789750740806&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
+
+<style id="world-polish-update">
+/* === WORLD POLISH UPDATE: themed islands, cave art, mobile + gamepad === */
+:root{--zoogle-ui-scale:1}
+
+/* Distinct island themes. Main Island intentionally keeps the existing look. */
+#island.rocky{
+  background:
+    radial-gradient(circle at 24% 24%,rgba(255,255,255,.22),transparent 17%),
+    radial-gradient(circle at 72% 66%,rgba(35,39,40,.18),transparent 25%),
+    repeating-linear-gradient(18deg,rgba(255,255,255,.035) 0 3px,transparent 3px 24px),
+    linear-gradient(145deg,#9ca39b,#6f7872 48%,#454c49 100%)!important;
+  border-color:#676e69!important;
+  box-shadow:inset 0 10px 0 rgba(255,255,255,.16),inset 0 -20px 0 rgba(34,39,37,.2),0 26px 0 #68645f,0 38px 0 #42403d,0 45px 36px rgba(0,0,0,.3)!important
+}
+#island.rocky::after{box-shadow:inset 0 0 0 9px rgba(255,255,255,.045),inset 0 -18px 18px rgba(30,32,31,.16)!important}
+#island.rocky .bush{opacity:.2;filter:grayscale(.55) saturate(.45) brightness(.86)}
+#island.rocky .island-rim{box-shadow:inset 0 -12px 0 rgba(66,70,68,.24),inset 0 8px 0 rgba(255,255,255,.12)!important}
+#island.rocky .rock{transform-origin:center;filter:grayscale(.25) contrast(1.12) drop-shadow(0 5px 3px rgba(0,0,0,.25))}
+
+/* Storage Cliffs: layered stone face with a greener plateau. */
+#island.storage{
+  background:
+    radial-gradient(circle at 24% 22%,rgba(255,255,255,.18),transparent 17%),
+    repeating-linear-gradient(172deg,rgba(255,255,255,.035) 0 4px,rgba(36,34,31,.06) 4px 10px,transparent 10px 31px),
+    linear-gradient(150deg,#7f9765 0 36%,#66765c 37% 58%,#535854 59% 100%)!important;
+  border-color:#62645f!important;
+  box-shadow:inset 0 10px 0 rgba(255,255,255,.15),inset 0 -19px 0 rgba(31,31,29,.2),0 25px 0 #65615a,0 35px 0 #4c4843,0 44px 0 #383431,0 52px 34px rgba(0,0,0,.34)!important
+}
+#island.storage::after{
+  box-shadow:inset 0 0 0 8px rgba(255,255,255,.045),inset 0 -26px 20px rgba(37,35,31,.2)!important;
+  background:repeating-linear-gradient(176deg,transparent 0 78%,rgba(36,34,31,.13) 79% 81%,transparent 82% 88%)!important
+}
+#island.storage .bush{filter:saturate(.65) brightness(.8)}
+#island.storage .rock{filter:grayscale(.35) contrast(1.08)}
+#island.storage .island-rim{box-shadow:inset 0 -12px 0 rgba(75,73,69,.24),inset 0 8px 0 rgba(255,255,255,.11)!important}
+
+/* Tribal Island: warm savannah rather than another green island. */
+#island.tribal{
+  background:
+    radial-gradient(circle at 22% 24%,rgba(255,245,177,.24),transparent 18%),
+    radial-gradient(circle at 70% 70%,rgba(150,74,24,.12),transparent 25%),
+    repeating-linear-gradient(15deg,rgba(120,73,26,.055) 0 2px,transparent 2px 23px),
+    linear-gradient(145deg,#cdb95f,#a98a42 48%,#7c5a2d 100%)!important;
+  border-color:#7c5730!important;
+  box-shadow:inset 0 10px 0 rgba(255,250,194,.18),inset 0 -19px 0 rgba(104,66,28,.18),0 26px 0 #8b5c30,0 38px 0 #613a20,0 45px 36px rgba(0,0,0,.3)!important
+}
+#island.tribal::after{box-shadow:inset 0 0 0 9px rgba(255,240,160,.045),inset 0 -18px 18px rgba(91,57,24,.14)!important}
+#island.tribal .bush{filter:hue-rotate(22deg) saturate(.7) brightness(1.02);opacity:.72}
+#island.tribal .island-rim{box-shadow:inset 0 -12px 0 rgba(126,84,39,.24),inset 0 8px 0 rgba(255,244,173,.13)!important}
+
+/* Decorative theme layer */
+.island-theme-decor{position:absolute;inset:0;z-index:6;pointer-events:none;overflow:visible}
+.theme-boulder{position:absolute;width:42px;height:30px;border-radius:48% 52% 42% 58%;background:linear-gradient(145deg,#c5c7c2,#777d79 58%,#555957);border:2px solid rgba(62,65,63,.28);box-shadow:inset 6px 5px 5px rgba(255,255,255,.18),inset -5px -6px 5px rgba(0,0,0,.14),0 6px 5px rgba(0,0,0,.18)}
+.theme-boulder.r1{left:8%;top:48%;transform:rotate(-14deg) scale(1.25)}.theme-boulder.r2{left:62%;top:72%;transform:rotate(9deg) scale(.9)}.theme-boulder.r3{left:84%;top:30%;transform:rotate(18deg) scale(1.1)}.theme-boulder.r4{left:44%;top:7%;transform:rotate(-8deg) scale(.72)}
+.rock-crack{position:absolute;width:82px;height:3px;border-radius:50%;background:rgba(53,54,53,.25);box-shadow:28px 14px 0 -1px rgba(53,54,53,.18);transform:rotate(-18deg)}.rock-crack.c1{left:27%;top:68%}.rock-crack.c2{left:67%;top:39%;transform:rotate(24deg) scale(.72)}
+.storage-ledger{position:absolute;left:6%;right:7%;bottom:8%;height:19%;border-radius:45% 50% 48% 50%;background:repeating-linear-gradient(176deg,rgba(42,39,36,.24) 0 5px,rgba(255,255,255,.035) 6px 8px,transparent 9px 19px);opacity:.72;filter:drop-shadow(0 8px 4px rgba(0,0,0,.18))}
+.storage-plank{position:absolute;height:12px;border-radius:5px;background:linear-gradient(#a87843,#65401f);border:2px solid #503018;box-shadow:inset 0 2px rgba(255,255,255,.16),0 4px 3px rgba(0,0,0,.2)}.storage-plank.p1{left:14%;top:27%;width:90px;transform:rotate(-8deg)}.storage-plank.p2{right:12%;top:67%;width:76px;transform:rotate(12deg)}
+.cliff-chest{pointer-events:auto;position:absolute;left:70%;top:47%;width:86px;height:64px;border-radius:16px 16px 12px 12px;background:linear-gradient(#b77b37 0 42%,#74451e 43% 100%);border:5px solid #4b2c17;box-shadow:inset 0 5px rgba(255,255,255,.18),inset 0 -7px rgba(0,0,0,.15),0 10px 7px rgba(0,0,0,.25);cursor:pointer;transform:rotate(3deg);display:grid;place-items:center;font-size:27px}
+.cliff-chest::before{content:"";position:absolute;left:-5px;right:-5px;top:27px;height:9px;background:#d9ad53;border-top:3px solid #553615;border-bottom:3px solid #553615}.cliff-chest::after{content:"";width:15px;height:18px;border-radius:3px;background:#f4ca58;border:3px solid #6b481c;z-index:2}
+.cliff-chest:hover,.cliff-chest:focus-visible{transform:rotate(0) translateY(-3px) scale(1.04);filter:brightness(1.08)}
+.acacia{position:absolute;width:11px;height:72px;border-radius:8px;background:linear-gradient(90deg,#5d3a1c,#9b6a33,#573516);filter:drop-shadow(0 7px 4px rgba(0,0,0,.18))}
+.acacia::before,.acacia::after{content:"";position:absolute;border-radius:50%;background:radial-gradient(circle at 35% 35%,#8d9b3d,#5d722e 65%,#3d5126);box-shadow:0 4px 4px rgba(0,0,0,.13)}
+.acacia::before{width:82px;height:31px;left:-35px;top:-13px}.acacia::after{width:55px;height:25px;left:-18px;top:4px}
+.acacia.a1{left:14%;top:29%;transform:scale(.85) rotate(-2deg)}.acacia.a2{right:15%;top:56%;transform:scale(.62) rotate(3deg)}
+.tribal-post{position:absolute;width:15px;height:64px;border-radius:6px 6px 3px 3px;background:repeating-linear-gradient(0deg,#6b3d1f 0 11px,#e0a846 11px 17px,#6b3d1f 17px 24px);border:2px solid #52301b;filter:drop-shadow(0 5px 3px rgba(0,0,0,.2))}
+.tribal-post::before{content:"◆";position:absolute;left:50%;top:-20px;transform:translateX(-50%);font-size:24px;color:#b9482c;text-shadow:0 2px #512614}.tribal-post.t1{left:40%;top:17%;transform:rotate(-4deg)}.tribal-post.t2{right:28%;top:28%;transform:rotate(5deg) scale(.8)}
+
+/* A much richer Breeding Cave — visual only, no new upgrade mechanic. */
+.cave-screen{
+  background:
+    radial-gradient(circle at 50% -20%,rgba(255,171,232,.23),transparent 35%),
+    linear-gradient(180deg,rgba(255,247,217,.98),rgba(218,181,132,.97))!important;
+  overflow:auto!important
+}
+.cave-art{
+  width:260px!important;height:166px!important;border-radius:48% 48% 30% 30%!important;
+  overflow:visible!important;
+  background:
+    radial-gradient(ellipse at 50% 69%,#100b17 0 29%,#27152e 30% 37%,transparent 38%),
+    radial-gradient(circle at 34% 32%,rgba(255,255,255,.16),transparent 16%),
+    repeating-linear-gradient(158deg,rgba(255,255,255,.045) 0 3px,transparent 3px 17px),
+    linear-gradient(145deg,#8c8176,#4f4744 62%,#322c2b)!important;
+  border:8px solid #3b302f!important;
+  box-shadow:inset 0 9px 0 rgba(255,255,255,.12),inset 0 -10px 0 rgba(0,0,0,.2),0 13px 0 #2e2524,0 20px 25px rgba(0,0,0,.28)!important
+}
+.cave-art::before{
+  content:"♡   ✦   ♡";position:absolute;left:50%;bottom:19px;transform:translateX(-50%);
+  width:104px;height:73px;border-radius:50% 50% 38% 38%;display:flex;align-items:flex-start;justify-content:center;
+  padding-top:9px;box-sizing:border-box;color:#ffb7e5;font-size:17px;font-weight:1000;letter-spacing:6px;
+  background:radial-gradient(ellipse at 50% 70%,rgba(255,92,201,.48),rgba(133,48,151,.18) 47%,transparent 69%);
+  box-shadow:0 0 25px rgba(255,102,211,.32);text-shadow:0 0 9px #ff91d9;animation:cavePortalGlow 2.4s ease-in-out infinite
+}
+.cave-art::after{
+  content:"💗";position:absolute;left:50%;top:-22px;transform:translateX(-50%);font-size:31px;
+  filter:drop-shadow(0 0 9px rgba(255,111,203,.8));animation:caveHeartFloat 2.2s ease-in-out infinite
+}
+@keyframes cavePortalGlow{50%{filter:brightness(1.35);transform:translateX(-50%) scale(1.04)}}
+@keyframes caveHeartFloat{50%{transform:translate(-50%,-7px) scale(1.08)}}
+.cave-screen h2{font-size:38px!important;text-shadow:0 2px #fff,0 5px 9px rgba(84,45,34,.14)}
+.cave-screen .breed-row,.cave-screen .empty-slot{background:rgba(255,255,255,.48)!important;border-color:rgba(112,64,48,.28)!important}
+
+/* New quick controls */
+#caveBtn{background:linear-gradient(180deg,#ffcae9,#d66ab5 70%,#914282)!important;color:#fff}
+#settingsBtn{background:linear-gradient(180deg,#e9f5ff,#8eb7d5 70%,#54738d)!important;color:#183245}
+.corner-buttons #musicBtn,.corner-buttons #resetProgressBtn{display:none!important}
+
+/* Settings */
+.settings-grid{display:grid;gap:10px}.settings-row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.42);border:3px solid rgba(104,62,25,.22)}
+.settings-row strong{display:block;font-size:17px}.settings-row .small-note{margin-top:2px}.settings-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.settings-controls input[type="range"]{width:150px;accent-color:#5aa83b}.settings-danger{margin-top:8px;border-top:3px dashed rgba(122,63,35,.22);padding-top:12px}
+.controller-hint{position:fixed;left:50%;bottom:104px;transform:translateX(-50%);z-index:118;padding:8px 13px;border-radius:999px;background:rgba(25,31,43,.9);border:2px solid rgba(255,255,255,.32);color:#fff;font-size:12px;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,.26);display:none;pointer-events:none;white-space:nowrap}
+body.input-gamepad .controller-hint{display:block}
+#gamepadCursor{position:fixed;z-index:125;width:28px;height:28px;border-radius:50%;border:4px solid #fff;box-shadow:0 0 0 4px rgba(72,139,255,.78),0 0 18px rgba(255,255,255,.85);transform:translate(-50%,-50%);pointer-events:none;display:none}
+body.input-gamepad.placing-with-gamepad #gamepadCursor{display:block}
+body.input-gamepad button:focus-visible,body.input-gamepad .zoogle-wrap:focus-visible,body.input-gamepad .meteor-glow:focus-visible,body.input-gamepad #eggClickArea:focus-visible{
+  outline:5px solid #fff!important;outline-offset:5px!important;box-shadow:0 0 0 9px rgba(77,139,255,.9),0 0 24px rgba(111,178,255,.85)!important
+}
+body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-motion *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+
+/* UI scale primarily affects controls/panels without scaling the actual island playfield. */
+.round-icon{width:calc(76px * var(--zoogle-ui-scale))!important;height:calc(76px * var(--zoogle-ui-scale))!important}
+.area-arrow{width:calc(50px * var(--zoogle-ui-scale))!important;height:calc(50px * var(--zoogle-ui-scale))!important}
+.currency-pill{font-size:calc(18px * var(--zoogle-ui-scale))!important}
+.modal-card,#zoogleMenu,.hatch-slot{font-size:calc(16px * var(--zoogle-ui-scale))}
+
+/* Proper phone layout: compact HUD + five-button navigation dock. */
+@media (max-width:900px), (pointer:coarse){
+  #game{padding-bottom:calc(74px + env(safe-area-inset-bottom))!important}
+  .hud{
+    position:fixed!important;top:calc(5px + env(safe-area-inset-top))!important;left:calc(6px + env(safe-area-inset-left))!important;right:calc(6px + env(safe-area-inset-right))!important;
+    flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:5px!important
+  }
+  .title-box{gap:3px!important;max-width:calc(100vw - 132px)!important;min-width:0}
+  .title-badge{font-size:10px!important;line-height:1.05!important;padding:5px 7px!important;border-width:3px!important;border-radius:15px!important;white-space:nowrap!important}
+  .area-name{font-size:9px!important;margin-top:2px;overflow:hidden;text-overflow:ellipsis;max-width:125px}
+  .area-arrow{width:31px!important;height:31px!important;min-height:31px!important;border-radius:11px!important;border-width:3px!important;font-size:19px!important}
+  .currency-row{flex-direction:row!important;gap:4px!important;align-self:auto!important}
+  .currency-pill{min-width:56px!important;padding:5px 6px!important;border-width:3px!important;border-radius:15px!important;font-size:12px!important;gap:4px!important}
+  .currency-icon{width:17px!important;height:17px!important}
+  .stage{margin-top:52px!important;padding-top:2vh!important;padding-bottom:74px!important}
+  #island{width:94vw!important;height:54vh!important;min-height:278px!important}
+  .corner-buttons{
+    position:fixed!important;left:0!important;right:0!important;bottom:0!important;top:auto!important;width:100%!important;
+    display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:4px!important;
+    padding:6px max(6px,env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left))!important;
+    margin:0!important;transform:none!important;background:linear-gradient(180deg,rgba(255,248,218,.95),rgba(226,189,115,.98))!important;
+    border-top:4px solid rgba(92,55,21,.75)!important;box-shadow:0 -9px 24px rgba(0,0,0,.2)!important;filter:none!important;z-index:110!important
+  }
+  .corner-buttons>button[data-nav-label]{
+    width:100%!important;height:56px!important;min-width:0!important;min-height:56px!important;border-radius:16px!important;border-width:3px!important;
+    padding:4px 2px 3px!important;margin:0!important;font-size:22px!important;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:1px;box-shadow:inset 0 2px 0 rgba(255,255,255,.4),0 3px 0 rgba(70,42,15,.24)!important
+  }
+  .corner-buttons>button[data-nav-label]::after{content:attr(data-nav-label);display:block;font-size:9px;line-height:10px;font-weight:1000;letter-spacing:.15px}
+  #collectAllBtn.collect-all-btn.ready,#collectAllBtn.collect-all-btn.cooldown{
+    position:fixed!important;right:calc(9px + env(safe-area-inset-right))!important;bottom:calc(77px + env(safe-area-inset-bottom))!important;left:auto!important;
+    width:54px!important;height:54px!important;min-width:54px!important;border-radius:18px!important;font-size:13px!important;z-index:112!important;padding:4px!important;display:grid!important
+  }
+  #collectAllBtn.collect-all-btn.locked{display:none!important}
+  .weather-banner{top:calc(48px + env(safe-area-inset-top))!important;font-size:11px!important;padding:5px 10px!important;max-width:90vw}
+  .placement-help{top:calc(55px + env(safe-area-inset-top))!important;font-size:12px!important;padding:7px 10px!important}
+  .hatch-slot{left:8px!important;right:auto!important;bottom:calc(76px + env(safe-area-inset-bottom))!important;width:min(245px,72vw)!important;max-height:31vh!important;padding:8px!important;border-width:4px!important}
+  .hatch-row{grid-template-columns:36px 1fr!important}.hatch-row .egg-shape{width:33px!important;height:42px!important}
+  .toast{bottom:calc(79px + env(safe-area-inset-bottom))!important;max-width:calc(100vw - 18px)!important;font-size:13px!important;padding:8px 12px!important}
+  .tutorial-card{bottom:calc(78px + env(safe-area-inset-bottom))!important}
+  #zoogleMenu.open{position:fixed!important;left:max(7px,env(safe-area-inset-left))!important;right:max(7px,env(safe-area-inset-right))!important;bottom:calc(75px + env(safe-area-inset-bottom))!important;top:auto!important;width:auto!important;max-height:58dvh!important}
+  .zoogle-wrap{width:78px!important;height:108px!important}
+  .modal.open{padding:0!important;align-items:flex-end!important;justify-content:center!important}
+  .modal-card{
+    width:100%!important;max-width:none!important;max-height:calc(100dvh - 74px - env(safe-area-inset-top))!important;min-height:54dvh;
+    overflow-y:auto!important;overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;
+    margin:0 0 calc(70px + env(safe-area-inset-bottom))!important;border-radius:26px 26px 0 0!important;border-width:4px!important;padding:15px!important
+  }
+  #confirmModal .modal-card{min-height:0!important;width:calc(100% - 20px)!important;margin-bottom:calc(82px + env(safe-area-inset-bottom))!important;border-radius:24px!important}
+  .close-x{position:sticky!important;float:right;top:0!important;z-index:15!important}
+  .tabs,.index-tabs,.quest-tabs{top:-15px!important}
+  .shop-grid,.book-grid,#shopGrid,#bookGrid,.quest-grid{grid-template-columns:1fr!important;padding-bottom:20px!important}
+  .settings-row{grid-template-columns:1fr!important;gap:7px}.settings-controls{justify-content:flex-start}
+  .controller-hint{bottom:calc(79px + env(safe-area-inset-bottom))!important;max-width:94vw;overflow:hidden;text-overflow:ellipsis}
+}
+
+/* Phone landscape: move navigation to the side so the island gets the height. */
+@media (orientation:landscape) and (max-height:600px) and (max-width:1000px){
+  #game{padding-right:70px!important;padding-bottom:0!important}
+  .hud{right:calc(72px + env(safe-area-inset-right))!important}
+  .stage{margin-top:34px!important;padding-top:1vh!important;padding-right:66px!important;padding-bottom:0!important}
+  #island{width:78vw!important;height:72vh!important;min-height:235px!important}
+  .corner-buttons{
+    left:auto!important;right:0!important;top:0!important;bottom:0!important;width:68px!important;height:100dvh!important;
+    grid-template-columns:1fr!important;grid-template-rows:repeat(5,minmax(0,1fr))!important;padding:calc(5px + env(safe-area-inset-top)) calc(5px + env(safe-area-inset-right)) calc(5px + env(safe-area-inset-bottom)) 5px!important;
+    border-top:0!important;border-left:4px solid rgba(92,55,21,.75)!important
+  }
+  .corner-buttons>button[data-nav-label]{height:auto!important;min-height:46px!important}
+  #collectAllBtn.collect-all-btn.ready,#collectAllBtn.collect-all-btn.cooldown{right:calc(76px + env(safe-area-inset-right))!important;bottom:8px!important}
+  .modal-card{width:calc(100% - 68px)!important;margin:0 68px 0 0!important;max-height:100dvh!important;min-height:100dvh!important;border-radius:0!important}
+  #confirmModal .modal-card{width:min(500px,calc(100vw - 90px))!important;min-height:0!important;margin:auto 78px auto auto!important;border-radius:24px!important}
+  .toast,.tutorial-card,.controller-hint{bottom:8px!important;max-width:calc(100vw - 90px)}
+  .hatch-slot{bottom:8px!important;left:8px!important;max-height:58vh!important;width:230px!important}
+  .weather-banner{top:47px!important;left:calc(50% - 34px)!important}
+}
+
+/* Very small phones */
+@media(max-width:380px){
+  .title-badge{font-size:9px!important;padding:4px 5px!important}.area-name{max-width:106px;font-size:8px!important}
+  .area-arrow{width:28px!important;height:28px!important;min-height:28px!important}
+  .currency-pill{min-width:49px!important;font-size:11px!important;padding:4px!important}.currency-icon{width:15px!important;height:15px!important}
+  .corner-buttons>button[data-nav-label]{font-size:20px!important}.corner-buttons>button[data-nav-label]::after{font-size:8px}
+}
+</style>
+
+<script type="text/javascript" nonce="8ac94d834751484b80c04d7b452" src="//local.adguard.org?ts=1789759738404&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_0000000095608243b8e614f3a8e78400%26ts%3D497155%26p%3Dfs%26cid%3D1%26sig%3Dbefa176cf2eabd335cd99288ac0b1809739550256e9e5e6435c421f694a16f27%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1Mi4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJDaHJvbWl1bSIsInZlcnNpb24iOiIxNTIifSwgeyJicmFuZCI6Ik5vdD9BX0JyYW5kIiwidmVyc2lvbiI6IjI0In0sIHsiYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MiJ9XQ==&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="8ac94d834751484b80c04d7b452" src="//local.adguard.org?ts=1789759738404&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
 <body>
 <div id="game">
   <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
@@ -1479,5 +1689,223 @@ function renderMutationIndex(){
 window.ZoogleDebug={addCoins(n=5000){state.coins+=n;renderCurrencies();save()},addGems(n=50){state.gems+=n;renderCurrencies();save()},unlockAll(){state.rockyUnlocked=true;state.breedingUnlocked=true;state.storageCliffsUnlocked=true;state.tribalUnlocked=true;Object.keys(ZOOGLES).forEach(k=>state.discovered[k]=true);renderAll();save()},maxUpgrades(){Object.keys(UPGRADE_DATA).forEach(k=>state.upgrades[k]=getUpgradeMax(k));renderShop();renderCollectAllButton();save()},reset(){deletingSave=true;safeStorage.removeItem(SAVE_KEY);for(const k of OLD_KEYS)safeStorage.removeItem(k);location.reload()},state};
 init();
 </script>
+
+<script id="world-polish-controller">
+(function(){
+  const SETTINGS_KEY='zoogleWorldSettingsV1';
+  const defaults={sfx:true,reducedMotion:false,vibration:true,uiScale:1};
+  let prefs={...defaults};
+  try{prefs={...defaults,...JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}')}}catch(e){}
+  const savePrefs=()=>{try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(prefs))}catch(e){}};
+
+  function addButton(id,emoji,label,title){
+    let b=document.getElementById(id);
+    if(!b){
+      b=document.createElement('button');b.id=id;b.type='button';b.className='round-icon';b.textContent=emoji;b.title=title||label;b.setAttribute('aria-label',title||label);
+      document.querySelector('.corner-buttons')?.appendChild(b);
+    }
+    b.dataset.navLabel=label;
+    return b;
+  }
+  function labelExistingDock(){
+    const q=document.getElementById('questsBtn'),book=document.getElementById('bookBtn'),shop=document.getElementById('shopBtn');
+    if(q)q.dataset.navLabel='Quests';
+    if(book)book.dataset.navLabel='Index';
+    if(shop)shop.dataset.navLabel='Market';
+  }
+  function installDock(){
+    labelExistingDock();
+    const cave=addButton('caveBtn','💕','Breed','Open Breeding Cave');
+    const settings=addButton('settingsBtn','⚙️','Settings','Open settings');
+    cave.onclick=()=>{if(typeof placement!=='undefined'&&placement){showToast('Finish placing your Zoogle first!');return}setArea('cave')};
+    settings.onclick=()=>{renderSettings();openModal('settingsModal')};
+    // Keep a predictable mobile/console order regardless of when Quests was injected.
+    const bar=document.querySelector('.corner-buttons');
+    const order=['questsBtn','bookBtn','shopBtn','caveBtn','settingsBtn'];
+    order.forEach(id=>{const el=document.getElementById(id);if(el&&bar)bar.appendChild(el)});
+    // Collect All is visually floating on mobile, but stays available.
+    const collect=document.getElementById('collectAllBtn');if(collect&&bar)bar.appendChild(collect);
+  }
+
+  function ensureSettingsModal(){
+    if(document.getElementById('settingsModal'))return;
+    const m=document.createElement('div');m.id='settingsModal';m.className='modal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label','Settings');m.setAttribute('aria-hidden','true');
+    m.innerHTML=`<div class="modal-card" style="width:min(680px,95vw)">
+      <button class="close-x" type="button" aria-label="Close settings">×</button>
+      <h2 class="modal-title">Settings</h2>
+      <div id="settingsContent" class="settings-grid"></div>
+    </div>`;
+    document.body.appendChild(m);
+    m.querySelector('.close-x').onclick=()=>closeModal('settingsModal');
+    m.addEventListener('pointerdown',e=>{if(e.target===m)closeModal('settingsModal')});
+  }
+  function musicOn(){try{return !!window.ZoogleMusic?.isOn?.()}catch(e){return false}}
+  function renderSettings(){
+    ensureSettingsModal();
+    const c=document.getElementById('settingsContent');if(!c)return;
+    const pct=Math.round((prefs.uiScale||1)*100);
+    c.innerHTML=`
+      <div class="settings-row"><div><strong>Music</strong><div class="small-note">Toggle the built-in chill soundtrack.</div></div><div class="settings-controls"><button id="settingsMusic" class="blue-btn">${musicOn()?'ON 🎵':'OFF 🔇'}</button></div></div>
+      <div class="settings-row"><div><strong>Sound Effects</strong><div class="small-note">Clicks, hatching, weather and collection sounds.</div></div><div class="settings-controls"><button id="settingsSfx" class="blue-btn">${prefs.sfx?'ON 🔊':'OFF 🔇'}</button></div></div>
+      <div class="settings-row"><div><strong>Reduced Motion</strong><div class="small-note">Cuts floating, pulsing and transition animations.</div></div><div class="settings-controls"><button id="settingsMotion" class="wood-btn">${prefs.reducedMotion?'ON':'OFF'}</button></div></div>
+      <div class="settings-row"><div><strong>UI Scale</strong><div class="small-note">Resize controls and panels without changing the island.</div></div><div class="settings-controls"><input id="settingsScale" type="range" min="90" max="115" step="5" value="${pct}" aria-label="UI scale"><strong id="settingsScaleText">${pct}%</strong></div></div>
+      <div class="settings-row"><div><strong>Controller Vibration</strong><div class="small-note">Used when a connected controller supports rumble.</div></div><div class="settings-controls"><button id="settingsVibration" class="wood-btn">${prefs.vibration?'ON':'OFF'}</button></div></div>
+      <div class="settings-row"><div><strong>Fullscreen</strong><div class="small-note">Useful for phones, tablets and console browsers.</div></div><div class="settings-controls"><button id="settingsFullscreen" class="green-btn">${document.fullscreenElement?'EXIT':'FULLSCREEN'}</button></div></div>
+      <div class="settings-danger"><button id="settingsReset" class="red-btn" style="width:100%">RESET SAVE</button></div>`;
+    document.getElementById('settingsMusic').onclick=()=>{window.ZoogleMusic?.toggle?.();setTimeout(renderSettings,80)};
+    document.getElementById('settingsSfx').onclick=()=>{prefs.sfx=!prefs.sfx;savePrefs();applyPrefs();renderSettings()};
+    document.getElementById('settingsMotion').onclick=()=>{prefs.reducedMotion=!prefs.reducedMotion;savePrefs();applyPrefs();renderSettings()};
+    document.getElementById('settingsVibration').onclick=()=>{prefs.vibration=!prefs.vibration;savePrefs();renderSettings()};
+    const scale=document.getElementById('settingsScale');scale.oninput=()=>{prefs.uiScale=Math.max(.9,Math.min(1.15,+scale.value/100));document.getElementById('settingsScaleText').textContent=Math.round(prefs.uiScale*100)+'%';applyPrefs()};scale.onchange=savePrefs;
+    const fs=document.getElementById('settingsFullscreen');
+    if(!document.documentElement.requestFullscreen)fs.disabled=true;
+    fs.onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch(e){showToast('Fullscreen is not available in this browser.')}renderSettings()};
+    document.getElementById('settingsReset').onclick=()=>document.getElementById('resetProgressBtn')?.click();
+  }
+
+  function applyPrefs(){
+    document.body.classList.toggle('user-reduced-motion',!!prefs.reducedMotion);
+    document.documentElement.style.setProperty('--zoogle-ui-scale',String(prefs.uiScale||1));
+    if(window.__zoogleSfxMaster?.gain)window.__zoogleSfxMaster.gain.value=prefs.sfx?.95:0;
+  }
+  function wrapSfx(){
+    const names=['playClick','playBuy','playCoin','playCrack','playHatch','playPlace','playSell','playError','playQuestSfx','playMutationSfx','playTotemSfx','playAncientSfx','playWeatherSfx'];
+    names.forEach(name=>{
+      const old=window[name];if(typeof old!=='function'||old.__settingsWrapped)return;
+      const wrapped=function(){if(!prefs.sfx)return;return old.apply(this,arguments)};wrapped.__settingsWrapped=true;window[name]=wrapped;
+      try{if(typeof globalThis[name]==='function')globalThis[name]=wrapped}catch(e){}
+    });
+  }
+
+  function ensureDecor(){
+    let d=document.getElementById('islandThemeDecor');
+    if(!d){d=document.createElement('div');d.id='islandThemeDecor';d.className='island-theme-decor';els.island.appendChild(d)}
+    return d;
+  }
+  function renderWorldTheme(){
+    if(!els?.island)return;
+    const d=ensureDecor(),area=state.currentArea;
+    d.className='island-theme-decor '+area+'-theme';
+    if(area==='rocky'&&state.rockyUnlocked){
+      d.innerHTML='<i class="theme-boulder r1"></i><i class="theme-boulder r2"></i><i class="theme-boulder r3"></i><i class="theme-boulder r4"></i><i class="rock-crack c1"></i><i class="rock-crack c2"></i>';
+    }else if(area==='storage'&&state.storageCliffsUnlocked){
+      d.innerHTML='<i class="storage-ledger"></i><i class="storage-plank p1"></i><i class="storage-plank p2"></i><button class="cliff-chest" type="button" aria-label="Open Storage Chest" title="Open Storage Chest"></button>';
+      d.querySelector('.cliff-chest').onclick=e=>{e.stopPropagation();openStorageChest()};
+    }else if(area==='tribal'&&state.tribalUnlocked){
+      d.innerHTML='<i class="acacia a1"></i><i class="acacia a2"></i><i class="tribal-post t1"></i><i class="tribal-post t2"></i>';
+    }else d.innerHTML='';
+  }
+  const oldRenderArea=window.renderArea||renderArea;
+  renderArea=function(){const r=oldRenderArea.apply(this,arguments);requestAnimationFrame(renderWorldTheme);return r};
+
+  // Controller/gamepad support
+  let gpPrev=[],lastNav=0,lastMode='pointer',controllerCursor=null;
+  function ensureControllerUi(){
+    let h=document.getElementById('controllerHint');
+    if(!h){h=document.createElement('div');h.id='controllerHint';h.className='controller-hint';h.textContent='🎮 A Select • B Back • X Collect • Y Index • LB/RB Island • Start Market';document.body.appendChild(h)}
+    if(!document.getElementById('gamepadCursor')){controllerCursor=document.createElement('div');controllerCursor.id='gamepadCursor';document.body.appendChild(controllerCursor)}else controllerCursor=document.getElementById('gamepadCursor');
+  }
+  function setInputMode(mode){
+    lastMode=mode;
+    document.body.classList.toggle('input-gamepad',mode==='gamepad');
+    if(mode!=='gamepad')document.body.classList.remove('placing-with-gamepad');
+  }
+  window.addEventListener('pointerdown',e=>setInputMode(e.pointerType==='touch'?'touch':'pointer'),{passive:true});
+  window.addEventListener('keydown',e=>{if(!['Shift','Control','Alt','Meta'].includes(e.key))setInputMode('keyboard')},{passive:true});
+  window.addEventListener('gamepadconnected',e=>{setInputMode('gamepad');showToast(`Controller connected: ${e.gamepad.id.split('(')[0].trim()||'Gamepad'}`)});
+  window.addEventListener('gamepaddisconnected',()=>{if(!navigator.getGamepads?.().some(Boolean))setInputMode('pointer')});
+
+  function visible(el){
+    if(!el||el.disabled)return false;
+    const s=getComputedStyle(el),r=el.getBoundingClientRect();
+    return s.display!=='none'&&s.visibility!=='hidden'&&+s.opacity!==0&&r.width>2&&r.height>2;
+  }
+  function focusScope(){
+    const modal=[...document.querySelectorAll('.modal.open')].pop();if(modal)return modal;
+    if(els.zoogleMenu?.classList.contains('open'))return els.zoogleMenu;
+    return document;
+  }
+  function candidates(){
+    return [...focusScope().querySelectorAll('button:not(:disabled),.zoogle-wrap[tabindex="0"],.meteor-glow[tabindex="0"],#eggClickArea[tabindex="0"],input:not(:disabled),select:not(:disabled)')].filter(visible);
+  }
+  function focusFirst(){
+    const preferred=document.querySelector('#questsBtn,#bookBtn,#shopBtn,#caveBtn,#settingsBtn');
+    if(preferred&&visible(preferred))preferred.focus();else candidates()[0]?.focus();
+  }
+  function navigate(dx,dy){
+    const list=candidates();if(!list.length)return;
+    let cur=document.activeElement;if(!list.includes(cur)){focusFirst();return}
+    const a=cur.getBoundingClientRect(),ax=a.left+a.width/2,ay=a.top+a.height/2;
+    let best=null,score=Infinity;
+    for(const el of list){if(el===cur)continue;const r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,vx=x-ax,vy=y-ay;
+      if(dx>0&&vx<=5||dx<0&&vx>=-5||dy>0&&vy<=5||dy<0&&vy>=-5)continue;
+      const primary=Math.abs(dx?vx:vy),secondary=Math.abs(dx?vy:vx),s=primary+secondary*2.2;if(s<score){score=s;best=el}
+    }
+    if(best){best.focus();best.scrollIntoView({block:'nearest',inline:'nearest'})}
+  }
+  function activateFocused(){
+    const el=document.activeElement;
+    if(el?.classList?.contains('zoogle-wrap')){const r=el.getBoundingClientRect();openZoogleMenu(el.dataset.id,r.left+r.width/2,r.top+r.height/2);els.zoogleMenu.querySelector('button:not(:disabled)')?.focus();return}
+    if(el===els.eggClickArea){crackEgg();return}
+    if(el&&visible(el)&&typeof el.click==='function'){el.click();return}
+    focusFirst();
+  }
+  function backAction(){
+    const modal=[...document.querySelectorAll('.modal.open')].pop();if(modal){closeModal(modal.id);return}
+    if(els.zoogleMenu?.classList.contains('open')){closeZoogleMenu();return}
+    if(placement){
+      if(placement.existingId){
+        placement=null;els.placementGhost.classList.remove('show','invalid');els.placementHelp.classList.remove('show');els.island.classList.remove('valid-placement');document.body.classList.remove('placing-with-gamepad');showToast('Move cancelled.');
+      }else showToast('This new Zoogle needs a home first!');
+      return
+    }
+  }
+  function cycleZoogle(dir){
+    const list=[...document.querySelectorAll('.zoogle-wrap[data-id]')].filter(visible);if(!list.length)return;
+    let i=list.indexOf(document.activeElement);i=i<0?(dir>0?-1:0):i;list[(i+dir+list.length)%list.length].focus();
+  }
+  function rumble(gp,strong=.18,weak=.3,duration=55){
+    if(!prefs.vibration)return;try{gp.vibrationActuator?.playEffect?.('dual-rumble',{duration,strongMagnitude:strong,weakMagnitude:weak})}catch(e){}
+  }
+  function pressed(gp,i,threshold=.55){return !!gp.buttons[i]&&(gp.buttons[i].pressed||gp.buttons[i].value>threshold)}
+  function edge(gp,i){const p=pressed(gp,i);const e=p&&!gpPrev[i];gpPrev[i]=p;return e}
+  function gamepadLoop(){
+    const gp=navigator.getGamepads?.().find(Boolean);
+    if(gp){
+      const any=gp.buttons.some(b=>b.pressed||b.value>.55)||gp.axes.some(a=>Math.abs(a)>.55);
+      if(any)setInputMode('gamepad');
+      const now=performance.now(),ax=gp.axes[0]||0,ay=gp.axes[1]||0;
+      if(typeof placement!=='undefined'&&placement&&lastMode==='gamepad'){
+        document.body.classList.add('placing-with-gamepad');
+        const r=els.island.getBoundingClientRect();
+        if(pointer.x<r.left||pointer.x>r.right||pointer.y<r.top||pointer.y>r.bottom){pointer.x=r.left+r.width/2;pointer.y=r.top+r.height/2}
+        const dx=(Math.abs(ax)>.16?ax:0)+(pressed(gp,15)?1:0)-(pressed(gp,14)?1:0),dy=(Math.abs(ay)>.16?ay:0)+(pressed(gp,13)?1:0)-(pressed(gp,12)?1:0);
+        if(dx||dy){pointer.x=Math.max(r.left+12,Math.min(r.right-12,pointer.x+dx*8));pointer.y=Math.max(r.top+12,Math.min(r.bottom-12,pointer.y+dy*8));updatePlacementGhost()}
+        if(controllerCursor){controllerCursor.style.left=pointer.x+'px';controllerCursor.style.top=pointer.y+'px'}
+      }else{
+        document.body.classList.remove('placing-with-gamepad');
+        let dx=0,dy=0;if(pressed(gp,15)||ax>.65)dx=1;else if(pressed(gp,14)||ax<-.65)dx=-1;if(pressed(gp,13)||ay>.65)dy=1;else if(pressed(gp,12)||ay<-.65)dy=-1;
+        if((dx||dy)&&now-lastNav>175){navigate(dx,dy);lastNav=now}
+      }
+      if(edge(gp,0)){if(placement)attemptPlaceAt(pointer.x,pointer.y);else activateFocused();rumble(gp)}
+      if(edge(gp,1)){backAction();rumble(gp,.1,.18,40)}
+      if(edge(gp,2)){const el=document.activeElement;if(el?.classList?.contains('zoogle-wrap'))collectEarnings(el.dataset.id);else if((state.upgrades.collectAll||0)>0)useCollectAll();rumble(gp,.08,.2,35)}
+      if(edge(gp,3)){renderBook();openModal('bookModal');rumble(gp,.08,.15,35)}
+      if(edge(gp,4)){if(!placement)switchArea(-1);rumble(gp,.06,.12,30)}
+      if(edge(gp,5)){if(!placement)switchArea(1);rumble(gp,.06,.12,30)}
+      if(edge(gp,6))cycleZoogle(-1);
+      if(edge(gp,7))cycleZoogle(1);
+      if(edge(gp,8)){renderQuests('daily');openModal('questsModal')}
+      if(edge(gp,9))openModal('shopModal');
+    }else gpPrev=[];
+    requestAnimationFrame(gamepadLoop);
+  }
+
+  ensureSettingsModal();installDock();ensureControllerUi();applyPrefs();wrapSfx();renderWorldTheme();
+  document.addEventListener('fullscreenchange',()=>{if(document.getElementById('settingsModal')?.classList.contains('open'))renderSettings()});
+  requestAnimationFrame(gamepadLoop);
+})();
+</script>
+
 </body>
 </html>
