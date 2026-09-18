@@ -258,6 +258,161 @@ button{font-family:inherit;border:0;cursor:pointer;color:var(--dark);transition:
 #musicBtn.music-btn.music-on{background:linear-gradient(#fff5ad,#71e792 45%,#4bbdff);box-shadow:inset 0 3px 0 rgba(255,255,255,.45),0 7px 0 rgba(0,0,0,.2),0 0 18px rgba(118,231,255,.55)}
 #musicBtn.music-btn.music-off{filter:saturate(.55) brightness(.9)}
 @media(max-width:740px){#musicBtn.music-btn{width:54px;height:54px;border-radius:16px;font-size:23px}}
+
+
+/* === Big UI upgrade: responsive Zoogle action sheet === */
+:root{
+  --menu-sheet-max: 560px;
+  --menu-btn-min-h: 56px;
+  --menu-gap: 10px;
+}
+#zoogleMenu{
+  width:min(var(--menu-sheet-max), calc(100vw - 20px))!important;
+  max-height:min(82vh, 900px)!important;
+  padding:14px!important;
+  border-radius:28px!important;
+  overflow:auto!important;
+}
+#zoogleMenu .species{
+  font-size:14px!important;
+  opacity:.78!important;
+  margin-bottom:0!important;
+}
+#zoogleMenu .zoogle-menu-header{
+  padding:14px!important;
+  border-radius:20px!important;
+  margin-bottom:12px!important;
+}
+#zoogleMenu .zoogle-menu-header h4{
+  font-size:clamp(24px, 3.2vw, 36px)!important;
+  line-height:1.05!important;
+  margin:0 0 6px!important;
+}
+#zoogleMenu .zoogle-menu-subtitle{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+#zoogleMenu .menu-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.55);
+  border:2px solid rgba(95,56,18,.18);
+  font-size:13px;
+  font-weight:1000;
+  color:#5a3816;
+}
+#zoogleMenu .zoogle-menu-layout{
+  display:grid;
+  grid-template-columns:1.1fr .95fr;
+  gap:12px;
+}
+#zoogleMenu .zoogle-menu-main,
+#zoogleMenu .zoogle-menu-side{
+  display:grid;
+  gap:12px;
+  align-content:start;
+}
+#zoogleMenu .menu-summary-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+#zoogleMenu .mastery-box,
+#zoogleMenu .mutation-line,
+#zoogleMenu .menu-section{
+  margin:0!important;
+  padding:12px!important;
+  border-radius:18px!important;
+  background:rgba(255,255,255,.38)!important;
+  border:2px solid rgba(102,61,22,.18)!important;
+}
+#zoogleMenu .mastery-box{
+  font-size:15px;
+  line-height:1.45;
+}
+#zoogleMenu .mutation-line{
+  font-size:14px;
+  line-height:1.6;
+}
+#zoogleMenu .menu-section-title{
+  font-size:13px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-weight:1000;
+  color:#7a5223;
+  margin-bottom:9px;
+}
+#zoogleMenu .menu-buttons,
+#zoogleMenu .menu-button-grid,
+#zoogleMenu .menu-travel-grid{
+  display:grid;
+  gap:var(--menu-gap);
+}
+#zoogleMenu .menu-button-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+#zoogleMenu .menu-travel-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+#zoogleMenu .menu-buttons button,
+#zoogleMenu .menu-button-grid button,
+#zoogleMenu .menu-travel-grid button{
+  min-height:var(--menu-btn-min-h);
+  padding:12px 12px!important;
+  font-size:16px!important;
+  line-height:1.15;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+#zoogleMenu button[disabled]{
+  opacity:.48;
+  filter:saturate(.6);
+}
+#zoogleMenu .menu-footer{
+  display:grid;
+  gap:10px;
+}
+#zoogleMenu .menu-note{
+  font-size:12px;
+  font-weight:900;
+  color:rgba(78,50,23,.72);
+  text-align:center;
+}
+#zoogleMenu .area-current{
+  box-shadow:inset 0 0 0 3px rgba(84,170,49,.25), inset 0 2px 0 rgba(255,255,255,.35), 0 4px 0 rgba(0,0,0,.18)!important;
+}
+#zoogleMenu .sell-strong{font-weight:1000}
+@media (max-width:980px){
+  #zoogleMenu{width:min(92vw, 640px)!important}
+  #zoogleMenu .zoogle-menu-layout{grid-template-columns:1fr}
+}
+@media (max-width:740px){
+  :root{--menu-btn-min-h:60px}
+  #zoogleMenu.open{
+    left:max(8px, env(safe-area-inset-left))!important;
+    right:max(8px, env(safe-area-inset-right))!important;
+    bottom:calc(74px + env(safe-area-inset-bottom))!important;
+    top:auto!important;
+    width:auto!important;
+    max-height:70dvh!important;
+  }
+  #zoogleMenu .zoogle-menu-header h4{font-size:28px!important}
+  #zoogleMenu .menu-summary-grid,
+  #zoogleMenu .menu-button-grid,
+  #zoogleMenu .menu-travel-grid{grid-template-columns:1fr}
+  #zoogleMenu .menu-section{padding:11px!important}
+}
+@media (min-width:1280px){
+  #zoogleMenu{width:min(600px, calc(100vw - 30px))!important}
+}
+
 </style>
 
 <style id="v6-style">
@@ -701,7 +856,188 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
 }
 </style>
 
-\n<style id="zoogle-unified-art-pass">\n/* === Unified Zoogle art pass ===\n   Every species keeps the classic Zoogle silhouette and face language.\n   Species identity comes from palette, markings and small CSS-drawn details. */\n.zoogle{--z-outline:rgba(52,37,25,.58);--z-mark:transparent;isolation:isolate}\n.zoogle .z-head{width:44px;height:44px;top:2px;border:3px solid var(--z-outline);box-shadow:inset 7px 7px 8px rgba(255,255,255,.34),inset -7px -8px 8px rgba(0,0,0,.12),0 2px 0 rgba(255,255,255,.16)}\n.zoogle .z-body{width:72px;height:84px;border:3px solid var(--z-outline);box-shadow:inset 10px 9px 10px rgba(255,255,255,.28),inset -12px -12px 10px rgba(0,0,0,.12),0 2px 0 rgba(255,255,255,.12)}\n.zoogle .z-head::after{content:"";position:absolute;left:7px;top:5px;width:12px;height:8px;border-radius:50%;background:rgba(255,255,255,.23);transform:rotate(-24deg);pointer-events:none}\n.zoogle .z-body::before{content:"";position:absolute;inset:8px 9px 11px;border-radius:48% 52% 50% 50%;background:var(--z-mark);opacity:.72;pointer-events:none}\n.zoogle .z-eye{width:6px;height:8px;background:#32251c;box-shadow:0 1px 0 rgba(255,255,255,.18)}\n.zoogle .z-eye.single{width:10px;height:12px;background:#2a1f28;box-shadow:0 0 0 3px rgba(255,255,255,.38),0 0 0 5px rgba(45,29,50,.18)}\n.zoogle .z-smile{width:16px;height:8px;border-bottom:2px solid rgba(46,33,24,.62)}\n/* CSS-drawn accessories replace OS-dependent emoji art. */\n.z-crown{left:31px;top:-7px;width:29px;height:23px;background:linear-gradient(#fff09a,#f4b928 62%,#b9770c);clip-path:polygon(0 100%,6% 30%,28% 61%,48% 4%,69% 61%,94% 29%,100% 100%);filter:drop-shadow(0 2px 1px rgba(62,37,8,.35));z-index:14}.z-crown::after{content:"";position:absolute;left:6px;right:6px;bottom:2px;height:5px;border-radius:4px;background:#8a4e12}\n.z-shield{left:32px;top:-5px;width:27px;height:30px;background:linear-gradient(135deg,#eef5f7,#8c999f 57%,#4b5960);clip-path:polygon(50% 0,94% 18%,85% 71%,50% 100%,15% 71%,6% 18%);filter:drop-shadow(0 2px 1px rgba(30,38,42,.4));z-index:14}.z-shield::after{content:"";position:absolute;left:12px;top:5px;width:4px;height:19px;background:#f1c653;box-shadow:-6px 7px 0 -1px #f1c653,6px 7px 0 -1px #f1c653}\n.z-eye-sigil{left:35px;top:-2px;width:23px;height:15px;border-radius:70% 10% 70% 10%;transform:rotate(45deg);background:#eee1ff;border:2px solid #4e2a6a;box-shadow:0 0 8px rgba(175,106,255,.65);z-index:14}.z-eye-sigil::after{content:"";position:absolute;left:7px;top:3px;width:6px;height:6px;border-radius:50%;background:#2b103f;box-shadow:0 0 0 2px #a963e6}\n.z-cheese{width:16px;height:14px;background:linear-gradient(145deg,#fff083,#e6a51d);clip-path:polygon(0 23%,100% 0,91% 100%,0 88%);filter:drop-shadow(0 2px 1px rgba(107,62,4,.24));z-index:13}.z-cheese::before,.z-cheese::after{content:"";position:absolute;border-radius:50%;background:rgba(166,100,8,.48)}.z-cheese::before{width:4px;height:4px;left:4px;top:4px}.z-cheese::after{width:3px;height:3px;right:3px;bottom:3px}\n\n/* Older species keep their palettes but get restrained, consistent markings. */\n.species-basic{--z-mark:radial-gradient(circle at 33% 65%,rgba(150,150,140,.16) 0 6px,transparent 7px)}\n.species-fire{--z-mark:radial-gradient(circle at 50% 75%,rgba(255,244,110,.35),transparent 35%)}\n.species-earth{--z-mark:radial-gradient(circle at 28% 35%,rgba(70,44,24,.22) 0 5px,transparent 6px),radial-gradient(circle at 68% 67%,rgba(70,44,24,.18) 0 4px,transparent 5px)}\n.species-air{--z-mark:linear-gradient(165deg,transparent 30%,rgba(255,255,255,.3) 31% 37%,transparent 38% 61%,rgba(255,255,255,.2) 62% 67%,transparent 68%)}\n.species-rockz,.species-gravel,.species-rubble{--z-mark:linear-gradient(135deg,transparent 26%,rgba(40,45,43,.22) 27% 31%,transparent 32% 63%,rgba(255,255,255,.18) 64% 68%,transparent 69%)}\n.species-water,.species-rain,.species-puddle,.species-sleet,.species-stormlight{--z-mark:radial-gradient(ellipse at 33% 63%,rgba(255,255,255,.28) 0 6px,transparent 7px),linear-gradient(180deg,transparent 60%,rgba(0,91,154,.18) 61% 69%,transparent 70%)}\n.species-nature,.species-leaf,.species-vinez,.species-overgrown,.species-mudleaf,.species-bog,.species-overgrownrelic{--z-mark:radial-gradient(ellipse at 33% 42%,rgba(255,255,180,.22) 0 5px,transparent 6px),radial-gradient(ellipse at 70% 70%,rgba(20,92,33,.22) 0 6px,transparent 7px)}\n.species-sand,.species-desert,.species-dust,.species-tumbleweed{--z-mark:radial-gradient(circle at 28% 38%,rgba(117,76,28,.17) 0 3px,transparent 4px),radial-gradient(circle at 66% 63%,rgba(117,76,28,.16) 0 2px,transparent 3px),linear-gradient(180deg,transparent 70%,rgba(129,85,30,.13) 71% 79%,transparent 80%)}\n.species-ice,.species-frostbite,.species-glacier,.species-blackice{--z-mark:linear-gradient(125deg,transparent 20%,rgba(255,255,255,.5) 21% 25%,transparent 26% 52%,rgba(198,245,255,.35) 53% 57%,transparent 58%)}\n.species-metal,.species-magnet,.species-alloy,.species-chrome,.species-mirror,.species-reflect{--z-mark:linear-gradient(120deg,transparent 18%,rgba(255,255,255,.52) 19% 27%,transparent 28% 52%,rgba(255,255,255,.2) 53% 59%,transparent 60%)}\n.species-shadow,.species-nightmare,.species-watcher,.species-horror{--z-mark:radial-gradient(circle at 50% 52%,rgba(178,91,255,.24),transparent 48%)}\n.species-cosmic,.species-nebula,.species-galaxyglass,.species-skyfall{--z-mark:radial-gradient(circle at 28% 37%,#fff 0 1.5px,transparent 2.5px),radial-gradient(circle at 67% 60%,#e8d6ff 0 1px,transparent 2px),radial-gradient(circle at 43% 75%,#bfe9ff 0 1px,transparent 2px)}\n\n/* New/breeding-only Zoogles now get their own palettes instead of cloning a parent. */\n.species-goofy{--z-head:radial-gradient(circle at 31% 24%,#fff8bd,#ff9bd4 58%,#a85da4);--z-body:radial-gradient(circle at 34% 22%,#fff1a8,#fb84c4 57%,#87509d);--z-mark:radial-gradient(circle at 28% 42%,#7edcff 0 4px,transparent 5px),radial-gradient(circle at 69% 68%,#a7f66f 0 4px,transparent 5px)}\n.species-ember{--z-head:radial-gradient(circle at 30% 22%,#ffcf68,#a44124 57%,#3b2724);--z-body:radial-gradient(circle at 34% 22%,#ffbd50,#8d3420 55%,#2a2020);--z-mark:radial-gradient(circle at 52% 72%,rgba(255,224,95,.7),transparent 30%)}\n.species-puddle{--z-head:radial-gradient(circle at 30% 22%,#ddffff,#54cbef 58%,#2577aa);--z-body:radial-gradient(ellipse at 50% 75%,#1a7eb5 0 23%,transparent 24%),radial-gradient(circle at 34% 22%,#c8ffff,#45bce7 58%,#1b6e9d);--z-mark:linear-gradient(180deg,transparent 54%,rgba(255,255,255,.28) 55% 61%,transparent 62%)}\n.species-fungus{--z-head:radial-gradient(circle at 31% 24%,#ffd9c5,#bf4f69 58%,#6d3040);--z-body:radial-gradient(circle at 34% 22%,#b7db74,#6d8c41 57%,#3e4f2c);--z-mark:radial-gradient(circle at 30% 40%,#f6e8ba 0 4px,transparent 5px),radial-gradient(circle at 67% 66%,#e3c993 0 3px,transparent 4px)}\n.species-rubble{--z-head:radial-gradient(circle at 31% 23%,#b6b4ab,#6e706d 58%,#393c3c);--z-body:radial-gradient(circle at 32% 22%,#aaa89e,#626562 56%,#343737)}\n.species-foam{--z-head:radial-gradient(circle at 30% 22%,#fff,#bffaff 58%,#61cbe1);--z-body:radial-gradient(circle at 30% 35%,#fff 0 9px,transparent 10px),radial-gradient(circle at 68% 65%,#efffff 0 8px,transparent 9px),radial-gradient(circle at 34% 22%,#edffff,#9eeef5 58%,#4eb2cc)}\n.species-bog{--z-head:radial-gradient(circle at 30% 22%,#c0c97b,#596b36 58%,#263723);--z-body:radial-gradient(circle at 34% 22%,#9cae64,#4d6032 60%,#23321f);--z-mark:radial-gradient(circle at 31% 50%,rgba(67,48,24,.33) 0 6px,transparent 7px),radial-gradient(circle at 68% 70%,rgba(151,180,80,.28) 0 5px,transparent 6px)}\n.species-glacier{--z-head:linear-gradient(145deg,#fff,#a2edff 42%,#4fa7d9 72%,#225b94);--z-body:linear-gradient(145deg,#efffff,#84def5 44%,#3e90c7 72%,#1e4f84);--z-mark:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.64) 26% 32%,transparent 33% 62%,rgba(205,250,255,.46) 63% 69%,transparent 70%)}\n.species-sleet{--z-head:radial-gradient(circle at 28% 22%,#fff,#b8dce7 55%,#65798a);--z-body:radial-gradient(circle at 34% 22%,#f8ffff,#a9cad4 58%,#596f80);--z-mark:linear-gradient(120deg,transparent 28%,rgba(255,255,255,.55) 29% 34%,transparent 35%),radial-gradient(circle at 72% 69%,#77bde5 0 4px,transparent 5px)}\n.species-desert{--z-head:radial-gradient(circle at 30% 22%,#fff0a5,#d39b48 58%,#84542a);--z-body:linear-gradient(180deg,#ecc76e 0 52%,#bd7f39 53% 64%,#e2b95e 65%);--z-mark:linear-gradient(180deg,transparent 55%,rgba(117,70,24,.22) 56% 61%,transparent 62%)}\n.species-tumbleweed{--z-head:radial-gradient(circle at 30% 22%,#e8d5a4,#a77e4d 58%,#654a2f);--z-body:repeating-radial-gradient(ellipse at 50% 52%,#a77a44 0 4px,#7d5a34 5px 7px,#c39b63 8px 11px);--z-mark:transparent}\n.species-alloy{--z-head:linear-gradient(135deg,#f6fbff,#8e9ba0 48%,#d39b4b 49% 64%,#4f5a60 65%);--z-body:linear-gradient(135deg,#e9f1f4,#77878e 46%,#c88a38 47% 63%,#424e54 64%);--z-mark:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.42) 26% 34%,transparent 35%)}\n.species-chrome{--z-head:linear-gradient(120deg,#fff 0 14%,#9ba7ac 28%,#f8ffff 43%,#66747b 61%,#dff6ff 77%,#3e4b51);--z-body:linear-gradient(120deg,#eefcff 0 14%,#89979d 28%,#fff 43%,#5d6b72 61%,#caedf8 77%,#37444a);--z-mark:linear-gradient(120deg,transparent 34%,rgba(255,255,255,.7) 35% 42%,transparent 43%)}\n.species-glowbubble{--z-head:radial-gradient(circle at 30% 22%,#f5ff9b,#5fe69d 56%,#167874);--z-body:radial-gradient(circle at 30% 38%,rgba(255,255,220,.72) 0 7px,transparent 8px),radial-gradient(circle at 70% 68%,rgba(168,255,252,.65) 0 6px,transparent 7px),radial-gradient(circle at 34% 22%,#dfff85,#45cf8b 58%,#116b70);--z-mark:transparent}\n.species-poisoncap{--z-head:radial-gradient(circle at 30% 22%,#d7ff91,#8d4ec4 55%,#4b246c);--z-body:radial-gradient(circle at 34% 22%,#9de85b,#563179 57%,#321b47);--z-mark:radial-gradient(circle at 28% 42%,#f2ffb0 0 4px,transparent 5px),radial-gradient(circle at 68% 67%,#d7ff91 0 3px,transparent 4px)}\n.species-overgrownrelic{--z-head:radial-gradient(circle at 30% 22%,#c8b487,#6a6044 55%,#2f732e);--z-body:radial-gradient(circle at 34% 22%,#b69e72,#5a503a 52%,#28682b);--z-mark:linear-gradient(135deg,transparent 32%,rgba(150,42,35,.28) 33% 38%,transparent 39%),radial-gradient(circle at 68% 70%,rgba(91,183,76,.42) 0 7px,transparent 8px)}\n.species-charcoal{--z-head:radial-gradient(circle at 30% 22%,#8b8883,#373635 58%,#171717);--z-body:radial-gradient(circle at 34% 22%,#77736e,#2e2d2c 58%,#121212);--z-mark:linear-gradient(135deg,transparent 30%,rgba(255,113,49,.24) 31% 34%,transparent 35% 64%,rgba(255,113,49,.15) 65% 68%,transparent 69%)}\n.species-basalt{--z-head:radial-gradient(circle at 30% 22%,#5e5b58,#1d1c1b 60%,#080808);--z-body:radial-gradient(circle at 34% 22%,#55514e,#181716 60%,#060606);--z-mark:linear-gradient(120deg,transparent 24%,#ff6725 25% 28%,transparent 29% 54%,#ff9a31 55% 58%,transparent 59%)}\n.species-sigil{--z-head:radial-gradient(circle at 30% 22%,#6b7380,#252d3c 60%,#0a111c);--z-body:radial-gradient(circle at 34% 22%,#5b6673,#202937 60%,#08101a);--z-mark:radial-gradient(circle at 50% 52%,transparent 0 8px,#ff6d69 9px 11px,transparent 12px),linear-gradient(90deg,transparent 47%,#ff7976 48% 52%,transparent 53%)}\n.species-spirit{--z-head:radial-gradient(circle at 30% 22%,#e7d7a8,#8c7246 52%,#4d89a0 82%);--z-body:radial-gradient(circle at 34% 22%,#d4bd87,#715a36 52%,#3d7890 82%);--z-mark:radial-gradient(circle at 50% 56%,rgba(139,236,255,.48),transparent 45%);filter:drop-shadow(0 0 9px rgba(128,220,255,.45))}\n.species-reflect{--z-head:linear-gradient(145deg,#fff,#a6f0ff 38%,#7d75e5 65%,#e1ffff);--z-body:linear-gradient(145deg,#fff,#83dff5 38%,#6d67cf 65%,#d8ffff);--z-mark:linear-gradient(120deg,transparent 27%,rgba(255,255,255,.76) 28% 36%,transparent 37%)}\n.species-watcher{--z-head:radial-gradient(circle at 30% 22%,#c28cf3,#4b2764 60%,#13091c);--z-body:radial-gradient(circle at 34% 22%,#9c67d1,#3b1c50 60%,#0e0715);--z-mark:radial-gradient(circle at 29% 38%,#eee2ff 0 3px,#351046 4px 5px,transparent 6px),radial-gradient(circle at 70% 68%,#eee2ff 0 3px,#351046 4px 5px,transparent 6px)}\n.species-horror{--z-head:radial-gradient(circle at 30% 22%,#a34ee0,#32133f 62%,#060308);--z-body:radial-gradient(circle at 34% 22%,#842dbf,#25102f 60%,#050207);--z-mark:radial-gradient(ellipse at 50% 70%,#09040d 0 8px,#8c42be 9px 11px,transparent 12px)}\n.species-stormcloud{--z-head:radial-gradient(circle at 30% 22%,#d6e2e7,#77858f 58%,#35404a);--z-body:radial-gradient(circle at 34% 22%,#c4d2d8,#677780 58%,#2f3942);--z-mark:linear-gradient(105deg,transparent 36%,#7fd8ff 37% 40%,transparent 41% 58%,#a7eaff 59% 62%,transparent 63%)}\n.species-sunbeam{--z-head:radial-gradient(circle at 30% 22%,#fffbd0,#f5e96f 52%,#80c65a);--z-body:radial-gradient(circle at 34% 22%,#fff2a8,#dbdf59 48%,#5aa25b);--z-mark:repeating-conic-gradient(from 0deg at 50% 55%,rgba(255,255,255,.48) 0 8deg,transparent 8deg 34deg);filter:drop-shadow(0 0 10px rgba(255,245,130,.65))}\n.species-stormlight{--z-head:radial-gradient(circle at 30% 22%,#e6f7ff,#708ec9 56%,#342f75);--z-body:radial-gradient(circle at 34% 22%,#caecff,#5c80bc 58%,#292862);--z-mark:linear-gradient(115deg,transparent 18%,#faff9c 19% 23%,transparent 24% 49%,#f7ffb4 50% 54%,transparent 55%)}\n.species-blackice{--z-head:linear-gradient(145deg,#c6f6ff,#29333c 48%,#080b0e 78%);--z-body:linear-gradient(145deg,#9edce9,#202a32 48%,#06090c 78%);--z-mark:linear-gradient(125deg,transparent 22%,rgba(170,238,255,.62) 23% 27%,transparent 28% 57%,rgba(170,238,255,.34) 58% 61%,transparent 62%)}\n.species-sentinel{--z-head:radial-gradient(circle at 30% 22%,#fff2c9,#a6aab0 52%,#5f6870);--z-body:radial-gradient(circle at 34% 22%,#e7d7a4,#8b9298 54%,#4b545b);--z-mark:linear-gradient(90deg,transparent 42%,#d6aa38 43% 57%,transparent 58%)}\n.species-runeguard{--z-head:radial-gradient(circle at 30% 22%,#e7f2f5,#8a959c 52%,#394650);--z-body:radial-gradient(circle at 34% 22%,#ccdbe0,#758088 54%,#303b44);--z-mark:radial-gradient(circle at 50% 52%,transparent 0 9px,#68d8ff 10px 12px,transparent 13px),linear-gradient(90deg,transparent 48%,#68d8ff 49% 51%,transparent 52%);filter:drop-shadow(0 0 8px rgba(89,207,255,.45))}\n.species-horizon{--z-head:linear-gradient(180deg,#f8ffff,#7ddcff 60%,#ffc879 61% 72%,#6cb0c4 73%);--z-body:linear-gradient(180deg,#eaffff,#6bcef1 58%,#ffbe6b 59% 70%,#4e95b0 71%);--z-mark:linear-gradient(180deg,transparent 58%,rgba(255,255,255,.56) 59% 61%,transparent 62%)}\n.species-skyfall{--z-head:linear-gradient(180deg,#17204e,#445f9e 58%,#8551bd);--z-body:linear-gradient(180deg,#121b46,#385788 58%,#6f409f);--z-mark:linear-gradient(135deg,transparent 26%,rgba(255,240,160,.8) 27% 30%,transparent 31%),radial-gradient(circle at 70% 70%,#fff 0 2px,transparent 3px);filter:drop-shadow(0 0 10px rgba(152,173,255,.55))}\n.species-galaxyglass{--z-head:radial-gradient(circle at 30% 22%,rgba(255,255,255,.88),rgba(82,151,230,.52) 45%,rgba(87,46,150,.48));--z-body:radial-gradient(circle at 34% 22%,rgba(255,255,255,.76),rgba(63,128,211,.5) 45%,rgba(76,37,132,.5));--z-mark:radial-gradient(circle at 26% 37%,#fff 0 2px,transparent 3px),radial-gradient(circle at 68% 64%,#ffdcff 0 1.5px,transparent 2.5px)}\n.species-lullaby{--z-head:linear-gradient(145deg,#fff0fb,#c6ddff 50%,#c2b1ef);--z-body:linear-gradient(145deg,#ffe5f8,#b8d4fb 50%,#b19add);--z-mark:radial-gradient(circle at 44% 54%,#fff8cf 0 8px,transparent 9px),radial-gradient(circle at 49% 50%,#c5dcff 0 8px,transparent 9px)}\n.species-supernova{--z-head:radial-gradient(circle,#fff 0 12%,#fff47a 13% 30%,#ff76c7 31% 54%,#6e75ff 55%);--z-body:radial-gradient(circle,#fff 0 10%,#ffe95b 11% 27%,#ff62b9 28% 52%,#5968eb 53%);--z-mark:repeating-conic-gradient(from 0deg,rgba(255,255,255,.38) 0 8deg,transparent 8deg 30deg);filter:drop-shadow(0 0 15px rgba(255,126,220,.58))}\n.species-eternity{--z-head:linear-gradient(135deg,#fff,#82fff4 38%,#a678ff 70%,#ff96dd);--z-body:linear-gradient(135deg,#f7ffff,#67e9e1 38%,#9160eb 70%,#f27acc);--z-mark:radial-gradient(ellipse at 38% 55%,transparent 0 5px,#fff 6px 8px,transparent 9px),radial-gradient(ellipse at 62% 55%,transparent 0 5px,#fff 6px 8px,transparent 9px)}\n.species-crownlight{--z-head:radial-gradient(circle at 30% 22%,#fff9d8,#f1d35c 48%,#ba7cff);--z-body:radial-gradient(circle at 34% 22%,#fff0a8,#e6bd42 48%,#9f65e1);--z-mark:linear-gradient(90deg,transparent 28%,rgba(255,255,255,.46) 29% 36%,transparent 37% 63%,rgba(255,255,255,.32) 64% 71%,transparent 72%);filter:drop-shadow(0 0 12px rgba(255,221,97,.5))}\n.species-jurassic{--z-head:radial-gradient(circle at 30% 22%,#c7b58b,#6c7c4b 55%,#39462e);--z-body:radial-gradient(circle at 34% 22%,#b5a276,#5d7042 55%,#313d28);--z-mark:radial-gradient(circle at 28% 40%,rgba(64,74,43,.42) 0 4px,transparent 5px),radial-gradient(circle at 68% 68%,rgba(227,211,169,.26) 0 5px,transparent 6px)}\n.species-lost{--z-head:radial-gradient(circle at 30% 22%,#d9d0c5,#8d7764 55%,#835151);--z-body:radial-gradient(circle at 34% 22%,#c7b9aa,#786251 55%,#704243);--z-mark:linear-gradient(140deg,transparent 28%,rgba(255,255,255,.25) 29% 32%,transparent 33% 58%,rgba(78,50,42,.28) 59% 62%,transparent 63%);opacity:.9}\n.species-corruptancient{--z-head:radial-gradient(circle at 30% 22%,#ff8383,#651317 58%,#190405);--z-body:linear-gradient(90deg,#b62b31 0 34%,#471014 35% 44%,#ec5252 45% 57%,#3d0c10 58% 67%,#9a2028 68%);--z-mark:repeating-linear-gradient(0deg,transparent 0 8px,rgba(255,172,172,.25) 9px 11px);filter:drop-shadow(0 0 10px rgba(255,45,55,.5))}\n.species-excavated{--z-head:radial-gradient(circle at 30% 22%,#efe1c7,#a58f6c 60%,#6c5338);--z-body:radial-gradient(circle at 34% 22%,#dfcdab,#927951 60%,#5a412b);--z-mark:radial-gradient(circle at 28% 42%,rgba(96,63,30,.34) 0 5px,transparent 6px),linear-gradient(140deg,transparent 48%,rgba(255,245,213,.36) 49% 54%,transparent 55%)}\n.species-primal{--z-head:radial-gradient(circle at 30% 22%,#a1c36b,#405d32 56%,#ff6a22 88%);--z-body:radial-gradient(circle at 34% 22%,#89aa58,#354f2d 56%,#f35019 88%);--z-mark:linear-gradient(120deg,transparent 24%,rgba(255,178,69,.55) 25% 28%,transparent 29% 55%,rgba(68,38,25,.3) 56% 60%,transparent 61%)}\n\n/* Direct V6 species get bespoke markings while staying on the same silhouette. */\n.species-mudleaf{--z-mark:radial-gradient(ellipse at 28% 38%,#79a84d 0 7px,transparent 8px),radial-gradient(ellipse at 68% 70%,#3f7d35 0 6px,transparent 7px)}\n.species-vinez{--z-mark:linear-gradient(105deg,transparent 32%,rgba(38,102,35,.45) 33% 39%,transparent 40% 63%,rgba(38,102,35,.38) 64% 70%,transparent 71%)}\n.species-dust{--z-mark:radial-gradient(circle at 30% 40%,rgba(96,64,35,.2) 0 3px,transparent 4px),radial-gradient(circle at 70% 68%,rgba(96,64,35,.18) 0 4px,transparent 5px)}\n.species-ash{--z-mark:radial-gradient(circle at 28% 39%,rgba(25,25,25,.22) 0 5px,transparent 6px),radial-gradient(circle at 68% 67%,rgba(230,230,220,.12) 0 4px,transparent 5px)}\n.species-rain{--z-mark:linear-gradient(105deg,transparent 22%,rgba(210,246,255,.45) 23% 27%,transparent 28% 53%,rgba(210,246,255,.34) 54% 58%,transparent 59%)}\n.species-mushroom{--z-mark:radial-gradient(circle at 28% 40%,#e9c99f 0 4px,transparent 5px),radial-gradient(circle at 68% 68%,#d97570 0 4px,transparent 5px)}\n.species-frostbite{--z-mark:linear-gradient(125deg,transparent 18%,rgba(255,255,255,.7) 19% 24%,transparent 25% 55%,rgba(202,246,255,.4) 56% 61%,transparent 62%)}\n.species-relic{--z-mark:linear-gradient(140deg,transparent 28%,rgba(139,37,37,.48) 29% 34%,transparent 35% 62%,rgba(224,194,133,.3) 63% 68%,transparent 69%)}\n.species-tribal{--z-mark:radial-gradient(circle at 28% 38%,#3f2617 0 3px,transparent 4px),radial-gradient(circle at 68% 68%,#3f2617 0 4px,transparent 5px),linear-gradient(90deg,transparent 44%,rgba(245,211,118,.28) 45% 55%,transparent 56%)}\n.species-obsidian{--z-mark:linear-gradient(125deg,transparent 20%,rgba(180,82,255,.25) 21% 24%,transparent 25% 56%,rgba(255,86,42,.22) 57% 60%,transparent 61%)}\n.species-totem{--z-mark:linear-gradient(90deg,transparent 43%,#53d8c6 44% 47%,transparent 48% 52%,#53d8c6 53% 56%,transparent 57%),radial-gradient(circle at 50% 69%,transparent 0 6px,#53d8c6 7px 9px,transparent 10px)}\n.species-rune{--z-mark:radial-gradient(circle at 50% 52%,transparent 0 7px,#ff5c58 8px 10px,transparent 11px),linear-gradient(90deg,transparent 48%,#ff5c58 49% 51%,transparent 52%)}\n.species-guardian{--z-mark:linear-gradient(90deg,transparent 44%,rgba(237,204,104,.45) 45% 55%,transparent 56%)}\n.species-eyez{--z-mark:radial-gradient(circle at 29% 39%,#f2e8ff 0 3px,#422052 4px 5px,transparent 6px),radial-gradient(circle at 70% 69%,#f2e8ff 0 3px,#422052 4px 5px,transparent 6px)}\n.species-skylight{--z-mark:linear-gradient(180deg,transparent 57%,rgba(255,255,255,.52) 58% 61%,rgba(255,205,126,.32) 62% 67%,transparent 68%)}\n.species-forgotten{--z-mark:linear-gradient(140deg,transparent 26%,rgba(151,34,34,.3) 27% 31%,transparent 32% 64%,rgba(255,243,213,.2) 65% 69%,transparent 70%)}\n.species-fossil{--z-mark:radial-gradient(circle at 31% 43%,rgba(94,72,43,.23) 0 5px,transparent 6px),linear-gradient(130deg,transparent 52%,rgba(255,248,218,.28) 53% 57%,transparent 58%)}\n.species-cursed{--z-mark:repeating-linear-gradient(0deg,transparent 0 9px,rgba(255,119,119,.24) 10px 12px)}\n.species-dinosaur{--z-mark:radial-gradient(circle at 28% 39%,rgba(37,76,37,.35) 0 4px,transparent 5px),radial-gradient(circle at 68% 68%,rgba(37,76,37,.28) 0 5px,transparent 6px)}\n.species-elder{--z-mark:linear-gradient(140deg,transparent 29%,rgba(255,238,191,.24) 30% 34%,transparent 35% 64%,rgba(79,57,37,.2) 65% 69%,transparent 70%)}\n.species-aurora{--z-mark:linear-gradient(135deg,transparent 24%,rgba(255,255,255,.35) 25% 34%,transparent 35% 58%,rgba(149,255,213,.25) 59% 68%,transparent 69%)}\n.species-nova{--z-mark:repeating-conic-gradient(from 0deg at 50% 55%,rgba(255,255,255,.35) 0 8deg,transparent 8deg 36deg)}\n.species-dream{--z-mark:radial-gradient(circle at 32% 43%,rgba(255,255,255,.38) 0 7px,transparent 8px),radial-gradient(circle at 68% 68%,rgba(255,255,255,.25) 0 5px,transparent 6px)}\n.species-starglass{--z-mark:radial-gradient(circle at 28% 38%,#fff 0 2px,transparent 3px),radial-gradient(circle at 69% 68%,#f0ccff 0 1.5px,transparent 2.5px)}\n.species-halo{--z-mark:radial-gradient(circle at 50% 55%,transparent 0 12px,rgba(255,239,132,.48) 13px 16px,transparent 17px)}\n.species-comet{--z-mark:linear-gradient(135deg,transparent 25%,rgba(255,255,255,.55) 26% 31%,transparent 32%)}\n.species-prism{--z-mark:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.45) 21% 28%,transparent 29% 58%,rgba(255,255,255,.3) 59% 66%,transparent 67%)}\n.species-infinity{--z-mark:radial-gradient(ellipse at 38% 55%,transparent 0 5px,#fff 6px 8px,transparent 9px),radial-gradient(ellipse at 62% 55%,transparent 0 5px,#fff 6px 8px,transparent 9px)}\n</style>\n<script type="text/javascript" nonce="cc4aab5275304bd4b830a2e71ba" src="//local.adguard.org?ts=1789769212388&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000b69882108b65b3a0f7c3c3dd%26ts%3D497158%26p%3Dfs%26cid%3D1%26sig%3D7bc6c853ed09c784d164f8033655ce15da135d5a9eb220ef6a8824dbbe02ddc7%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MyJ9LCB7ImJyYW5kIjoiTm90X0EgQnJhbmQiLCJ2ZXJzaW9uIjoiOCJ9LCB7ImJyYW5kIjoiQ2hyb21pdW0iLCJ2ZXJzaW9uIjoiMTUzIn1d&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="cc4aab5275304bd4b830a2e71ba" src="//local.adguard.org?ts=1789769212388&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
+\n<style id="zoogle-unified-art-pass">\n/* === Unified Zoogle art pass ===\n   Every species keeps the classic Zoogle silhouette and face language.\n   Species identity comes from palette, markings and small CSS-drawn details. */\n.zoogle{--z-outline:rgba(52,37,25,.58);--z-mark:transparent;isolation:isolate}\n.zoogle .z-head{width:44px;height:44px;top:2px;border:3px solid var(--z-outline);box-shadow:inset 7px 7px 8px rgba(255,255,255,.34),inset -7px -8px 8px rgba(0,0,0,.12),0 2px 0 rgba(255,255,255,.16)}\n.zoogle .z-body{width:72px;height:84px;border:3px solid var(--z-outline);box-shadow:inset 10px 9px 10px rgba(255,255,255,.28),inset -12px -12px 10px rgba(0,0,0,.12),0 2px 0 rgba(255,255,255,.12)}\n.zoogle .z-head::after{content:"";position:absolute;left:7px;top:5px;width:12px;height:8px;border-radius:50%;background:rgba(255,255,255,.23);transform:rotate(-24deg);pointer-events:none}\n.zoogle .z-body::before{content:"";position:absolute;inset:8px 9px 11px;border-radius:48% 52% 50% 50%;background:var(--z-mark);opacity:.72;pointer-events:none}\n.zoogle .z-eye{width:6px;height:8px;background:#32251c;box-shadow:0 1px 0 rgba(255,255,255,.18)}\n.zoogle .z-eye.single{width:10px;height:12px;background:#2a1f28;box-shadow:0 0 0 3px rgba(255,255,255,.38),0 0 0 5px rgba(45,29,50,.18)}\n.zoogle .z-smile{width:16px;height:8px;border-bottom:2px solid rgba(46,33,24,.62)}\n/* CSS-drawn accessories replace OS-dependent emoji art. */\n.z-crown{left:31px;top:-7px;width:29px;height:23px;background:linear-gradient(#fff09a,#f4b928 62%,#b9770c);clip-path:polygon(0 100%,6% 30%,28% 61%,48% 4%,69% 61%,94% 29%,100% 100%);filter:drop-shadow(0 2px 1px rgba(62,37,8,.35));z-index:14}.z-crown::after{content:"";position:absolute;left:6px;right:6px;bottom:2px;height:5px;border-radius:4px;background:#8a4e12}\n.z-shield{left:32px;top:-5px;width:27px;height:30px;background:linear-gradient(135deg,#eef5f7,#8c999f 57%,#4b5960);clip-path:polygon(50% 0,94% 18%,85% 71%,50% 100%,15% 71%,6% 18%);filter:drop-shadow(0 2px 1px rgba(30,38,42,.4));z-index:14}.z-shield::after{content:"";position:absolute;left:12px;top:5px;width:4px;height:19px;background:#f1c653;box-shadow:-6px 7px 0 -1px #f1c653,6px 7px 0 -1px #f1c653}\n.z-eye-sigil{left:35px;top:-2px;width:23px;height:15px;border-radius:70% 10% 70% 10%;transform:rotate(45deg);background:#eee1ff;border:2px solid #4e2a6a;box-shadow:0 0 8px rgba(175,106,255,.65);z-index:14}.z-eye-sigil::after{content:"";position:absolute;left:7px;top:3px;width:6px;height:6px;border-radius:50%;background:#2b103f;box-shadow:0 0 0 2px #a963e6}\n.z-cheese{width:16px;height:14px;background:linear-gradient(145deg,#fff083,#e6a51d);clip-path:polygon(0 23%,100% 0,91% 100%,0 88%);filter:drop-shadow(0 2px 1px rgba(107,62,4,.24));z-index:13}.z-cheese::before,.z-cheese::after{content:"";position:absolute;border-radius:50%;background:rgba(166,100,8,.48)}.z-cheese::before{width:4px;height:4px;left:4px;top:4px}.z-cheese::after{width:3px;height:3px;right:3px;bottom:3px}\n\n/* Older species keep their palettes but get restrained, consistent markings. */\n.species-basic{--z-mark:radial-gradient(circle at 33% 65%,rgba(150,150,140,.16) 0 6px,transparent 7px)}\n.species-fire{--z-mark:radial-gradient(circle at 50% 75%,rgba(255,244,110,.35),transparent 35%)}\n.species-earth{--z-mark:radial-gradient(circle at 28% 35%,rgba(70,44,24,.22) 0 5px,transparent 6px),radial-gradient(circle at 68% 67%,rgba(70,44,24,.18) 0 4px,transparent 5px)}\n.species-air{--z-mark:linear-gradient(165deg,transparent 30%,rgba(255,255,255,.3) 31% 37%,transparent 38% 61%,rgba(255,255,255,.2) 62% 67%,transparent 68%)}\n.species-rockz,.species-gravel,.species-rubble{--z-mark:linear-gradient(135deg,transparent 26%,rgba(40,45,43,.22) 27% 31%,transparent 32% 63%,rgba(255,255,255,.18) 64% 68%,transparent 69%)}\n.species-water,.species-rain,.species-puddle,.species-sleet,.species-stormlight{--z-mark:radial-gradient(ellipse at 33% 63%,rgba(255,255,255,.28) 0 6px,transparent 7px),linear-gradient(180deg,transparent 60%,rgba(0,91,154,.18) 61% 69%,transparent 70%)}\n.species-nature,.species-leaf,.species-vinez,.species-overgrown,.species-mudleaf,.species-bog,.species-overgrownrelic{--z-mark:radial-gradient(ellipse at 33% 42%,rgba(255,255,180,.22) 0 5px,transparent 6px),radial-gradient(ellipse at 70% 70%,rgba(20,92,33,.22) 0 6px,transparent 7px)}\n.species-sand,.species-desert,.species-dust,.species-tumbleweed{--z-mark:radial-gradient(circle at 28% 38%,rgba(117,76,28,.17) 0 3px,transparent 4px),radial-gradient(circle at 66% 63%,rgba(117,76,28,.16) 0 2px,transparent 3px),linear-gradient(180deg,transparent 70%,rgba(129,85,30,.13) 71% 79%,transparent 80%)}\n.species-ice,.species-frostbite,.species-glacier,.species-blackice{--z-mark:linear-gradient(125deg,transparent 20%,rgba(255,255,255,.5) 21% 25%,transparent 26% 52%,rgba(198,245,255,.35) 53% 57%,transparent 58%)}\n.species-metal,.species-magnet,.species-alloy,.species-chrome,.species-mirror,.species-reflect{--z-mark:linear-gradient(120deg,transparent 18%,rgba(255,255,255,.52) 19% 27%,transparent 28% 52%,rgba(255,255,255,.2) 53% 59%,transparent 60%)}\n.species-shadow,.species-nightmare,.species-watcher,.species-horror{--z-mark:radial-gradient(circle at 50% 52%,rgba(178,91,255,.24),transparent 48%)}\n.species-cosmic,.species-nebula,.species-galaxyglass,.species-skyfall{--z-mark:radial-gradient(circle at 28% 37%,#fff 0 1.5px,transparent 2.5px),radial-gradient(circle at 67% 60%,#e8d6ff 0 1px,transparent 2px),radial-gradient(circle at 43% 75%,#bfe9ff 0 1px,transparent 2px)}\n\n/* New/breeding-only Zoogles now get their own palettes instead of cloning a parent. */\n.species-goofy{--z-head:radial-gradient(circle at 31% 24%,#fff8bd,#ff9bd4 58%,#a85da4);--z-body:radial-gradient(circle at 34% 22%,#fff1a8,#fb84c4 57%,#87509d);--z-mark:radial-gradient(circle at 28% 42%,#7edcff 0 4px,transparent 5px),radial-gradient(circle at 69% 68%,#a7f66f 0 4px,transparent 5px)}\n.species-ember{--z-head:radial-gradient(circle at 30% 22%,#ffcf68,#a44124 57%,#3b2724);--z-body:radial-gradient(circle at 34% 22%,#ffbd50,#8d3420 55%,#2a2020);--z-mark:radial-gradient(circle at 52% 72%,rgba(255,224,95,.7),transparent 30%)}\n.species-puddle{--z-head:radial-gradient(circle at 30% 22%,#ddffff,#54cbef 58%,#2577aa);--z-body:radial-gradient(ellipse at 50% 75%,#1a7eb5 0 23%,transparent 24%),radial-gradient(circle at 34% 22%,#c8ffff,#45bce7 58%,#1b6e9d);--z-mark:linear-gradient(180deg,transparent 54%,rgba(255,255,255,.28) 55% 61%,transparent 62%)}\n.species-fungus{--z-head:radial-gradient(circle at 31% 24%,#ffd9c5,#bf4f69 58%,#6d3040);--z-body:radial-gradient(circle at 34% 22%,#b7db74,#6d8c41 57%,#3e4f2c);--z-mark:radial-gradient(circle at 30% 40%,#f6e8ba 0 4px,transparent 5px),radial-gradient(circle at 67% 66%,#e3c993 0 3px,transparent 4px)}\n.species-rubble{--z-head:radial-gradient(circle at 31% 23%,#b6b4ab,#6e706d 58%,#393c3c);--z-body:radial-gradient(circle at 32% 22%,#aaa89e,#626562 56%,#343737)}\n.species-foam{--z-head:radial-gradient(circle at 30% 22%,#fff,#bffaff 58%,#61cbe1);--z-body:radial-gradient(circle at 30% 35%,#fff 0 9px,transparent 10px),radial-gradient(circle at 68% 65%,#efffff 0 8px,transparent 9px),radial-gradient(circle at 34% 22%,#edffff,#9eeef5 58%,#4eb2cc)}\n.species-bog{--z-head:radial-gradient(circle at 30% 22%,#c0c97b,#596b36 58%,#263723);--z-body:radial-gradient(circle at 34% 22%,#9cae64,#4d6032 60%,#23321f);--z-mark:radial-gradient(circle at 31% 50%,rgba(67,48,24,.33) 0 6px,transparent 7px),radial-gradient(circle at 68% 70%,rgba(151,180,80,.28) 0 5px,transparent 6px)}\n.species-glacier{--z-head:linear-gradient(145deg,#fff,#a2edff 42%,#4fa7d9 72%,#225b94);--z-body:linear-gradient(145deg,#efffff,#84def5 44%,#3e90c7 72%,#1e4f84);--z-mark:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.64) 26% 32%,transparent 33% 62%,rgba(205,250,255,.46) 63% 69%,transparent 70%)}\n.species-sleet{--z-head:radial-gradient(circle at 28% 22%,#fff,#b8dce7 55%,#65798a);--z-body:radial-gradient(circle at 34% 22%,#f8ffff,#a9cad4 58%,#596f80);--z-mark:linear-gradient(120deg,transparent 28%,rgba(255,255,255,.55) 29% 34%,transparent 35%),radial-gradient(circle at 72% 69%,#77bde5 0 4px,transparent 5px)}\n.species-desert{--z-head:radial-gradient(circle at 30% 22%,#fff0a5,#d39b48 58%,#84542a);--z-body:linear-gradient(180deg,#ecc76e 0 52%,#bd7f39 53% 64%,#e2b95e 65%);--z-mark:linear-gradient(180deg,transparent 55%,rgba(117,70,24,.22) 56% 61%,transparent 62%)}\n.species-tumbleweed{--z-head:radial-gradient(circle at 30% 22%,#e8d5a4,#a77e4d 58%,#654a2f);--z-body:repeating-radial-gradient(ellipse at 50% 52%,#a77a44 0 4px,#7d5a34 5px 7px,#c39b63 8px 11px);--z-mark:transparent}\n.species-alloy{--z-head:linear-gradient(135deg,#f6fbff,#8e9ba0 48%,#d39b4b 49% 64%,#4f5a60 65%);--z-body:linear-gradient(135deg,#e9f1f4,#77878e 46%,#c88a38 47% 63%,#424e54 64%);--z-mark:linear-gradient(120deg,transparent 25%,rgba(255,255,255,.42) 26% 34%,transparent 35%)}\n.species-chrome{--z-head:linear-gradient(120deg,#fff 0 14%,#9ba7ac 28%,#f8ffff 43%,#66747b 61%,#dff6ff 77%,#3e4b51);--z-body:linear-gradient(120deg,#eefcff 0 14%,#89979d 28%,#fff 43%,#5d6b72 61%,#caedf8 77%,#37444a);--z-mark:linear-gradient(120deg,transparent 34%,rgba(255,255,255,.7) 35% 42%,transparent 43%)}\n.species-glowbubble{--z-head:radial-gradient(circle at 30% 22%,#f5ff9b,#5fe69d 56%,#167874);--z-body:radial-gradient(circle at 30% 38%,rgba(255,255,220,.72) 0 7px,transparent 8px),radial-gradient(circle at 70% 68%,rgba(168,255,252,.65) 0 6px,transparent 7px),radial-gradient(circle at 34% 22%,#dfff85,#45cf8b 58%,#116b70);--z-mark:transparent}\n.species-poisoncap{--z-head:radial-gradient(circle at 30% 22%,#d7ff91,#8d4ec4 55%,#4b246c);--z-body:radial-gradient(circle at 34% 22%,#9de85b,#563179 57%,#321b47);--z-mark:radial-gradient(circle at 28% 42%,#f2ffb0 0 4px,transparent 5px),radial-gradient(circle at 68% 67%,#d7ff91 0 3px,transparent 4px)}\n.species-overgrownrelic{--z-head:radial-gradient(circle at 30% 22%,#c8b487,#6a6044 55%,#2f732e);--z-body:radial-gradient(circle at 34% 22%,#b69e72,#5a503a 52%,#28682b);--z-mark:linear-gradient(135deg,transparent 32%,rgba(150,42,35,.28) 33% 38%,transparent 39%),radial-gradient(circle at 68% 70%,rgba(91,183,76,.42) 0 7px,transparent 8px)}\n.species-charcoal{--z-head:radial-gradient(circle at 30% 22%,#8b8883,#373635 58%,#171717);--z-body:radial-gradient(circle at 34% 22%,#77736e,#2e2d2c 58%,#121212);--z-mark:linear-gradient(135deg,transparent 30%,rgba(255,113,49,.24) 31% 34%,transparent 35% 64%,rgba(255,113,49,.15) 65% 68%,transparent 69%)}\n.species-basalt{--z-head:radial-gradient(circle at 30% 22%,#5e5b58,#1d1c1b 60%,#080808);--z-body:radial-gradient(circle at 34% 22%,#55514e,#181716 60%,#060606);--z-mark:linear-gradient(120deg,transparent 24%,#ff6725 25% 28%,transparent 29% 54%,#ff9a31 55% 58%,transparent 59%)}\n.species-sigil{--z-head:radial-gradient(circle at 30% 22%,#6b7380,#252d3c 60%,#0a111c);--z-body:radial-gradient(circle at 34% 22%,#5b6673,#202937 60%,#08101a);--z-mark:radial-gradient(circle at 50% 52%,transparent 0 8px,#ff6d69 9px 11px,transparent 12px),linear-gradient(90deg,transparent 47%,#ff7976 48% 52%,transparent 53%)}\n.species-spirit{--z-head:radial-gradient(circle at 30% 22%,#e7d7a8,#8c7246 52%,#4d89a0 82%);--z-body:radial-gradient(circle at 34% 22%,#d4bd87,#715a36 52%,#3d7890 82%);--z-mark:radial-gradient(circle at 50% 56%,rgba(139,236,255,.48),transparent 45%);filter:drop-shadow(0 0 9px rgba(128,220,255,.45))}\n.species-reflect{--z-head:linear-gradient(145deg,#fff,#a6f0ff 38%,#7d75e5 65%,#e1ffff);--z-body:linear-gradient(145deg,#fff,#83dff5 38%,#6d67cf 65%,#d8ffff);--z-mark:linear-gradient(120deg,transparent 27%,rgba(255,255,255,.76) 28% 36%,transparent 37%)}\n.species-watcher{--z-head:radial-gradient(circle at 30% 22%,#c28cf3,#4b2764 60%,#13091c);--z-body:radial-gradient(circle at 34% 22%,#9c67d1,#3b1c50 60%,#0e0715);--z-mark:radial-gradient(circle at 29% 38%,#eee2ff 0 3px,#351046 4px 5px,transparent 6px),radial-gradient(circle at 70% 68%,#eee2ff 0 3px,#351046 4px 5px,transparent 6px)}\n.species-horror{--z-head:radial-gradient(circle at 30% 22%,#a34ee0,#32133f 62%,#060308);--z-body:radial-gradient(circle at 34% 22%,#842dbf,#25102f 60%,#050207);--z-mark:radial-gradient(ellipse at 50% 70%,#09040d 0 8px,#8c42be 9px 11px,transparent 12px)}\n.species-stormcloud{--z-head:radial-gradient(circle at 30% 22%,#d6e2e7,#77858f 58%,#35404a);--z-body:radial-gradient(circle at 34% 22%,#c4d2d8,#677780 58%,#2f3942);--z-mark:linear-gradient(105deg,transparent 36%,#7fd8ff 37% 40%,transparent 41% 58%,#a7eaff 59% 62%,transparent 63%)}\n.species-sunbeam{--z-head:radial-gradient(circle at 30% 22%,#fffbd0,#f5e96f 52%,#80c65a);--z-body:radial-gradient(circle at 34% 22%,#fff2a8,#dbdf59 48%,#5aa25b);--z-mark:repeating-conic-gradient(from 0deg at 50% 55%,rgba(255,255,255,.48) 0 8deg,transparent 8deg 34deg);filter:drop-shadow(0 0 10px rgba(255,245,130,.65))}\n.species-stormlight{--z-head:radial-gradient(circle at 30% 22%,#e6f7ff,#708ec9 56%,#342f75);--z-body:radial-gradient(circle at 34% 22%,#caecff,#5c80bc 58%,#292862);--z-mark:linear-gradient(115deg,transparent 18%,#faff9c 19% 23%,transparent 24% 49%,#f7ffb4 50% 54%,transparent 55%)}\n.species-blackice{--z-head:linear-gradient(145deg,#c6f6ff,#29333c 48%,#080b0e 78%);--z-body:linear-gradient(145deg,#9edce9,#202a32 48%,#06090c 78%);--z-mark:linear-gradient(125deg,transparent 22%,rgba(170,238,255,.62) 23% 27%,transparent 28% 57%,rgba(170,238,255,.34) 58% 61%,transparent 62%)}\n.species-sentinel{--z-head:radial-gradient(circle at 30% 22%,#fff2c9,#a6aab0 52%,#5f6870);--z-body:radial-gradient(circle at 34% 22%,#e7d7a4,#8b9298 54%,#4b545b);--z-mark:linear-gradient(90deg,transparent 42%,#d6aa38 43% 57%,transparent 58%)}\n.species-runeguard{--z-head:radial-gradient(circle at 30% 22%,#e7f2f5,#8a959c 52%,#394650);--z-body:radial-gradient(circle at 34% 22%,#ccdbe0,#758088 54%,#303b44);--z-mark:radial-gradient(circle at 50% 52%,transparent 0 9px,#68d8ff 10px 12px,transparent 13px),linear-gradient(90deg,transparent 48%,#68d8ff 49% 51%,transparent 52%);filter:drop-shadow(0 0 8px rgba(89,207,255,.45))}\n.species-horizon{--z-head:linear-gradient(180deg,#f8ffff,#7ddcff 60%,#ffc879 61% 72%,#6cb0c4 73%);--z-body:linear-gradient(180deg,#eaffff,#6bcef1 58%,#ffbe6b 59% 70%,#4e95b0 71%);--z-mark:linear-gradient(180deg,transparent 58%,rgba(255,255,255,.56) 59% 61%,transparent 62%)}\n.species-skyfall{--z-head:linear-gradient(180deg,#17204e,#445f9e 58%,#8551bd);--z-body:linear-gradient(180deg,#121b46,#385788 58%,#6f409f);--z-mark:linear-gradient(135deg,transparent 26%,rgba(255,240,160,.8) 27% 30%,transparent 31%),radial-gradient(circle at 70% 70%,#fff 0 2px,transparent 3px);filter:drop-shadow(0 0 10px rgba(152,173,255,.55))}\n.species-galaxyglass{--z-head:radial-gradient(circle at 30% 22%,rgba(255,255,255,.88),rgba(82,151,230,.52) 45%,rgba(87,46,150,.48));--z-body:radial-gradient(circle at 34% 22%,rgba(255,255,255,.76),rgba(63,128,211,.5) 45%,rgba(76,37,132,.5));--z-mark:radial-gradient(circle at 26% 37%,#fff 0 2px,transparent 3px),radial-gradient(circle at 68% 64%,#ffdcff 0 1.5px,transparent 2.5px)}\n.species-lullaby{--z-head:linear-gradient(145deg,#fff0fb,#c6ddff 50%,#c2b1ef);--z-body:linear-gradient(145deg,#ffe5f8,#b8d4fb 50%,#b19add);--z-mark:radial-gradient(circle at 44% 54%,#fff8cf 0 8px,transparent 9px),radial-gradient(circle at 49% 50%,#c5dcff 0 8px,transparent 9px)}\n.species-supernova{--z-head:radial-gradient(circle,#fff 0 12%,#fff47a 13% 30%,#ff76c7 31% 54%,#6e75ff 55%);--z-body:radial-gradient(circle,#fff 0 10%,#ffe95b 11% 27%,#ff62b9 28% 52%,#5968eb 53%);--z-mark:repeating-conic-gradient(from 0deg,rgba(255,255,255,.38) 0 8deg,transparent 8deg 30deg);filter:drop-shadow(0 0 15px rgba(255,126,220,.58))}\n.species-eternity{--z-head:linear-gradient(135deg,#fff,#82fff4 38%,#a678ff 70%,#ff96dd);--z-body:linear-gradient(135deg,#f7ffff,#67e9e1 38%,#9160eb 70%,#f27acc);--z-mark:radial-gradient(ellipse at 38% 55%,transparent 0 5px,#fff 6px 8px,transparent 9px),radial-gradient(ellipse at 62% 55%,transparent 0 5px,#fff 6px 8px,transparent 9px)}\n.species-crownlight{--z-head:radial-gradient(circle at 30% 22%,#fff9d8,#f1d35c 48%,#ba7cff);--z-body:radial-gradient(circle at 34% 22%,#fff0a8,#e6bd42 48%,#9f65e1);--z-mark:linear-gradient(90deg,transparent 28%,rgba(255,255,255,.46) 29% 36%,transparent 37% 63%,rgba(255,255,255,.32) 64% 71%,transparent 72%);filter:drop-shadow(0 0 12px rgba(255,221,97,.5))}\n.species-jurassic{--z-head:radial-gradient(circle at 30% 22%,#c7b58b,#6c7c4b 55%,#39462e);--z-body:radial-gradient(circle at 34% 22%,#b5a276,#5d7042 55%,#313d28);--z-mark:radial-gradient(circle at 28% 40%,rgba(64,74,43,.42) 0 4px,transparent 5px),radial-gradient(circle at 68% 68%,rgba(227,211,169,.26) 0 5px,transparent 6px)}\n.species-lost{--z-head:radial-gradient(circle at 30% 22%,#d9d0c5,#8d7764 55%,#835151);--z-body:radial-gradient(circle at 34% 22%,#c7b9aa,#786251 55%,#704243);--z-mark:linear-gradient(140deg,transparent 28%,rgba(255,255,255,.25) 29% 32%,transparent 33% 58%,rgba(78,50,42,.28) 59% 62%,transparent 63%);opacity:.9}\n.species-corruptancient{--z-head:radial-gradient(circle at 30% 22%,#ff8383,#651317 58%,#190405);--z-body:linear-gradient(90deg,#b62b31 0 34%,#471014 35% 44%,#ec5252 45% 57%,#3d0c10 58% 67%,#9a2028 68%);--z-mark:repeating-linear-gradient(0deg,transparent 0 8px,rgba(255,172,172,.25) 9px 11px);filter:drop-shadow(0 0 10px rgba(255,45,55,.5))}\n.species-excavated{--z-head:radial-gradient(circle at 30% 22%,#efe1c7,#a58f6c 60%,#6c5338);--z-body:radial-gradient(circle at 34% 22%,#dfcdab,#927951 60%,#5a412b);--z-mark:radial-gradient(circle at 28% 42%,rgba(96,63,30,.34) 0 5px,transparent 6px),linear-gradient(140deg,transparent 48%,rgba(255,245,213,.36) 49% 54%,transparent 55%)}\n.species-primal{--z-head:radial-gradient(circle at 30% 22%,#a1c36b,#405d32 56%,#ff6a22 88%);--z-body:radial-gradient(circle at 34% 22%,#89aa58,#354f2d 56%,#f35019 88%);--z-mark:linear-gradient(120deg,transparent 24%,rgba(255,178,69,.55) 25% 28%,transparent 29% 55%,rgba(68,38,25,.3) 56% 60%,transparent 61%)}\n\n/* Direct V6 species get bespoke markings while staying on the same silhouette. */\n.species-mudleaf{--z-mark:radial-gradient(ellipse at 28% 38%,#79a84d 0 7px,transparent 8px),radial-gradient(ellipse at 68% 70%,#3f7d35 0 6px,transparent 7px)}\n.species-vinez{--z-mark:linear-gradient(105deg,transparent 32%,rgba(38,102,35,.45) 33% 39%,transparent 40% 63%,rgba(38,102,35,.38) 64% 70%,transparent 71%)}\n.species-dust{--z-mark:radial-gradient(circle at 30% 40%,rgba(96,64,35,.2) 0 3px,transparent 4px),radial-gradient(circle at 70% 68%,rgba(96,64,35,.18) 0 4px,transparent 5px)}\n.species-ash{--z-mark:radial-gradient(circle at 28% 39%,rgba(25,25,25,.22) 0 5px,transparent 6px),radial-gradient(circle at 68% 67%,rgba(230,230,220,.12) 0 4px,transparent 5px)}\n.species-rain{--z-mark:linear-gradient(105deg,transparent 22%,rgba(210,246,255,.45) 23% 27%,transparent 28% 53%,rgba(210,246,255,.34) 54% 58%,transparent 59%)}\n.species-mushroom{--z-mark:radial-gradient(circle at 28% 40%,#e9c99f 0 4px,transparent 5px),radial-gradient(circle at 68% 68%,#d97570 0 4px,transparent 5px)}\n.species-frostbite{--z-mark:linear-gradient(125deg,transparent 18%,rgba(255,255,255,.7) 19% 24%,transparent 25% 55%,rgba(202,246,255,.4) 56% 61%,transparent 62%)}\n.species-relic{--z-mark:linear-gradient(140deg,transparent 28%,rgba(139,37,37,.48) 29% 34%,transparent 35% 62%,rgba(224,194,133,.3) 63% 68%,transparent 69%)}\n.species-tribal{--z-mark:radial-gradient(circle at 28% 38%,#3f2617 0 3px,transparent 4px),radial-gradient(circle at 68% 68%,#3f2617 0 4px,transparent 5px),linear-gradient(90deg,transparent 44%,rgba(245,211,118,.28) 45% 55%,transparent 56%)}\n.species-obsidian{--z-mark:linear-gradient(125deg,transparent 20%,rgba(180,82,255,.25) 21% 24%,transparent 25% 56%,rgba(255,86,42,.22) 57% 60%,transparent 61%)}\n.species-totem{--z-mark:linear-gradient(90deg,transparent 43%,#53d8c6 44% 47%,transparent 48% 52%,#53d8c6 53% 56%,transparent 57%),radial-gradient(circle at 50% 69%,transparent 0 6px,#53d8c6 7px 9px,transparent 10px)}\n.species-rune{--z-mark:radial-gradient(circle at 50% 52%,transparent 0 7px,#ff5c58 8px 10px,transparent 11px),linear-gradient(90deg,transparent 48%,#ff5c58 49% 51%,transparent 52%)}\n.species-guardian{--z-mark:linear-gradient(90deg,transparent 44%,rgba(237,204,104,.45) 45% 55%,transparent 56%)}\n.species-eyez{--z-mark:radial-gradient(circle at 29% 39%,#f2e8ff 0 3px,#422052 4px 5px,transparent 6px),radial-gradient(circle at 70% 69%,#f2e8ff 0 3px,#422052 4px 5px,transparent 6px)}\n.species-skylight{--z-mark:linear-gradient(180deg,transparent 57%,rgba(255,255,255,.52) 58% 61%,rgba(255,205,126,.32) 62% 67%,transparent 68%)}\n.species-forgotten{--z-mark:linear-gradient(140deg,transparent 26%,rgba(151,34,34,.3) 27% 31%,transparent 32% 64%,rgba(255,243,213,.2) 65% 69%,transparent 70%)}\n.species-fossil{--z-mark:radial-gradient(circle at 31% 43%,rgba(94,72,43,.23) 0 5px,transparent 6px),linear-gradient(130deg,transparent 52%,rgba(255,248,218,.28) 53% 57%,transparent 58%)}\n.species-cursed{--z-mark:repeating-linear-gradient(0deg,transparent 0 9px,rgba(255,119,119,.24) 10px 12px)}\n.species-dinosaur{--z-mark:radial-gradient(circle at 28% 39%,rgba(37,76,37,.35) 0 4px,transparent 5px),radial-gradient(circle at 68% 68%,rgba(37,76,37,.28) 0 5px,transparent 6px)}\n.species-elder{--z-mark:linear-gradient(140deg,transparent 29%,rgba(255,238,191,.24) 30% 34%,transparent 35% 64%,rgba(79,57,37,.2) 65% 69%,transparent 70%)}\n.species-aurora{--z-mark:linear-gradient(135deg,transparent 24%,rgba(255,255,255,.35) 25% 34%,transparent 35% 58%,rgba(149,255,213,.25) 59% 68%,transparent 69%)}\n.species-nova{--z-mark:repeating-conic-gradient(from 0deg at 50% 55%,rgba(255,255,255,.35) 0 8deg,transparent 8deg 36deg)}\n.species-dream{--z-mark:radial-gradient(circle at 32% 43%,rgba(255,255,255,.38) 0 7px,transparent 8px),radial-gradient(circle at 68% 68%,rgba(255,255,255,.25) 0 5px,transparent 6px)}\n.species-starglass{--z-mark:radial-gradient(circle at 28% 38%,#fff 0 2px,transparent 3px),radial-gradient(circle at 69% 68%,#f0ccff 0 1.5px,transparent 2.5px)}\n.species-halo{--z-mark:radial-gradient(circle at 50% 55%,transparent 0 12px,rgba(255,239,132,.48) 13px 16px,transparent 17px)}\n.species-comet{--z-mark:linear-gradient(135deg,transparent 25%,rgba(255,255,255,.55) 26% 31%,transparent 32%)}\n.species-prism{--z-mark:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.45) 21% 28%,transparent 29% 58%,rgba(255,255,255,.3) 59% 66%,transparent 67%)}\n.species-infinity{--z-mark:radial-gradient(ellipse at 38% 55%,transparent 0 5px,#fff 6px 8px,transparent 9px),radial-gradient(ellipse at 62% 55%,transparent 0 5px,#fff 6px 8px,transparent 9px)}\n</style>\n
+<style id="responsive-ui-v2">
+/* === Responsive UI V2 ===
+   One layout language from small phones to desktop. The Zoogle action panel is
+   deliberately compact and island movement uses a selector so future islands
+   do not create an endlessly tall wall of buttons. */
+:root{
+  --ui-edge:clamp(7px,1.2vw,18px);
+  --ui-radius:clamp(16px,2vw,26px);
+  --ui-card-gap:clamp(7px,1vw,12px);
+  --ui-control-h:clamp(44px,5.2vh,56px);
+}
+
+/* General responsive polish */
+.hud{top:var(--ui-edge);left:var(--ui-edge);right:var(--ui-edge);gap:8px}
+.title-box{min-width:0}
+.title-badge{font-size:clamp(13px,2vw,24px);padding:clamp(6px,1vw,10px) clamp(8px,1.3vw,14px)}
+.currency-row{gap:clamp(5px,.8vw,9px)}
+.currency-pill{min-width:clamp(78px,9vw,112px);font-size:clamp(13px,1.4vw,18px);padding:clamp(6px,.8vw,9px) clamp(7px,1vw,12px)}
+.corner-buttons{gap:clamp(6px,1vw,12px);right:var(--ui-edge);bottom:var(--ui-edge)}
+.round-icon{width:clamp(58px,6vw,76px)!important;height:clamp(58px,6vw,76px)!important;font-size:clamp(23px,2.7vw,31px)!important}
+.modal{padding:clamp(8px,2vw,24px)}
+.modal-card{width:min(1040px,calc(100vw - 2 * var(--ui-edge)));padding:clamp(13px,2vw,22px);border-radius:clamp(20px,3vw,30px)}
+.modal-title{font-size:clamp(24px,3.5vw,42px)}
+.shop-grid,.book-grid{grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:clamp(9px,1.4vw,15px)}
+.shop-card,.book-entry,.card,.info-panel{padding:clamp(11px,1.5vw,16px);border-radius:clamp(16px,2vw,22px)}
+.wood-btn,.green-btn,.red-btn,.blue-btn,.purple-btn,.gold-btn{min-height:44px}
+
+/* Zoogle action sheet */
+#zoogleMenu{
+  --menu-btn-min-h:48px;
+  width:min(620px,calc(100vw - 24px))!important;
+  max-height:min(78dvh,760px)!important;
+  padding:12px!important;
+  border-radius:26px!important;
+  overflow:auto!important;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+#zoogleMenu .zoogle-menu-grabber{display:none;width:46px;height:5px;border-radius:999px;background:rgba(91,55,22,.25);margin:0 auto 8px}
+#zoogleMenu .zoogle-menu-header{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+  padding:10px 11px!important;margin:0 0 7px!important;border-radius:17px!important
+}
+#zoogleMenu .zoogle-menu-heading{min-width:0}
+#zoogleMenu .zoogle-menu-header h4{font-size:clamp(22px,2.6vw,31px)!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#zoogleMenu .species{font-size:12px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#zoogleMenu .menu-close-btn{flex:0 0 38px;width:38px;height:38px;min-height:38px!important;padding:0!important;border-radius:12px!important;font-size:24px!important;line-height:1}
+#zoogleMenu .zoogle-menu-chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 1px 9px}
+#zoogleMenu .menu-chip{font-size:11px;padding:5px 8px}
+#zoogleMenu .menu-chip-ready{background:rgba(178,239,107,.42);border-color:rgba(64,126,42,.25)}
+#zoogleMenu .zoogle-menu-layout{grid-template-columns:minmax(0,1.12fr) minmax(220px,.88fr);gap:9px}
+#zoogleMenu .zoogle-menu-main,#zoogleMenu .zoogle-menu-side{gap:9px}
+#zoogleMenu .menu-summary-grid{grid-template-columns:1fr 1fr;gap:8px}
+#zoogleMenu .mastery-box,#zoogleMenu .mutation-line,#zoogleMenu .menu-section{padding:9px!important;border-radius:15px!important}
+#zoogleMenu .compact-stat{min-height:74px;display:flex;flex-direction:column;justify-content:center}
+#zoogleMenu .menu-stat-head{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:1000;color:#684318}
+#zoogleMenu .menu-stat-foot{font-size:11px;font-weight:900;opacity:.7;margin-top:4px}
+#zoogleMenu .mastery-track{height:8px;border-radius:999px;overflow:hidden;background:rgba(93,58,24,.14);margin-top:6px;border:1px solid rgba(93,58,24,.12)}
+#zoogleMenu .mastery-track>span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#70c83f,#f4ca42);min-width:0}
+#zoogleMenu .mutation-compact{font-size:12px;line-height:1.35;max-height:40px;overflow:auto;margin-top:4px}
+#zoogleMenu .mutation-compact .mutation-pill{font-size:10px;padding:2px 5px;margin:1px}
+#zoogleMenu .menu-section-title{font-size:11px;margin-bottom:7px}
+#zoogleMenu .menu-button-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#zoogleMenu .menu-button-grid button,#zoogleMenu .menu-travel-row button,#zoogleMenu .compact-action{
+  min-height:var(--menu-btn-min-h)!important;padding:8px 9px!important;font-size:14px!important;border-radius:13px!important
+}
+#zoogleMenu .menu-travel-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;align-items:stretch}
+#zoogleMenu .menu-area-select{
+  width:100%;min-width:0;min-height:var(--menu-btn-min-h);padding:7px 32px 7px 10px;border-radius:13px;
+  border:3px solid rgba(58,37,17,.48);background:linear-gradient(#fafdff,#cceeff);color:#30210f;
+  font:900 14px/1.15 inherit;box-shadow:inset 0 2px 0 rgba(255,255,255,.65),0 3px 0 rgba(0,0,0,.12)
+}
+#zoogleMenu .compact-action{width:100%;margin-top:7px}
+#zoogleMenu .menu-manage-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}
+#zoogleMenu .menu-note{display:none}
+
+/* Laptop / compact desktop */
+@media (min-width:741px) and (max-width:1100px){
+  #zoogleMenu{width:min(560px,calc(100vw - 20px))!important;max-height:76dvh!important}
+  #zoogleMenu .zoogle-menu-layout{grid-template-columns:1fr}
+  #zoogleMenu .zoogle-menu-side{grid-template-columns:1.1fr .9fr}
+  #zoogleMenu .menu-travel-section,#zoogleMenu .menu-manage-section{min-width:0}
+  .modal-card{width:min(94vw,900px)}
+}
+
+/* Tablet: larger touch targets without phone-sized giant controls. */
+@media (min-width:601px) and (max-width:1024px) and (pointer:coarse){
+  .corner-buttons>button[data-nav-label]{height:60px!important;min-height:60px!important;font-size:23px!important}
+  .corner-buttons>button[data-nav-label]::after{font-size:10px!important}
+  #zoogleMenu.open{left:50%!important;right:auto!important;transform:translateX(-50%);width:min(680px,calc(100vw - 28px))!important;bottom:calc(78px + env(safe-area-inset-bottom))!important;max-height:64dvh!important}
+  #zoogleMenu .zoogle-menu-layout{grid-template-columns:1fr 1fr}
+  #zoogleMenu .menu-button-grid button{font-size:15px!important}
+}
+
+/* Phones: compact bottom sheet, still two action columns. */
+@media (max-width:600px){
+  :root{--ui-control-h:46px}
+  .hud{gap:3px!important}
+  .title-box{max-width:calc(100vw - 118px)!important}
+  .title-badge{font-size:clamp(9px,2.8vw,12px)!important;padding:4px 6px!important}
+  .area-name{font-size:clamp(8px,2.4vw,10px)!important;max-width:120px!important}
+  .currency-pill{min-width:51px!important;font-size:11px!important;padding:4px 5px!important}
+  .currency-icon{width:15px!important;height:15px!important}
+  .area-arrow{width:29px!important;height:29px!important;min-height:29px!important;font-size:18px!important}
+  .stage{margin-top:44px!important}
+  #island{width:96vw!important;height:min(54vh,480px)!important;min-height:250px!important}
+  .corner-buttons{gap:3px!important;padding-top:5px!important}
+  .corner-buttons>button[data-nav-label]{height:52px!important;min-height:52px!important;border-radius:14px!important;font-size:20px!important}
+  .corner-buttons>button[data-nav-label]::after{font-size:8px!important;line-height:9px!important}
+  .modal-card{padding:12px!important;border-radius:22px 22px 0 0!important}
+  .modal-title{font-size:24px!important;margin-right:46px!important}
+  .close-x{width:40px!important;height:40px!important;font-size:20px!important}
+  #zoogleMenu.open{
+    left:max(5px,env(safe-area-inset-left))!important;right:max(5px,env(safe-area-inset-right))!important;
+    bottom:calc(66px + env(safe-area-inset-bottom))!important;top:auto!important;transform:none!important;
+    width:auto!important;max-height:min(66dvh,590px)!important;padding:9px!important;border-radius:22px 22px 16px 16px!important
+  }
+  #zoogleMenu .zoogle-menu-grabber{display:block}
+  #zoogleMenu .zoogle-menu-header{padding:7px 8px!important;margin-bottom:5px!important}
+  #zoogleMenu .zoogle-menu-header h4{font-size:21px!important;margin-bottom:2px!important}
+  #zoogleMenu .species{font-size:10px!important}
+  #zoogleMenu .menu-close-btn{width:34px;height:34px;min-height:34px!important;font-size:21px!important}
+  #zoogleMenu .zoogle-menu-chips{gap:4px;margin-bottom:6px}
+  #zoogleMenu .menu-chip{font-size:9px;padding:3px 6px}
+  #zoogleMenu .zoogle-menu-layout{grid-template-columns:1fr;gap:6px}
+  #zoogleMenu .zoogle-menu-main,#zoogleMenu .zoogle-menu-side{gap:6px}
+  #zoogleMenu .menu-summary-grid{grid-template-columns:1fr 1fr;gap:5px}
+  #zoogleMenu .mastery-box,#zoogleMenu .mutation-line,#zoogleMenu .menu-section{padding:7px!important;border-radius:12px!important}
+  #zoogleMenu .compact-stat{min-height:57px}
+  #zoogleMenu .menu-stat-head{font-size:10px}
+  #zoogleMenu .menu-stat-foot{font-size:9px;margin-top:2px}
+  #zoogleMenu .mastery-track{height:6px;margin-top:4px}
+  #zoogleMenu .mutation-compact{font-size:10px;max-height:28px;margin-top:2px}
+  #zoogleMenu .mutation-compact .mutation-pill{font-size:8px;padding:1px 4px}
+  #zoogleMenu .menu-section-title{font-size:9px;margin-bottom:5px}
+  #zoogleMenu .menu-button-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+  #zoogleMenu .menu-button-grid button,#zoogleMenu .menu-travel-row button,#zoogleMenu .compact-action{min-height:43px!important;font-size:12px!important;padding:6px!important;border-width:3px!important;border-radius:11px!important}
+  #zoogleMenu .menu-area-select{min-height:43px;font-size:11px;padding:5px 26px 5px 7px;border-radius:11px}
+  #zoogleMenu .menu-travel-row{grid-template-columns:minmax(0,1fr) 72px;gap:5px}
+  #zoogleMenu .compact-action{margin-top:5px}
+  #zoogleMenu .menu-manage-grid{grid-template-columns:1.2fr .8fr}
+}
+
+/* Narrow phones: keep the panel usable instead of making controls enormous. */
+@media (max-width:360px){
+  #zoogleMenu.open{max-height:69dvh!important;padding:7px!important}
+  #zoogleMenu .zoogle-menu-header h4{font-size:19px!important}
+  #zoogleMenu .menu-summary-grid{grid-template-columns:1fr 1fr}
+  #zoogleMenu .menu-button-grid button,#zoogleMenu .menu-travel-row button,#zoogleMenu .compact-action{min-height:40px!important;font-size:11px!important}
+  #zoogleMenu .menu-area-select{min-height:40px;font-size:10px}
+  .corner-buttons>button[data-nav-label]{height:49px!important;min-height:49px!important}
+}
+
+/* Short landscape phones: side sheet prevents the menu covering the whole island. */
+@media (orientation:landscape) and (max-height:600px) and (max-width:1000px){
+  #zoogleMenu.open{
+    left:auto!important;right:calc(72px + env(safe-area-inset-right))!important;top:6px!important;bottom:6px!important;
+    transform:none!important;width:min(430px,calc(100vw - 92px))!important;max-height:none!important;border-radius:20px!important;padding:8px!important
+  }
+  #zoogleMenu .zoogle-menu-grabber{display:none}
+  #zoogleMenu .zoogle-menu-header{padding:6px 8px!important}
+  #zoogleMenu .zoogle-menu-header h4{font-size:19px!important}
+  #zoogleMenu .zoogle-menu-chips{margin-bottom:5px}
+  #zoogleMenu .zoogle-menu-layout{grid-template-columns:1fr 1fr;gap:6px}
+  #zoogleMenu .menu-summary-grid{grid-template-columns:1fr 1fr}
+  #zoogleMenu .mastery-box,#zoogleMenu .mutation-line,#zoogleMenu .menu-section{padding:6px!important}
+  #zoogleMenu .compact-stat{min-height:50px}
+  #zoogleMenu .menu-button-grid button,#zoogleMenu .menu-travel-row button,#zoogleMenu .compact-action{min-height:38px!important;font-size:11px!important;padding:4px 6px!important}
+  #zoogleMenu .menu-area-select{min-height:38px;font-size:10px}
+  #zoogleMenu .menu-section-title{font-size:8px;margin-bottom:4px}
+}
+
+/* Large desktop: use space without making controls cartoonishly huge. */
+@media (min-width:1500px){
+  #zoogleMenu{width:650px!important}
+  .modal-card{width:min(1180px,92vw)}
+  .shop-grid,.book-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+}
+</style>
+
+<script type="text/javascript" nonce="cc4aab5275304bd4b830a2e71ba" src="//local.adguard.org?ts=1789769212388&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_0000000095688210a42ad01efb1064fb%26fn%3Dindex%252820260918-222423%2529.html%26cd%3Dattachment%26ts%3D497158%26p%3Dfs%26cid%3D1%26sig%3Df3d354874db1abc13c85d9a03c1dae37e7d7c21b980e51e723b6bc4e7ac620da%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MyJ9LCB7ImJyYW5kIjoiTm90X0EgQnJhbmQiLCJ2ZXJzaW9uIjoiOCJ9LCB7ImJyYW5kIjoiQ2hyb21pdW0iLCJ2ZXJzaW9uIjoiMTUzIn1d&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="cc4aab5275304bd4b830a2e71ba" src="//local.adguard.org?ts=1789769212388&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
 <body>
 <div id="game">
   <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
@@ -1262,7 +1598,111 @@ function rollNextEarningMode(z){const base=(state.upgrades.gemFinder||0)*2;const
 function tryStartBreeding(){const p1=getZoogle(state.breedSelect.p1),p2=getZoogle(state.breedSelect.p2);if(!p1||!p2){state.breedSelect={p1:null,p2:null};return}if(state.breedings.length>=getMaxBreedingSlots()){showToast('All breeding slots are full!');return}const parentTypes=[p1.type,p2.type];let key=[...parentTypes].sort().join('+'),intended=COMBOS[key];if(!intended){const allMuts=[...(p1.mutations||[]),...(p2.mutations||[])];const synthetic=[...parentTypes,...allMuts].sort();for(const [k,v] of Object.entries(COMBOS)){const parts=k.split('+');if(parts.every(p=>synthetic.includes(p))){intended=v;break}}}let result,rar,fallbackRarity=null;if(intended){result=rollBreedResult(p1,p2,intended);rar=ZOOGLES[intended].rarity}else{const fallback=rollFallbackBreedResult(p1,p2);result=fallback.result;rar=fallback.rarity;fallbackRarity=rar;intended=result}const duration=getAdjustedBreedTime(BREED_TIME[rar]||1800000);heartBurst(p1);heartBurst(p2);addMastery(p1,8);addMastery(p2,8);const n1=p1.customName||ZOOGLES[p1.type].name,n2=p2.customName||ZOOGLES[p2.type].name;showToast(fallbackRarity?`${n1} + ${n2}: unknown combo — rolling a random ${rar} Zoogle! ❤️🧬`:`${n1} and ${n2} have begun breeding ❤️🧬`);state.breedings.push({p1:p1.uid,p2:p2.uid,p1Name:n1,p2Name:n2,p1Type:p1.type,p2Type:p2.type,intended,result,fallbackRarity,endAt:Date.now()+duration,duration});state.breedSelect={p1:null,p2:null};setTimeout(()=>renderArea(),120);save()}
 function rollFallbackBreedResult(p1,p2){const r1=ZOOGLES[p1.type]?.rarity||'Common',r2=ZOOGLES[p2.type]?.rarity||'Common',rarity=r1===r2?r1:(Math.random()<.5?r1:r2),pool=Object.keys(ZOOGLES).filter(type=>ZOOGLES[type]?.rarity===rarity);const result=pool.length?pool[Math.floor(Math.random()*pool.length)]:(Math.random()<.5?p1.type:p2.type);return{rarity,result}}
 function rollBreedResult(p1,p2,intended){const rar=ZOOGLES[intended].rarity,r=Math.random()*100;if(rar==='Common'||rar==='Uncommon'){if(r<70)return intended;if(r<85)return p1.type;return p2.type}else if(rar==='Legendary'||rar==='Celestial'||rar==='Ancient'){if(r<40)return intended;if(r<70)return p1.type;return p2.type}else{if(r<50)return intended;if(r<75)return p1.type;return p2.type}}
-function openZoogleMenu(uid,x,y){els.zoogleMenu.__returnFocus=document.activeElement;const z=getZoogle(uid);if(!z)return;const def=ZOOGLES[z.type],sell=getSellValue(uid);let breedButtons=state.breedingUnlocked?`<button class="purple-btn" data-act="p1">Breed P1</button><button class="purple-btn" data-act="p2">Breed P2</button>`:'';let areaBtns=`<button class="blue-btn" data-act="main">Move to Main</button>${state.rockyUnlocked?'<button class="blue-btn" data-act="rocky">Move to Rocky</button>':''}${state.storageCliffsUnlocked?'<button class="blue-btn" data-act="storage">Move to Storage Cliffs</button><button class="wood-btn" data-act="chest">Store in Chest</button>':''}${state.tribalUnlocked?'<button class="blue-btn" data-act="tribal">Move to Tribal</button>':''}`;els.zoogleMenu.innerHTML=`<div class="zoogle-menu-header"><h4>${escapeHtml(z.customName||def.name)}</h4><div class="species">${def.name} • ${def.rarity}</div></div><div class="mastery-box">Mastery: ${z.masteryLevel||0}/5<br>XP: ${z.masteryXp||0}</div><div class="mutation-line"><strong>Mutations:</strong> ${formatMutationList(z.mutations)}</div><div class="menu-buttons"><button class="green-btn" data-act="collect" ${z.stored?'':'disabled'}>Collect</button><button class="green-btn" data-act="move">Move</button>${areaBtns}<button class="purple-btn" data-act="rename">Rename</button><button class="blue-btn" data-act="info">Info</button>${breedButtons}<button class="red-btn" data-act="sell">Sell 🪙${sell}</button><button class="wood-btn" data-act="close">Close</button></div>`;const q=a=>els.zoogleMenu.querySelector(`[data-act='${a}']`);q('collect').onclick=()=>{collectEarnings(uid);closeZoogleMenu()};q('move').onclick=()=>{closeZoogleMenu();beginPlacement({type:z.type,existingId:uid})};['main','rocky','storage','tribal'].forEach(a=>{if(q(a))q(a).onclick=()=>moveToArea(uid,a)});if(q('chest'))q('chest').onclick=()=>storeInChest(uid);q('rename').onclick=()=>renameZoogle(uid);q('info').onclick=()=>{closeZoogleMenu();showZoogleInfo(z.type,uid)};if(q('p1'))q('p1').onclick=()=>selectParent(uid,'p1');if(q('p2'))q('p2').onclick=()=>selectParent(uid,'p2');q('sell').onclick=()=>sellZoogle(uid);q('close').onclick=closeZoogleMenu;els.zoogleMenu.classList.add('open');const rect=els.zoogleMenu.getBoundingClientRect();els.zoogleMenu.style.left=`${Math.max(10,Math.min(innerWidth-rect.width-10,x+12))}px`;els.zoogleMenu.style.top=`${Math.max(10,Math.min(innerHeight-rect.height-10,y-20))}px`}
+function openZoogleMenu(uid,x,y){
+  els.zoogleMenu.__returnFocus=document.activeElement;
+  const z=getZoogle(uid); if(!z) return;
+  const def=ZOOGLES[z.type], sell=getSellValue(uid);
+  const currentArea=(z.island||state.currentArea||'main');
+  const areaDefs=AREAS
+    .filter(a=>a.id!=='cave'&&isAreaUnlockedForPlacement(a.id))
+    .map(a=>({key:a.id,label:a.name||a.id,short:(a.name||a.id).replace(/ Island$/,'').replace(/ Cliffs$/,'')}));
+  const currentAreaDef=areaDefs.find(a=>a.key===currentArea)||{label:'Island'};
+  const destinations=areaDefs.filter(a=>a.key!==currentArea);
+  const travelOptions=destinations.map(a=>`<option value="${a.key}">${escapeHtml(a.label)}</option>`).join('');
+  const travelExtras = state.storageCliffsUnlocked ? `<button class="wood-btn compact-action" data-act="chest">📦 Store in Chest</button>` : '';
+  const breedSection = state.breedingUnlocked ? `
+    <section class="menu-section menu-breed-section">
+      <div class="menu-section-title">Breeding</div>
+      <div class="menu-button-grid">
+        <button class="purple-btn" data-act="p1">💕 Parent 1</button>
+        <button class="purple-btn" data-act="p2">💕 Parent 2</button>
+      </div>
+    </section>` : '';
+  const xp=Number(z.masteryXp)||0, level=Number(z.masteryLevel)||0;
+  const masteryPct=Math.max(0,Math.min(100,(xp/500)*100));
+  const storedAmount=Math.floor(Number(z.stored)||0);
+  els.zoogleMenu.innerHTML=`
+    <div class="zoogle-menu-grabber" aria-hidden="true"></div>
+    <header class="zoogle-menu-header">
+      <div class="zoogle-menu-heading">
+        <h4>${escapeHtml(z.customName||def.name)}</h4>
+        <div class="species">${escapeHtml(def.name)} • ${escapeHtml(def.rarity)}</div>
+      </div>
+      <button class="menu-close-btn wood-btn" data-act="close" aria-label="Close Zoogle menu">×</button>
+    </header>
+    <div class="zoogle-menu-chips">
+      <span class="menu-chip">📍 ${escapeHtml(currentAreaDef.label)}</span>
+      <span class="menu-chip">🪙 Sell ${sell}</span>
+      ${storedAmount?`<span class="menu-chip menu-chip-ready">💰 ${storedAmount} ready</span>`:''}
+    </div>
+    <div class="zoogle-menu-layout">
+      <div class="zoogle-menu-main">
+        <div class="menu-summary-grid">
+          <div class="mastery-box compact-stat">
+            <div class="menu-stat-head"><span>Mastery</span><strong>${level}/5</strong></div>
+            <div class="mastery-track"><span style="width:${masteryPct}%"></span></div>
+            <div class="menu-stat-foot">${xp} XP</div>
+          </div>
+          <div class="mutation-line compact-stat">
+            <div class="menu-stat-head"><span>Mutations</span></div>
+            <div class="mutation-compact">${formatMutationList(z.mutations)}</div>
+          </div>
+        </div>
+        <section class="menu-section">
+          <div class="menu-section-title">Actions</div>
+          <div class="menu-button-grid">
+            <button class="green-btn" data-act="collect" ${z.stored?'':'disabled'}>🪙 Collect</button>
+            <button class="green-btn" data-act="move">✥ Reposition</button>
+            <button class="purple-btn" data-act="rename">✎ Rename</button>
+            <button class="blue-btn" data-act="info">ⓘ Info</button>
+          </div>
+        </section>
+        ${breedSection}
+      </div>
+      <div class="zoogle-menu-side">
+        <section class="menu-section menu-travel-section">
+          <div class="menu-section-title">Move to another island</div>
+          <div class="menu-travel-row">
+            <select id="zoogleTravelSelect" class="menu-area-select" aria-label="Choose island destination" ${destinations.length?'':'disabled'}>
+              ${destinations.length?travelOptions:'<option>No other islands unlocked</option>'}
+            </select>
+            <button class="blue-btn" data-act="travel" ${destinations.length?'':'disabled'}>Move</button>
+          </div>
+          ${travelExtras}
+        </section>
+        <section class="menu-section menu-manage-section">
+          <div class="menu-section-title">Manage</div>
+          <div class="menu-button-grid menu-manage-grid">
+            <button class="red-btn" data-act="sell"><span class="sell-strong">Sell</span>&nbsp;🪙${sell}</button>
+            <button class="wood-btn" data-act="close">Close</button>
+          </div>
+        </section>
+      </div>
+    </div>`;
+  const q=a=>els.zoogleMenu.querySelector(`[data-act='${a}']`);
+  const safe=(a,fn)=>{const el=q(a); if(el) el.onclick=fn};
+  safe('collect',()=>{collectEarnings(uid);closeZoogleMenu()});
+  safe('move',()=>{closeZoogleMenu();beginPlacement({type:z.type,existingId:uid})});
+  safe('travel',()=>{const select=$('zoogleTravelSelect');if(select?.value)moveToArea(uid,select.value)});
+  safe('chest',()=>storeInChest(uid));
+  safe('rename',()=>renameZoogle(uid));
+  safe('info',()=>{closeZoogleMenu();showZoogleInfo(z.type,uid)});
+  safe('p1',()=>selectParent(uid,'p1'));
+  safe('p2',()=>selectParent(uid,'p2'));
+  safe('sell',()=>sellZoogle(uid));
+  els.zoogleMenu.querySelectorAll('[data-act="close"]').forEach(b=>b.onclick=closeZoogleMenu);
+  els.zoogleMenu.classList.add('open');
+  const rect=els.zoogleMenu.getBoundingClientRect();
+  const mobileLike = matchMedia('(max-width: 740px), (pointer: coarse)').matches;
+  if(!mobileLike){
+    const left=Math.max(10,Math.min(innerWidth-rect.width-10,x+16));
+    const top=Math.max(10,Math.min(innerHeight-rect.height-10,y-16));
+    els.zoogleMenu.style.left=`${left}px`;
+    els.zoogleMenu.style.right='auto';
+    els.zoogleMenu.style.top=`${top}px`;
+    els.zoogleMenu.style.bottom='auto';
+  }
+}
 function moveToArea(uid,area){const z=getZoogle(uid);if(!z)return;if(area==='rocky'&&!state.rockyUnlocked)return showToast('Rocky Island locked!');if(area==='storage'&&!state.storageCliffsUnlocked)return showToast('Storage Cliffs locked!');if(area==='tribal'&&!state.tribalUnlocked)return showToast('Tribal Island locked!');z.island=area;closeZoogleMenu();renderArea();save()}
 function showZoogleInfo(type,uid=null){const def=ZOOGLES[type],z=uid?getZoogle(uid):null,st=z?getZoogleCoinStatFor(z):((def&&def.stats)||RARITY_STATS[def.rarity]);els.infoTitle.textContent='Zoogle Info';els.infoContent.innerHTML=`<div class="info-panel"><div class="result-preview"><div class="zoogle-wrap preview-stable">${createZoogleVisual(type,0,'',false,z)}</div></div><h3>${z?escapeHtml(z.customName||def.name):def.name}</h3><span class="rarity-tag ${rarityClass(def.rarity)}">${def.rarity}</span><div class="stats-list">Species: ${def.name}<br>Coin Rate: ${st.amount||1} coin / ${((st.rateMs||1000)/1000).toFixed((st.rateMs||0)%1000?2:0)}s<br>Max Coin Storage: ${formatStorageMax(getStorageMaxFor(def.rarity,'coin',type))}<br>Max Gem Storage: ${formatStorageMax(getStorageMaxFor(def.rarity,'gem',type))}<br>Sell Value: ${uid?getSellValue(uid):getSellBase(type)} coins<br>Source: ${def.egg?'Eggs / events':'Breeding'}${z?`<br>Mode: ${z.mode==='gem'?'Gem earning 💎':'Coin earning 🪙'}`:''}</div>${z?`<div class="mastery-box">Mastery: ${z.masteryLevel||0}/5<br>XP: ${z.masteryXp||0}</div><div class="mutation-line"><strong>Mutations:</strong> ${formatMutationList(z.mutations)}</div>`:''}<p><strong>Look:</strong> ${def.look}</p></div>`;openModal('infoModal')}
 
