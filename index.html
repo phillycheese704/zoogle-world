@@ -89,6 +89,49 @@ body.weather-rain .weather-banner{background:linear-gradient(#e6f4ff,#8db5d2);bo
 body.weather-snow .weather-banner{background:linear-gradient(#ffffff,#d6f6ff);border-color:#78b8d0;color:#1e5166;box-shadow:0 10px 24px rgba(90,140,170,.18)}
 body.weather-heatwave .weather-banner{background:linear-gradient(#fff4ba,#ff9b4f);border-color:#9d4417;color:#592505;box-shadow:0 10px 24px rgba(160,80,20,.2)}
 body.weather-starfall .weather-banner{background:linear-gradient(135deg,#27205c,#874ed6,#ffd56d);border-color:#f9dc85;color:#fff;text-shadow:0 2px 3px rgba(0,0,0,.55);box-shadow:0 10px 24px rgba(40,20,90,.32)}
+body.weather-volcano{background:
+  radial-gradient(circle at 78% 14%,rgba(255,118,35,.46),transparent 16%),
+  radial-gradient(circle at 20% 24%,rgba(112,20,8,.35),transparent 24%),
+  linear-gradient(180deg,#341318 0%,#6e2519 28%,#a53d18 48%,#5a1a10 49%,#1d0d0c 100%)}
+body.weather-aurora{background:
+  radial-gradient(circle at 20% 12%,rgba(90,255,198,.18),transparent 20%),
+  radial-gradient(circle at 72% 18%,rgba(152,104,255,.22),transparent 24%),
+  linear-gradient(180deg,#071326 0%,#102958 28%,#173c69 48%,#102a4c 49%,#071426 100%)}
+body.weather-volcano .cloud{background:rgba(63,48,45,.88);box-shadow:42px 8px 0 rgba(77,52,47,.78),86px -7px 0 rgba(48,40,39,.72);opacity:.88;filter:drop-shadow(0 8px 16px rgba(0,0,0,.32))}
+body.weather-aurora .cloud{background:rgba(91,108,146,.35);box-shadow:42px 8px 0 rgba(101,129,165,.27),86px -7px 0 rgba(111,92,165,.24);opacity:.36;filter:drop-shadow(0 8px 18px rgba(80,255,210,.13))}
+body.weather-volcano #game::before{opacity:.92;background:
+  radial-gradient(circle at 10% 20%,rgba(255,180,84,.95) 0 2px,transparent 3px),
+  radial-gradient(circle at 33% 72%,rgba(255,95,35,.88) 0 1.5px,transparent 2.5px),
+  radial-gradient(circle at 58% 35%,rgba(255,205,104,.82) 0 2px,transparent 3px),
+  radial-gradient(circle at 82% 56%,rgba(225,79,35,.8) 0 1.5px,transparent 2.5px),
+  radial-gradient(circle at 70% 14%,rgba(70,49,45,.78) 0 2px,transparent 3px);
+  background-size:150px 150px,210px 210px,180px 180px,250px 250px,125px 125px;
+  animation:volcanoAsh 4.8s linear infinite;filter:drop-shadow(0 0 7px rgba(255,100,25,.45))}
+body.weather-volcano #game::after{opacity:.72;background:
+  radial-gradient(circle at 50% 100%,rgba(255,82,20,.26),transparent 42%),
+  linear-gradient(rgba(55,10,4,.12),rgba(45,5,2,.34));
+  z-index:3;animation:volcanoGlow 3.1s ease-in-out infinite}
+body.weather-aurora #game::before{opacity:.9;background:
+  radial-gradient(circle at 12% 24%,#fff 0 1px,transparent 2px),
+  radial-gradient(circle at 31% 70%,#dffcff 0 1px,transparent 2px),
+  radial-gradient(circle at 56% 34%,#fff 0 1px,transparent 2px),
+  radial-gradient(circle at 82% 60%,#e7ddff 0 1px,transparent 2px),
+  radial-gradient(circle at 72% 14%,#d8fff0 0 1.2px,transparent 2.2px);
+  background-size:190px 190px,260px 260px,220px 220px,290px 290px,160px 160px;
+  animation:auroraStars 2.8s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(255,255,255,.8))}
+body.weather-aurora #game::after{opacity:.88;background:
+  linear-gradient(112deg,transparent 8%,rgba(89,255,181,.05) 18%,rgba(89,255,181,.42) 29%,rgba(83,213,255,.16) 39%,transparent 51%),
+  linear-gradient(126deg,transparent 22%,rgba(180,102,255,.05) 31%,rgba(180,102,255,.34) 43%,rgba(255,116,218,.12) 54%,transparent 66%);
+  background-size:165% 100%,185% 100%;z-index:3;filter:blur(7px);mix-blend-mode:screen;animation:auroraFlow 7.5s ease-in-out infinite alternate}
+body.weather-volcano #island{filter:saturate(1.15) brightness(.86) sepia(.16) drop-shadow(0 0 18px rgba(255,78,24,.22))}
+body.weather-aurora #island{filter:saturate(1.15) brightness(.93) drop-shadow(0 0 24px rgba(93,255,205,.24))}
+body.weather-volcano .weather-banner{background:linear-gradient(#ffb14d,#9e2916);border-color:#57170d;color:#fff6de;text-shadow:0 2px 3px rgba(0,0,0,.52);box-shadow:0 10px 24px rgba(92,18,8,.34)}
+body.weather-aurora .weather-banner{background:linear-gradient(135deg,#112b5d,#25b58c,#8f63df);border-color:#9fffe3;color:#fff;text-shadow:0 2px 3px rgba(0,0,0,.48);box-shadow:0 10px 24px rgba(30,110,120,.3)}
+@keyframes volcanoAsh{0%{background-position:0 0,0 0,0 0,0 0,0 0}100%{background-position:20px 260px,-15px 330px,12px 295px,-20px 380px,8px 235px}}
+@keyframes volcanoGlow{0%,100%{opacity:.58;filter:brightness(.95)}50%{opacity:.82;filter:brightness(1.12)}}
+@keyframes auroraStars{0%,100%{opacity:.92}50%{opacity:.58}}
+@keyframes auroraFlow{0%{background-position:-18% 0,-28% 0;transform:skewX(-4deg)}100%{background-position:24% 0,18% 0;transform:skewX(4deg)}}
+
 @keyframes rainFall{to{background-position:-34px 84px,-18px 96px}}
 @keyframes snowFall{to{background-position:0 240px,0 340px,0 280px,0 380px,0 200px}}
 @keyframes heatWave{0%,100%{transform:translateX(0) skewX(0deg);opacity:.45}50%{transform:translateX(8px) skewX(-2.2deg);opacity:.62}}
@@ -230,6 +273,13 @@ button{font-family:inherit;border:0;cursor:pointer;color:var(--dark);transition:
   .mutation-pill{display:inline-block;margin:2px;padding:3px 7px;border-radius:999px;background:rgba(255,255,255,.45);border:2px solid rgba(95,56,18,.25);font-size:12px;font-weight:900}.mutation-line{margin:6px 0;line-height:1.7}.mastery-box{margin:8px 0;padding:8px;border-radius:12px;background:rgba(255,255,255,.38);border:2px dashed rgba(102,61,22,.28)}
   .quest-grid{display:grid;gap:12px}.quest-card{padding:12px;border-radius:16px;background:rgba(255,255,255,.45);border:3px solid rgba(112,69,29,.45)}.quest-card h3{margin:0 0 6px}.quest-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.quest-tabs button.active{background:linear-gradient(#a8ed63,#54aa31)}
   .zoogle.shiny{filter:brightness(1.1) drop-shadow(0 0 8px rgba(255,255,255,.75))}.zoogle.golden .z-body,.zoogle.golden .z-head{filter:sepia(.45) saturate(1.7) brightness(1.1)}.zoogle.diamond .z-body,.zoogle.diamond .z-head{filter:brightness(1.1) drop-shadow(0 0 9px #b9f8ff)}.zoogle.glitched{animation:glitchJitter .22s steps(2,end) infinite}.zoogle.wet::after{content:"💧";position:absolute;right:8px;top:48px;z-index:20}.zoogle.icy::after{content:"❄️";position:absolute;right:8px;top:48px;z-index:20}.zoogle.snowy::after{content:"☃️";position:absolute;right:8px;top:48px;z-index:20}.zoogle.burnt .z-body,.zoogle.burnt .z-head{filter:brightness(.78) sepia(.45)}.zoogle.heatstricken{filter:drop-shadow(0 0 9px #ff8b2b)}.zoogle.starhit,.zoogle.stary{filter:drop-shadow(0 0 12px #fff2a8)}
+  .zoogle.embermut::after{content:"🔥";position:absolute;right:5px;top:50px;z-index:20;font-size:17px;animation:floatEmoji 1.45s ease-in-out infinite}.zoogle.embermut{filter:drop-shadow(0 0 8px rgba(255,115,35,.72))}
+  .zoogle.moltenmut .z-body,.zoogle.moltenmut .z-head{box-shadow:inset 0 0 12px rgba(255,82,18,.52),0 0 10px rgba(255,118,25,.55)}.zoogle.moltenmut{filter:saturate(1.18) drop-shadow(0 0 9px rgba(255,92,24,.55))}
+  .zoogle.magmamut .z-body,.zoogle.magmamut .z-head{filter:brightness(.72) saturate(1.35);box-shadow:inset 0 0 15px rgba(255,70,10,.72),0 0 14px rgba(255,92,15,.72)}.zoogle.magmamut{filter:drop-shadow(0 0 13px rgba(255,72,12,.8))}
+  .zoogle.glowingmut{filter:brightness(1.08) drop-shadow(0 0 10px rgba(121,255,211,.72))}
+  .zoogle.auroramut{filter:saturate(1.18) drop-shadow(0 0 12px rgba(101,255,207,.65)) drop-shadow(0 0 15px rgba(166,104,255,.38))}
+  .zoogle.radiantmut{filter:brightness(1.14) saturate(1.22) drop-shadow(0 0 14px rgba(255,245,160,.8)) drop-shadow(0 0 18px rgba(109,255,221,.5))}
+
   @keyframes glitchJitter{0%{translate:0 0}50%{translate:2px -1px}100%{translate:-1px 1px}}
   .mudleaf{--z-head:radial-gradient(circle at 30% 22%,#b88552,#604027 62%,#2e6e27);--z-body:radial-gradient(circle at 34% 22%,#9b6a41,#513321 58%,#247a31)}.vinez{--z-head:radial-gradient(circle at 30% 22%,#baf783,#4f9c36 58%,#245a21);--z-body:radial-gradient(circle at 34% 22%,#8dd45a,#3b812c 58%,#1e4a1d)}.dust{--z-head:radial-gradient(circle at 30% 22%,#e8d0a3,#b89257 60%,#7b5731);--z-body:radial-gradient(circle at 34% 22%,#d7bd8d,#a67d49 60%,#674522)}
   .ash{--z-head:radial-gradient(circle at 30% 22%,#b7b2aa,#595755 62%,#252525);--z-body:radial-gradient(circle at 34% 22%,#a6a19b,#4d4d4c 60%,#202020)}.rainz{--z-head:radial-gradient(circle at 30% 22%,#d2f0ff,#6e9ec5 58%,#385a7a);--z-body:radial-gradient(circle at 34% 22%,#bde8ff,#5f91bc 60%,#2c4e72)}.mushroom{--z-head:radial-gradient(circle at 30% 22%,#ffd0cf,#c6534e 55%,#6b2a26);--z-body:radial-gradient(circle at 34% 22%,#d8bc8a,#8c653c 60%,#4f351d)}
@@ -441,7 +491,7 @@ button:focus-visible,.zoogle-wrap:focus-visible,.meteor-glow:focus-visible,#eggC
 <style id="tutorialStyles">
 .tutorial-card{position:fixed;left:50%;bottom:92px;transform:translate(-50%,16px);z-index:125;width:min(390px,calc(100vw - 24px));padding:14px 46px 14px 16px;border-radius:20px;background:linear-gradient(180deg,rgba(255,251,226,.98),rgba(244,220,165,.98));border:4px solid #6e411b;box-shadow:inset 0 2px 0 rgba(255,255,255,.65),0 14px 30px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:.2s opacity,.2s transform;color:#3c2813}.tutorial-card.show{opacity:1;pointer-events:auto;transform:translate(-50%,0)}.tutorial-step{font-size:13px;font-weight:1000;text-transform:uppercase;letter-spacing:.55px;color:#6b451d;margin-bottom:3px}.tutorial-text{font-size:15px;font-weight:800;line-height:1.35}.tutorial-action{margin-top:9px;width:100%}.tutorial-skip{position:absolute;right:8px;top:8px;width:31px;height:31px;border-radius:10px;background:linear-gradient(#f0d39b,#c58b45);border:2px solid #74471f;font-size:20px;font-weight:1000;line-height:1}@media(max-width:560px){.tutorial-card{bottom:72px;width:calc(100vw - 16px);padding:11px 42px 11px 12px}.tutorial-text{font-size:13px}.tutorial-action{padding:7px 8px}.tutorial-step{font-size:11px}}
 </style>
-<script type="text/javascript" nonce="8ac94d834751484b80c04d7b452" src="//local.adguard.org?ts=1789747288674&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000c0cc81f4a4e39c72f1130ec2%26fn%3Dzoogle_world_v6_breeding_fallback.html%26cd%3Dattachment%26ts%3D497152%26p%3Dfs%26cid%3D1%26sig%3D84286b7067bb876746376457ff7466fc1443d3ec86054db94fc1d03b1e3ab996%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1Mi4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJDaHJvbWl1bSIsInZlcnNpb24iOiIxNTIifSwgeyJicmFuZCI6Ik5vdD9BX0JyYW5kIiwidmVyc2lvbiI6IjI0In0sIHsiYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MiJ9XQ==&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="8ac94d834751484b80c04d7b452" src="//local.adguard.org?ts=1789747288674&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
+<script type="text/javascript" nonce="8ac94d834751484b80c04d7b452" src="//local.adguard.org?ts=1789750740806&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_000000002e5481f48fcab4f5d2137e8c%26ts%3D497153%26p%3Dfs%26cid%3D1%26sig%3D2d6f0cfa0b69c284bc52481bb2c2b45797f981f1c478f3fe90b7a96564904ba4%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1Mi4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJDaHJvbWl1bSIsInZlcnNpb24iOiIxNTIifSwgeyJicmFuZCI6Ik5vdD9BX0JyYW5kIiwidmVyc2lvbiI6IjI0In0sIHsiYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MiJ9XQ==&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="8ac94d834751484b80c04d7b452" src="//local.adguard.org?ts=1789750740806&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
 <body>
 <div id="game">
   <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
@@ -834,9 +884,11 @@ function v6Combo(a,b,r){COMBOS[[a,b].sort().join("+")]=r;}
 ].forEach(c=>v6Combo(c[0],c[1],c[2]));
 const V6_RARITY_SORT={Common:0,Uncommon:1,Rare:2,Epic:3,Legendary:4,Celestial:5,Ancient:6};
 const V6_MUTATIONS={
- shiny:{name:"Shiny",sellMult:1.5,amountBonus:.10,visual:"shiny"},golden:{name:"Golden",sellBonus:.10,amountBonus:.10,visual:"golden"},diamond:{name:"Diamond",sellBonus:.20,amountBonus:.20,visual:"diamond"},glitched:{name:"Glitched",speedBonus:1,amountBonus:-.05,sellBonus:.17,gemFinderBonus:1.2243543,visual:"glitched"},wet:{name:"Wet",sellBonus:.10,speedBonus:.05,visual:"wet"},icy:{name:"Icy",sellBonus:.05,amountBonus:.05,visual:"icy"},snowy:{name:"Snowy",sellBonus:.10,visual:"snowy"},burnt:{name:"Burnt",sellBonus:-.05,speedBonus:-.05,amountBonus:.10,visual:"burnt"},heatstricken:{name:"Heat-Stricken",sellBonus:.10,speedBonus:.10,visual:"heatstricken"},starhit:{name:"Star-Hit",gemFinderBonus:5,speedBonus:.15,sellBonus:.50,visual:"starhit"},stary:{name:"Starry",sellBonus:1.50,visual:"stary"}
+ shiny:{name:"Shiny",sellMult:1.5,amountBonus:.10,visual:"shiny"},golden:{name:"Golden",sellBonus:.10,amountBonus:.10,visual:"golden"},diamond:{name:"Diamond",sellBonus:.20,amountBonus:.20,visual:"diamond"},glitched:{name:"Glitched",speedBonus:1,amountBonus:-.05,sellBonus:.17,gemFinderBonus:1.2243543,visual:"glitched"},wet:{name:"Wet",sellBonus:.10,speedBonus:.05,visual:"wet"},icy:{name:"Icy",sellBonus:.05,amountBonus:.05,visual:"icy"},snowy:{name:"Snowy",sellBonus:.10,visual:"snowy"},burnt:{name:"Burnt",sellBonus:-.05,speedBonus:-.05,amountBonus:.10,visual:"burnt"},heatstricken:{name:"Heat-Stricken",sellBonus:.10,speedBonus:.10,visual:"heatstricken"},starhit:{name:"Star-Hit",gemFinderBonus:5,speedBonus:.15,sellBonus:.50,visual:"starhit"},stary:{name:"Starry",sellBonus:1.50,visual:"stary"},
+ embermut:{name:"Ember",sellBonus:.10,speedBonus:.05,visual:"embermut"},moltenmut:{name:"Molten",sellBonus:.15,amountBonus:.10,visual:"moltenmut"},magmamut:{name:"Magma",sellBonus:.30,amountBonus:.10,speedBonus:.10,visual:"magmamut"},
+ glowingmut:{name:"Glowing",sellBonus:.10,speedBonus:.05,visual:"glowingmut"},auroramut:{name:"Aurora",sellBonus:.20,amountBonus:.10,visual:"auroramut"},radiantmut:{name:"Radiant",sellBonus:.50,speedBonus:.10,gemFinderBonus:2,visual:"radiantmut"}
 };
-const WEATHER_MUTATION_ROLLS={rain:[['wet',12]],snow:[['snowy',12],['icy',8]],heatwave:[['burnt',12],['heatstricken',7]],starfall:[['starhit',10],['stary',6]]};
+const WEATHER_MUTATION_ROLLS={rain:[['wet',12]],snow:[['snowy',12],['icy',8]],heatwave:[['burnt',12],['heatstricken',7]],starfall:[['starhit',10],['stary',6]],volcano:[['embermut',12],['moltenmut',8],['magmamut',4]],aurora:[['glowingmut',10],['auroramut',7],['radiantmut',4]]};
 function ensureV6State(){
  if(ensureV6State.done)return;
  const now=Date.now();
@@ -930,11 +982,11 @@ function tickZoogles(dt){
  }
  if(changed)updateEarningsOnly();renderWeatherBanner();
 }
-function handleWeatherAndAncients(){const now=Date.now();if(now-(handleWeatherAndAncients.lastCheck||0)<250)return;handleWeatherAndAncients.lastCheck=now;if(state.weather.type&&now>=state.weather.endAt){showToast(`${weatherName(state.weather.type)} faded away.`);state.weather.type=null;state.weather.endAt=0;state.weather.mutationRolled=false;state.weather.nextRollAt=now+420000}if(!state.weather.type&&now>=state.weather.nextRollAt){const r=Math.random()*100;let type=null;if(r<28)type='rain';else if(r<50)type='snow';else if(r<68)type='heatwave';else if(r<75)type='starfall';if(type){const dur=(2+Math.random()*4)*60000;state.weather={type,endAt:now+dur,nextRollAt:now+420000,mutationRolled:false};showToast(`${weatherName(type)} has begun!`)}else state.weather.nextRollAt=now+420000}if(state.weather.type&&!state.weather.mutationRolled){rollWeatherMutations();state.weather.mutationRolled=true;save()}if(state.tribalUnlocked&&!state.ancientMeteorActive&&now>=state.nextAncientRollAt){state.nextAncientRollAt=now+120000;if(Math.random()<0.05){state.ancientMeteorActive=true;if(state.currentArea==='tribal')showToast('A meteor falls onto Tribal Island!');else showToast('A loud crash hits Tribal Island!');renderArea()}}}
-function weatherName(t){return{rain:'Rain',snow:'Snow',heatwave:'Heatwave',starfall:'Starfall'}[t]||'Weather'}
-function setWeatherBackground(type){const key=type||'';if(document.body.dataset.weatherType===key)return;document.body.dataset.weatherType=key;document.body.classList.remove('weather-rain','weather-snow','weather-heatwave','weather-starfall');if(type)document.body.classList.add('weather-'+type);if(els.shopModal?.classList.contains('open')&&currentShopTab==='eggs')renderEggsShop()}
+function handleWeatherAndAncients(){const now=Date.now();if(now-(handleWeatherAndAncients.lastCheck||0)<250)return;handleWeatherAndAncients.lastCheck=now;if(state.weather.type&&now>=state.weather.endAt){showToast(`${weatherName(state.weather.type)} faded away.`);state.weather.type=null;state.weather.endAt=0;state.weather.mutationRolled=false;state.weather.nextRollAt=now+420000}if(!state.weather.type&&now>=state.weather.nextRollAt){const r=Math.random()*100;let type=null;if(r<28)type='rain';else if(r<50)type='snow';else if(r<68)type='heatwave';else if(r<78)type='volcano';else if(r<85)type='starfall';else if(r<90)type='aurora';if(type){const dur=(2+Math.random()*4)*60000;state.weather={type,endAt:now+dur,nextRollAt:now+420000,mutationRolled:false};showToast(`${weatherName(type)} has begun!`)}else state.weather.nextRollAt=now+420000}if(state.weather.type&&!state.weather.mutationRolled){rollWeatherMutations();state.weather.mutationRolled=true;save()}if(state.tribalUnlocked&&!state.ancientMeteorActive&&now>=state.nextAncientRollAt){state.nextAncientRollAt=now+120000;if(Math.random()<0.05){state.ancientMeteorActive=true;if(state.currentArea==='tribal')showToast('A meteor falls onto Tribal Island!');else showToast('A loud crash hits Tribal Island!');renderArea()}}}
+function weatherName(t){return{rain:'Rain',snow:'Snow',heatwave:'Heatwave',volcano:'Volcano',starfall:'Starfall',aurora:'Aurora'}[t]||'Weather'}
+function setWeatherBackground(type){const key=type||'';if(document.body.dataset.weatherType===key)return;document.body.dataset.weatherType=key;document.body.classList.remove('weather-rain','weather-snow','weather-heatwave','weather-volcano','weather-starfall','weather-aurora');if(type)document.body.classList.add('weather-'+type);if(els.shopModal?.classList.contains('open')&&currentShopTab==='eggs')renderEggsShop()}
 function renderWeatherBanner(){const b=document.getElementById('weatherBanner'),type=state.weather&&state.weather.type;setWeatherBackground(type);if(!b)return;const text=type?`Weather: ${weatherName(type)} ${weatherEmoji(type)} • ${formatTime(Math.max(0,state.weather.endAt-Date.now()))}`:'';const key=`${type||'none'}|${text}`;if(renderWeatherBanner._key===key)return;renderWeatherBanner._key=key;if(type){b.classList.add('show');b.textContent=text}else{b.classList.remove('show');b.textContent=''}}
-function weatherEmoji(t){return{rain:'🌧️',snow:'❄️',heatwave:'☀️',starfall:'✨'}[t]||''}
+function weatherEmoji(t){return{rain:'🌧️',snow:'❄️',heatwave:'☀️',volcano:'🌋',starfall:'✨',aurora:'🌌'}[t]||''}
 function rollWeatherMutations(){const list=WEATHER_MUTATION_ROLLS[state.weather.type]||[];for(const z of state.zoogles){if(!z.island||isBusy(z.uid))continue;for(const [m,ch] of list){if((z.mutations||[]).length>=10)break;if((z.mutations||[]).includes(m))continue;if(Math.random()*100<ch){addMutationToZoogle(z,m);break}}}}
 function renderArea(){ensureV6State();const area=AREAS.find(a=>a.id===state.currentArea)||AREAS[0];els.areaName.textContent=area.name;els.areaPanel.classList.add('hidden');els.areaPanel.classList.remove('storage-panel');els.caveScreen.style.display='none';els.island.style.display='block';els.islandShadow.style.display='block';els.hatchSlot.style.display=state.currentArea==='cave'?'none':'';els.island.classList.toggle('rocky',state.currentArea==='rocky');els.island.classList.toggle('storage',state.currentArea==='storage');els.island.classList.toggle('tribal',state.currentArea==='tribal');if(state.currentArea==='cave'){els.island.style.display='none';els.islandShadow.style.display='none';renderCave();return}if(state.currentArea==='rocky'&&!state.rockyUnlocked){lockedPanel('Rocky Island','A rough new island with more space for Zoogles.',1000,unlockRocky);return}if(state.currentArea==='storage'&&!state.storageCliffsUnlocked){lockedPanel('Storage Cliffs','Store Zoogles in a chest and let their sell value grow.',500,unlockStorageCliffs);return}if(state.currentArea==='tribal'&&!state.tribalUnlocked){lockedPanel('Tribal Island','Ancient ruins where red meteors can awaken Ancient Zoogles.',1500,unlockTribalIsland);return}renderZoogles();if(state.currentArea==='storage')renderStoragePanel();if(state.currentArea==='tribal')renderTribalMeteor()}
 function lockedPanel(title,body,cost,fn){els.zoogleLayer.innerHTML='';els.areaPanel.classList.remove('hidden');els.areaPanel.innerHTML=`<h2>${title}</h2><p>${body}</p><button id="unlockAreaBtn" class="green-btn">UNLOCK — 🪙${cost}</button>`;document.getElementById('unlockAreaBtn').onclick=fn}
@@ -1030,11 +1082,13 @@ function formatStorageMax(max){return max===Infinity?'∞':formatAmount(max)}
 
 // === V6 Totems Tab Patch ===
 const TOTEM_DATA={
-  random:{name:'Mystery Totem',icon:'🌀',cost:8,desc:'Starts a random weather for 3-5 minutes.',kind:'randomWeather'},
+  random:{name:'Mystery Totem',icon:'🌀',cost:8,desc:'Starts a random weather for 3-5 minutes, including Volcano and Aurora.',kind:'randomWeather'},
+  heatwave:{name:'Heatwave Totem',icon:'☀️',cost:10,desc:'Starts Heatwave for 5 minutes. Risky, but can give strong heat mutations.',weather:'heatwave'},
   rain:{name:'Rain Totem',icon:'🌧️',cost:12,desc:'Starts Rain for 5 minutes. Useful for Wet mutations and Uncommon boosts.',weather:'rain'},
   snow:{name:'Snow Totem',icon:'❄️',cost:12,desc:'Starts Snow for 5 minutes. Can lead to Icy and Snowy mutations.',weather:'snow'},
-  heatwave:{name:'Heatwave Totem',icon:'☀️',cost:10,desc:'Starts Heatwave for 5 minutes. Risky, but can give strong heat mutations.',weather:'heatwave'},
+  volcano:{name:'Volcano Totem',icon:'🌋',cost:20,desc:'Starts Volcano for 5 minutes. Can cause Ember, Molten and Magma mutations.',weather:'volcano'},
   starfall:{name:'Starfall Totem',icon:'✨',cost:40,desc:'Starts Starfall for 4 minutes. Boosts Celestial and Shiny chances.',weather:'starfall',duration:240000},
+  aurora:{name:'Aurora Totem',icon:'🌌',cost:45,desc:'Starts Aurora for 5 minutes. Can cause Glowing, Aurora and Radiant mutations.',weather:'aurora'},
   ancientMeteor:{name:'Ancient Meteor Totem',icon:'☄️',cost:55,desc:'Calls a guaranteed Ancient meteor to Tribal Island. Requires Tribal Island unlocked.',kind:'ancientMeteor'}
 };
 function renderShop(){
@@ -1052,7 +1106,7 @@ function renderEggsShop(){
 }
 function renderTotems(){
   els.shopGrid.className='shop-grid';
-  els.shopGrid.innerHTML=Object.entries(TOTEM_DATA).map(([id,t])=>{
+  els.shopGrid.innerHTML=Object.entries(TOTEM_DATA).sort((a,b)=>a[1].cost-b[1].cost||a[1].name.localeCompare(b[1].name)).map(([id,t])=>{
     const locked=id==='ancientMeteor'&&!state.tribalUnlocked;
     const blocked=id==='ancientMeteor'&&state.ancientMeteorActive;
     const disabled=locked||blocked||state.gems<t.cost;
@@ -1078,7 +1132,7 @@ function useTotem(id){
   }else{
     let type=t.weather;
     if(t.kind==='randomWeather'){
-      const types=['rain','snow','heatwave','starfall'];
+      const types=['rain','snow','heatwave','volcano','starfall','aurora'];
       type=types[Math.floor(Math.random()*types.length)];
     }
     const duration=t.duration || (t.kind==='randomWeather'?(180000+Math.floor(Math.random()*120000)):300000);
@@ -1139,7 +1193,7 @@ function renderZoogleIndex(){
 function renderEggIndex(){
   els.bookGrid.className='shop-grid';
   const weatherNote=(state.weather&&state.weather.type)?`<div class="small-note">Current weather may adjust live hatch odds: ${weatherName(state.weather.type)}.</div>`:'';
-  els.bookGrid.innerHTML=Object.values(EGGS).map(egg=>{
+  els.bookGrid.innerHTML=Object.values(EGGS).sort((a,b)=>a.coinCost-b.coinCost||a.gemCost-b.gemCost||a.name.localeCompare(b.name)).map(egg=>{
     const pool=egg.pool?Object.entries(egg.pool).map(([r,ids])=>`<strong>${r} pool:</strong> ${ids.map(id=>ZOOGLES[id]?.name||id).join(', ')}`).join('<br>'):'General rarity pool';
     return `<div class="index-card"><div class="egg-shape ${egg.eggClass}"></div><h3>${egg.name}</h3><div class="mini"><strong>Cost:</strong> 🪙${egg.coinCost} or 💎${egg.gemCost}<br><strong>Hatch time:</strong> ${formatTime(getAdjustedHatchMs(egg.hatchMs))}</div><div class="weather-rules"><strong>Base chances</strong><br>${rarityChanceText(egg.chances)}<br><br>${pool}</div>${weatherNote}</div>`;
   }).join('');
@@ -1150,7 +1204,9 @@ function renderWeatherIndex(){
     {name:'Rain',icon:'🌧️',chance:'28%',duration:'2–6 min',rules:'+5% Uncommon chance. If an egg has no Uncommon, Rain adds it by taking 5% from the highest chance rarity.',muts:'Wet: 12% once when Rain begins on each eligible placed Zoogle. +10% sell, +5% coin gen speed.'},
     {name:'Snow',icon:'❄️',chance:'22%',duration:'2–6 min',rules:'Snow is mutation-focused and adds a cold island/weather vibe.',muts:'Once per Snow event: Snowy 12% (+10% sell), Icy 8% (+5% sell, +5% coin gen amount).'},
     {name:'Heatwave',icon:'☀️',chance:'18%',duration:'2–6 min',rules:'All Zoogles generate coins/gems 3.5% slower while active.',muts:'Once per Heatwave event: Burnt 12% (-5% sell, -5% speed, +10% coin amount), Heat-Stricken 7% (+10% sell, +10% speed).'},
-    {name:'Starfall',icon:'✨',chance:'7%',duration:'2–6 min',rules:'+2% Celestial chance. If egg has no Celestial, adds 1% Celestial by taking from highest chance rarity. Shiny becomes 25%.',muts:'Once per Starfall event: Star-Hit 10% (+5% gem chance, +15% speed, +50% sell), Starry 6% (+150% sell).'}
+    {name:'Volcano',icon:'🌋',chance:'10%',duration:'2–6 min',rules:'Volcanic skies bring ash and embers. No extra global stat modifier.',muts:'Once per Volcano event: Ember 12% (+10% sell, +5% speed), Molten 8% (+15% sell, +10% gen amount), Magma 4% (+30% sell, +10% gen amount, +10% speed).'},
+    {name:'Starfall',icon:'✨',chance:'7%',duration:'2–6 min',rules:'+2% Celestial chance. If egg has no Celestial, adds 1% Celestial by taking from highest chance rarity. Shiny becomes 25%.',muts:'Once per Starfall event: Star-Hit 10% (+5% gem chance, +15% speed, +50% sell), Starry 6% (+150% sell).'},
+    {name:'Aurora',icon:'🌌',chance:'5%',duration:'2–6 min',rules:'Rare aurora skies shimmer over every island. No extra global stat modifier.',muts:'Once per Aurora event: Glowing 10% (+10% sell, +5% speed), Aurora 7% (+20% sell, +10% gen amount), Radiant 4% (+50% sell, +10% speed, +2% gem chance).'}
   ];
   els.bookGrid.innerHTML=weatherCards.map(w=>`<div class="index-card"><h3>${w.icon} ${w.name}</h3><div class="mini"><strong>Roll chance:</strong> ${w.chance}<br><strong>Duration:</strong> ${w.duration}<br><strong>Weather rolls:</strong> every 7 minutes</div><div class="weather-rules"><strong>Effect:</strong><br>${w.rules}<br><br><strong>Mutations:</strong><br>${w.muts}</div></div>`).join('');
 }
@@ -1170,10 +1226,12 @@ function mutationSourceText(id){
   if(['snowy','icy'].includes(id))return 'Snow, already placed Zoogles';
   if(['burnt','heatstricken'].includes(id))return 'Heatwave, already placed Zoogles';
   if(['starhit','stary'].includes(id))return 'Starfall, already placed Zoogles';
+  if(['embermut','moltenmut','magmamut'].includes(id))return 'Volcano, already placed Zoogles';
+  if(['glowingmut','auroramut','radiantmut'].includes(id))return 'Aurora, already placed Zoogles';
   return 'Special';
 }
 function mutationChanceText(id){
-  return ({shiny:'10% normally, 25% during Starfall',golden:'6% from eggs',diamond:'3% from eggs',glitched:'2% from eggs',wet:'12% per Rain event',snowy:'12% per Snow event',icy:'8% per Snow event',burnt:'12% per Heatwave event',heatstricken:'7% per Heatwave event',starhit:'10% per Starfall event',stary:'6% per Starfall event'}[id])||'Special';
+  return ({shiny:'10% normally, 25% during Starfall',golden:'6% from eggs',diamond:'3% from eggs',glitched:'2% from eggs',wet:'12% per Rain event',snowy:'12% per Snow event',icy:'8% per Snow event',burnt:'12% per Heatwave event',heatstricken:'7% per Heatwave event',starhit:'10% per Starfall event',stary:'6% per Starfall event',embermut:'12% per Volcano event',moltenmut:'8% per Volcano event',magmamut:'4% per Volcano event',glowingmut:'10% per Aurora event',auroramut:'7% per Aurora event',radiantmut:'4% per Aurora event'}[id])||'Special';
 }
 function renderMutationIndex(){
   els.bookGrid.className='shop-grid';
@@ -1257,7 +1315,9 @@ function renderMutationIndex(){
     if(type==='rain'){burst(.38,.07,0,1500,'bandpass');tone(160,.18,'triangle',.04,.04);tone(96,.16,'sawtooth',.04,.21)}
     else if(type==='snow'){arpeggio([880,1174,1320,1760],'sine',.04,.08,.18);burst(.18,.018,.05,5200,'highpass')}
     else if(type==='heatwave'){tone(190,.45,'sawtooth',.055,0,235);tone(380,.35,'triangle',.035,.06,420);burst(.25,.025,.04,700,'bandpass')}
+    else if(type==='volcano'){tone(82,.42,'sawtooth',.075,0,110);burst(.42,.08,.02,260,'lowpass');tone(210,.18,'triangle',.04,.16)}
     else if(type==='starfall'){arpeggio([659,988,1318,1976,2637],'sine',.052,.075,.2);burst(.35,.035,.11,5200,'highpass')}
+    else if(type==='aurora'){arpeggio([392,587,784,1174,1568],'sine',.058,.085,.22);tone(196,.5,'sine',.025,.04);burst(.28,.018,.12,4500,'highpass')}
     else {playTotemSfx()}
   };
 
@@ -1268,8 +1328,8 @@ function renderMutationIndex(){
       if(now-lastToastSound>220){
         if(/not enough|already|busy|first|ready in|place it|doesn.t work|invalid/i.test(m))window.playError&&window.playError();
         else if(/unlocked|claimed|reward|upgraded|bought/i.test(m))window.playQuestSfx&&window.playQuestSfx();
-        else if(/weather|rain|snow|heatwave|starfall|begun|started/i.test(m)){
-          const low=m.toLowerCase(); window.playWeatherSfx&&window.playWeatherSfx(low.includes('rain')?'rain':low.includes('snow')?'snow':low.includes('heat')?'heatwave':low.includes('star')?'starfall':null);
+        else if(/weather|rain|snow|heatwave|volcano|starfall|aurora|begun|started/i.test(m)){
+          const low=m.toLowerCase(); window.playWeatherSfx&&window.playWeatherSfx(low.includes('rain')?'rain':low.includes('snow')?'snow':low.includes('heat')?'heatwave':low.includes('volcano')?'volcano':low.includes('star')?'starfall':low.includes('aurora')?'aurora':null);
         }
         lastToastSound=now;
       }
