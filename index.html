@@ -1057,7 +1057,7 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
 body.user-reduced-motion .hatch-nest.ready .egg-shape{animation:none!important}
 </style>
 
-<script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789844677074&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000dd6081f4be454ed390b88d81%26ts%3D497179%26p%3Dfs%26cid%3D1%26sig%3D7787003d8dcf415779e1a8b0afda4d2bb4e348113adacf0a52bbd2dbfc464218%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MyJ9LCB7ImJyYW5kIjoiTm90X0EgQnJhbmQiLCJ2ZXJzaW9uIjoiOCJ9LCB7ImJyYW5kIjoiQ2hyb21pdW0iLCJ2ZXJzaW9uIjoiMTUzIn1d&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789844677074&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
+<script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789844677074&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000b4ec8210acc8135f064c37e1%26ts%3D497179%26p%3Dfs%26cid%3D1%26sig%3D3d1916128cae720018b716d405e76b3d4518a1f0079d50bbd5183929c8836937%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MyJ9LCB7ImJyYW5kIjoiTm90X0EgQnJhbmQiLCJ2ZXJzaW9uIjoiOCJ9LCB7ImJyYW5kIjoiQ2hyb21pdW0iLCJ2ZXJzaW9uIjoiMTUzIn1d&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789844677074&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
 <body>
 <div id="game">
   <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
@@ -2751,6 +2751,7 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
 <script id="zoogle-multiplayer-v1-script">
 (()=>{
   const MP_USERNAME_KEY='zoogleWorldUsernameV1';
+  const MP_PENDING_KEY='zoogleWorldPendingJoinV1';
   const MP_MAX_PLAYERS=4;
   const mp={role:null,active:false,guestActive:false,sessionId:null,revision:0,userId:null,hostUsername:'',islandCode:'',islandName:'',homeState:null,homeArea:'main',channel:null,requestChannel:null,requestTopicName:'',presences:new Map(),cursors:new Map(),requests:[],pendingRequest:null,hostCommitBusy:false,hostCommitQueued:false,applying:false,lastHostSerialized:'',lastGuestSerialized:'',hostMissingTimer:0,available:true};
   let mpHeartbeatTimer=0,requestPollTimer=0,pendingPollTimer=0,cursorLastSent=0,presenceQueued=0,guestHealthTimer=0;
@@ -2761,6 +2762,9 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
   function sanitizeUsername(v){let s=String(v||'').replace(/[^A-Za-z0-9 _-]/g,'').replace(/\s+/g,' ').trim().slice(0,16);return s||usernameFallback()}
   function getUsername(){let u=sanitizeUsername(safeStorage.getItem(MP_USERNAME_KEY)||'');if(!safeStorage.getItem(MP_USERNAME_KEY))safeStorage.setItem(MP_USERNAME_KEY,u);return u}
   function setUsername(v){const u=sanitizeUsername(v);safeStorage.setItem(MP_USERNAME_KEY,u);return u}
+  function persistPendingRequest(){try{if(mp.pendingRequest)safeStorage.setItem(MP_PENDING_KEY,JSON.stringify(mp.pendingRequest));else safeStorage.removeItem(MP_PENDING_KEY)}catch(e){}}
+  function restorePendingRequest(){try{const raw=safeStorage.getItem(MP_PENDING_KEY);if(!raw)return;const v=JSON.parse(raw);if(v&&v.id&&v.code)mp.pendingRequest=v;else safeStorage.removeItem(MP_PENDING_KEY)}catch(e){safeStorage.removeItem(MP_PENDING_KEY)}}
+  function clearPendingRequest(){mp.pendingRequest=null;safeStorage.removeItem(MP_PENDING_KEY)}
   function rowOf(data){return Array.isArray(data)?data[0]:data}
   async function clientAndUser(){const api=window.ZoogleIslandSharing;if(!api?.getClient||!api?.ensureAuth)throw new Error('Island sharing is not ready');const client=await api.getClient(),user=await api.ensureAuth();if(!client||!user)throw new Error('Could not connect');mp.userId=user.id;return{client,user}}
   function multiplayerUnavailable(e){const m=String(e?.message||e||'');return /zoogle_mp_|function .* does not exist|Could not find the function/i.test(m)}
@@ -2870,17 +2874,17 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
     button.disabled=true;button.textContent='SENDING…';
     try{
       const {client}=await clientAndUser();const res=await client.rpc('zoogle_mp_request_join',{p_code:code,p_username:getUsername()});if(res.error)throw res.error;const row=rowOf(res.data);if(!row?.request_id){if(error)error.textContent='Invalid code';return}
-      mp.pendingRequest={id:row.request_id,code,islandName:row.island_name||code,hostOnline:!!row.host_online};renderPendingJoinCard();startPendingPoll();signalJoinRequest(code,row.request_id,getUsername());showToast('Join request sent!');
+      mp.pendingRequest={id:row.request_id,code,islandName:row.island_name||code,hostOnline:!!row.host_online};persistPendingRequest();renderPendingJoinCard();startPendingPoll();signalJoinRequest(code,row.request_id,getUsername());showToast('Join request sent!');
     }catch(e){console.warn('Join request failed',e);if(error)error.textContent=multiplayerUnavailable(e)?'Multiplayer database update not installed yet':'Could not send request right now'}
     finally{button.disabled=false;button.textContent='REQUEST TO JOIN'}
   }
-  async function cancelPendingRequest(){const p=mp.pendingRequest;if(!p)return;try{const {client}=await clientAndUser();await client.rpc('zoogle_mp_cancel_request',{p_request_id:p.id})}catch(e){}mp.pendingRequest=null;clearInterval(pendingPollTimer);pendingPollTimer=0;renderPendingJoinCard();showToast('Join request cancelled.')}
+  async function cancelPendingRequest(){const p=mp.pendingRequest;if(!p)return;try{const {client}=await clientAndUser();await client.rpc('zoogle_mp_cancel_request',{p_request_id:p.id})}catch(e){}clearPendingRequest();clearInterval(pendingPollTimer);pendingPollTimer=0;renderPendingJoinCard();showToast('Join request cancelled.')}
   function startPendingPoll(){clearInterval(pendingPollTimer);pendingPollTimer=setInterval(checkPendingRequest,1400);checkPendingRequest()}
   async function checkPendingRequest(){
     if(!mp.pendingRequest||mp.guestActive)return;
     try{const {client}=await clientAndUser();const res=await client.rpc('zoogle_mp_check_request',{p_request_id:mp.pendingRequest.id});if(res.error)throw res.error;const row=rowOf(res.data);if(!row)return;
-      if(row.status==='accepted'&&row.session_id&&row.snapshot){const pending=mp.pendingRequest;mp.pendingRequest=null;clearInterval(pendingPollTimer);pendingPollTimer=0;await joinGuestSession(row,pending);return}
-      if(['declined','expired','cancelled','left'].includes(row.status)){const msg=row.status==='declined'?'Join request declined.':row.status==='expired'?'Join request expired.':'Join request ended.';mp.pendingRequest=null;clearInterval(pendingPollTimer);pendingPollTimer=0;renderPendingJoinCard();showToast(msg)}
+      if(row.status==='accepted'&&row.session_id&&row.snapshot){const pending=mp.pendingRequest;clearPendingRequest();clearInterval(pendingPollTimer);pendingPollTimer=0;await joinGuestSession(row,pending);return}
+      if(['declined','expired','cancelled','left'].includes(row.status)){const msg=row.status==='declined'?'Join request declined.':row.status==='expired'?'Join request expired.':'Join request ended.';clearPendingRequest();clearInterval(pendingPollTimer);pendingPollTimer=0;renderPendingJoinCard();showToast(msg)}
     }catch(e){console.warn('Request status failed',e)}
   }
 
@@ -2890,7 +2894,27 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
     try{const {client}=await clientAndUser();const res=await client.rpc('zoogle_mp_list_requests',{p_code:state.islandCode});if(res.error)throw res.error;mp.requests=Array.isArray(res.data)?res.data:[];updateRequestBadge();if(document.getElementById('multiplayerRequestsModal')?.classList.contains('open'))renderRequestsModal()}catch(e){console.warn('Join request inbox refresh failed',e);if(multiplayerUnavailable(e))mp.available=false}
   }
   async function respondRequest(id,accept){
-    try{await ensureHostSession();const {client}=await clientAndUser();const res=await client.rpc('zoogle_mp_respond_request',{p_request_id:id,p_accept:!!accept});if(res.error)throw res.error;showToast(accept?'Player accepted!':'Request declined.');await pollRequests()}catch(e){console.warn('Request response failed',e);showToast(String(e?.message||'Could not respond to request').includes('full')?'World is full.':'Could not respond right now.')}
+    try{
+      const {client,user}=await clientAndUser();
+      const res=await client.rpc('zoogle_mp_respond_request_v2',{p_request_id:id,p_accept:!!accept,p_username:getUsername(),p_snapshot:buildSharedSnapshot()});
+      if(res.error)throw res.error;
+      const row=rowOf(res.data);
+      if(accept){
+        const sid=row?.result_session_id||row?.session_id;
+        const rev=Number(row?.result_revision??row?.revision??0);
+        if(!sid)throw new Error('Accepted request did not return a live session');
+        const changed=mp.sessionId!==sid||mp.role!=='host';
+        mp.role='host';mp.active=true;mp.guestActive=false;mp.sessionId=sid;mp.revision=rev;mp.userId=user.id;mp.islandCode=state.islandCode;mp.islandName=state.islandName||'Zoogle Island';mp.hostUsername=getUsername();mp.available=true;
+        document.body.classList.add('mp-live');document.body.classList.remove('mp-guest');
+        if(changed)await connectRealtime();
+        updateLiveBadge();showToast('Player accepted — joining now!');
+      }else showToast('Request declined.');
+      await pollRequests();
+    }catch(e){
+      console.warn('Request response failed',e);
+      const msg=String(e?.message||e||'');
+      showToast(msg.toLowerCase().includes('full')?'World is full.':msg.includes('zoogle_mp_respond_request_v2')?'Run the multiplayer accept SQL fix first.':'Could not respond right now.');
+    }
   }
 
   async function ensureHostSession(){
@@ -2991,7 +3015,7 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
 
   window.addEventListener('focus',()=>{if(!mp.guestActive){pollRequests();connectRequestInbox()}});document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!mp.guestActive){pollRequests();connectRequestInbox()}});
   document.getElementById('worldVisitBtn')?.addEventListener('click',()=>setTimeout(()=>{pollRequests();connectRequestInbox()},0));
-  ensureMultiplayerUi();setTimeout(startHostServices,900);
+  restorePendingRequest();if(mp.pendingRequest)setTimeout(()=>{renderPendingJoinCard();startPendingPoll()},650);ensureMultiplayerUi();setTimeout(startHostServices,900);
   window.ZoogleMultiplayer={
     get guestActive(){return mp.guestActive},get active(){return mp.active},get role(){return mp.role},get username(){return getUsername()},
     renderGuestPassport,requestJoin:requestJoinByCode,leave:leaveGuestSession,get state(){return mp}
