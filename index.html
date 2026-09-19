@@ -1057,7 +1057,7 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
 body.user-reduced-motion .hatch-nest.ready .egg-shape{animation:none!important}
 </style>
 
-<script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789848276290&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000ad8c81f492179da09cdb880e%26fn%3Dindex%252820260919-201416%2529.html%26cd%3Dattachment%26ts%3D497180%26p%3Dfs%26cid%3D1%26sig%3D900a7e62b8e6f4203fdc020a0df011c44b319629da989309d867a16c98cca1e8%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MyJ9LCB7ImJyYW5kIjoiTm90X0EgQnJhbmQiLCJ2ZXJzaW9uIjoiOCJ9LCB7ImJyYW5kIjoiQ2hyb21pdW0iLCJ2ZXJzaW9uIjoiMTUzIn1d&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789848276290&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
+<script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789851878871&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_0000000058788210b9a54a702fee610e%26fn%3Dindex%252820260919-211304%2529.html%26cd%3Dattachment%26ts%3D497181%26p%3Dfs%26cid%3D1%26sig%3D1a6be0aea66e9bf2783117f1aaf395beb6ea903c6fc001cdb68efdeaa57545ef%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MyJ9LCB7ImJyYW5kIjoiTm90X0EgQnJhbmQiLCJ2ZXJzaW9uIjoiOCJ9LCB7ImJyYW5kIjoiQ2hyb21pdW0iLCJ2ZXJzaW9uIjoiMTUzIn1d&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789851878871&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
 <body>
 <div id="game">
   <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
@@ -2753,8 +2753,10 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
   const MP_USERNAME_KEY='zoogleWorldUsernameV1';
   const MP_PENDING_KEY='zoogleWorldPendingJoinV1';
   const MP_MAX_PLAYERS=4;
-  const mp={role:null,active:false,guestActive:false,sessionId:null,revision:0,userId:null,hostUsername:'',islandCode:'',islandName:'',homeState:null,homeArea:'main',channel:null,requestChannel:null,requestTopicName:'',presences:new Map(),cursors:new Map(),requests:[],pendingRequest:null,hostCommitBusy:false,hostCommitQueued:false,applying:false,lastHostSerialized:'',lastGuestSerialized:'',hostMissingTimer:0,available:true};
-  let mpHeartbeatTimer=0,requestPollTimer=0,pendingPollTimer=0,cursorLastSent=0,presenceQueued=0,guestHealthTimer=0;
+  const mp={role:null,active:false,guestActive:false,sessionId:null,revision:0,userId:null,hostUsername:'',islandCode:'',islandName:'',homeState:null,homeArea:'main',channel:null,requestChannel:null,requestTopicName:'',presences:new Map(),presenceSeen:new Map(),cursors:new Map(),requests:[],pendingRequest:null,hostCommitBusy:false,hostCommitQueued:false,applying:false,lastHostSerialized:'',lastGuestSerialized:'',hostMissingTimer:0,available:true};
+  let mpHeartbeatTimer=0,requestPollTimer=0,pendingPollTimer=0,cursorLastSent=0,presenceQueued=0,guestHealthTimer=0,cursorHeartbeatTimer=0;
+  let lastCursorX=.5,lastCursorY=.5;
+  const MP_PRESENCE_GRACE_MS=18000,MP_CURSOR_GRACE_MS=18000;
   const baseSave=save,baseTickZoogles=tickZoogles,baseRenderArea=renderArea;
 
   function clone(v){try{return structuredClone(v)}catch(e){return JSON.parse(JSON.stringify(v))}}
@@ -2951,19 +2953,45 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
     ch.on('broadcast',{event:'shared-action'},({payload})=>window.ZoogleSharedActions?.receive?.(payload));
     ch.on('broadcast',{event:'need-state'},()=>{if(mp.role==='host')broadcastState()});
     ch.on('presence',{event:'sync'},syncPresence).on('presence',{event:'join'},syncPresence).on('presence',{event:'leave'},syncPresence);
-    ch.subscribe(async status=>{if(status==='SUBSCRIBED'){await memberHeartbeat();await trackPresence(true);if(mp.role==='guest')ch.send({type:'broadcast',event:'need-state',payload:{user_id:mp.userId}});else{broadcastState();scheduleHostCommit()}}});
+    ch.subscribe(async status=>{if(status==='SUBSCRIBED'){await memberHeartbeat();await trackPresence(true);startCursorHeartbeat();if(mp.role==='guest')ch.send({type:'broadcast',event:'need-state',payload:{user_id:mp.userId}});else{broadcastState();scheduleHostCommit()}}});
   }
   async function trackPresence(force=false){if(!mp.channel||!mp.active)return;clearTimeout(presenceQueued);const run=async()=>{try{await mp.channel.track({user_id:mp.userId,username:getUsername(),area:state.currentArea,role:mp.role,online_at:new Date().toISOString()})}catch(e){}};if(force)return run();presenceQueued=setTimeout(run,80)}
   function syncPresence(){
-    if(!mp.channel)return;const raw=mp.channel.presenceState(),next=new Map();Object.values(raw||{}).forEach(arr=>(arr||[]).forEach(p=>{if(p?.user_id)next.set(p.user_id,p)}));mp.presences=next;renderRemotePlayers();updateLiveBadge();
-    if(mp.guestActive){const hostPresent=[...next.values()].some(p=>p.role==='host');if(hostPresent){clearTimeout(mp.hostMissingTimer);mp.hostMissingTimer=0}else if(!mp.hostMissingTimer){mp.hostMissingTimer=setTimeout(()=>{if(mp.guestActive&&!([...mp.presences.values()].some(p=>p.role==='host')))leaveGuestSession('Host disconnected.')},12000)}}
+    if(!mp.channel)return;
+    const raw=mp.channel.presenceState(),fresh=new Map(),nowMs=Date.now();
+    Object.values(raw||{}).forEach(arr=>(arr||[]).forEach(p=>{if(p?.user_id){fresh.set(p.user_id,p);mp.presenceSeen.set(p.user_id,nowMs)}}));
+    // Presence can briefly go empty while Supabase resynchronises/reconnects. Keep the
+    // last known player around for a short grace window so their cursor does not blink out.
+    const stable=new Map(fresh);
+    for(const [id,p] of mp.presences){
+      if(stable.has(id))continue;
+      const seen=mp.presenceSeen.get(id)||0;
+      const cur=mp.cursors.get(id);
+      const cursorFresh=cur&&nowMs-(cur.seen||0)<MP_CURSOR_GRACE_MS;
+      if(nowMs-seen<MP_PRESENCE_GRACE_MS||cursorFresh)stable.set(id,p);
+      else mp.presenceSeen.delete(id);
+    }
+    mp.presences=stable;renderRemotePlayers();updateLiveBadge();
+    // Host-disconnect detection intentionally uses the *fresh* Presence snapshot, with
+    // its existing 12s grace timer, rather than the visual cache above.
+    if(mp.guestActive){const hostPresent=[...fresh.values()].some(p=>p.role==='host');if(hostPresent){clearTimeout(mp.hostMissingTimer);mp.hostMissingTimer=0}else if(!mp.hostMissingTimer){mp.hostMissingTimer=setTimeout(()=>{const live=mp.channel?.presenceState?.()||{};let hasHost=false;Object.values(live).forEach(arr=>(arr||[]).forEach(p=>{if(p?.role==='host')hasHost=true}));if(mp.guestActive&&!hasHost)leaveGuestSession('Host disconnected.')},12000)}}
   }
-  function updateLiveBadge(){const b=document.getElementById('mpLiveBadge');if(!b)return;const count=Math.max(1,mp.presences.size||1);b.textContent=String(count);document.body.classList.toggle('mp-live',!!mp.active)}
+  function updateLiveBadge(){const b=document.getElementById('mpLiveBadge');if(!b)return;const count=Math.max(1,currentPlayers().length+1);b.textContent=String(count);document.body.classList.toggle('mp-live',!!mp.active)}
 
   function userRing(id){let h=0;for(const c of String(id||''))h=(h*31+c.charCodeAt(0))>>>0;return `hsl(${h%360} 75% 58%)`}
   function zHeadHtml(){return `<span class="mp-zhead"><i class="mp-eye left"></i><i class="mp-eye right"></i><i class="mp-mouth"></i></span>`}
-  function receiveCursor(p){if(!p||p.user_id===mp.userId)return;mp.cursors.set(p.user_id,{...p,seen:Date.now()});renderRemotePlayers()}
-  function currentPlayers(){const out=[];for(const [id,p] of mp.presences){if(id===mp.userId)continue;const cur=mp.cursors.get(id)||{};out.push({user_id:id,username:p.username||cur.username||'Player',area:p.area||cur.area||'main',x:Number.isFinite(cur.x)?cur.x:.5,y:Number.isFinite(cur.y)?cur.y:.5})}return out}
+  function receiveCursor(p){if(!p||p.user_id===mp.userId)return;const nowMs=Date.now();mp.cursors.set(p.user_id,{...p,seen:nowMs});mp.presenceSeen.set(p.user_id,nowMs);renderRemotePlayers()}
+  function currentPlayers(){
+    const out=[],ids=new Set([...mp.presences.keys(),...mp.cursors.keys()]),nowMs=Date.now();
+    for(const id of ids){
+      if(id===mp.userId)continue;
+      const p=mp.presences.get(id)||{},cur=mp.cursors.get(id)||{};
+      const pSeen=mp.presenceSeen.get(id)||0,cSeen=cur.seen||0;
+      if(!mp.presences.has(id)&&nowMs-Math.max(pSeen,cSeen)>=MP_CURSOR_GRACE_MS){mp.cursors.delete(id);continue}
+      out.push({user_id:id,username:p.username||cur.username||'Player',area:p.area||cur.area||'main',x:Number.isFinite(cur.x)?cur.x:.5,y:Number.isFinite(cur.y)?cur.y:.5});
+    }
+    return out;
+  }
   function areaDirection(from,to){const ids=AREAS.map(a=>a.id),a=ids.indexOf(from),b=ids.indexOf(to);if(a<0||b<0||a===b)return null;const n=ids.length,f=(b-a+n)%n,back=(a-b+n)%n;return f<=back?'right':'left'}
   function renderRemotePlayers(){
     ensureMultiplayerUi();const layer=document.getElementById('mpCursorLayer'),left=[],right=[];if(!layer)return;layer.innerHTML='';
@@ -2972,7 +3000,13 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
   }
   function renderArrowPlayers(id,list){const el=document.getElementById(id);if(!el)return;const shown=list.slice(0,2);el.innerHTML=shown.map(p=>`<span class="mp-off-player" style="--mp-ring:${userRing(p.user_id)}">${zHeadHtml()}<span class="mp-off-name">${escapeHtml(p.username)}</span></span>`).join('')+(list.length>2?`<span class="mp-more">+${list.length-2}</span>`:'');el.style.display=list.length?'flex':'none'}
   function positionArrowPlayers(){[['mpLeftPlayers','prevArea'],['mpRightPlayers','nextArea']].forEach(([id,bid])=>{const el=document.getElementById(id),b=document.getElementById(bid);if(!el||!b)return;const r=b.getBoundingClientRect();el.style.left=(r.left+r.width/2)+'px';el.style.top=(r.bottom+5)+'px'})}
-  function sendCursor(x,y){if(!mp.active||!mp.channel)return;const now=performance.now();if(now-cursorLastSent<48)return;cursorLastSent=now;mp.channel.send({type:'broadcast',event:'cursor',payload:{user_id:mp.userId,username:getUsername(),area:state.currentArea,x:Math.max(0,Math.min(1,x)),y:Math.max(0,Math.min(1,y))}})}
+  function sendCursor(x,y,force=false){
+    if(Number.isFinite(x))lastCursorX=Math.max(0,Math.min(1,x));
+    if(Number.isFinite(y))lastCursorY=Math.max(0,Math.min(1,y));
+    if(!mp.active||!mp.channel)return;const t=performance.now();if(!force&&t-cursorLastSent<48)return;cursorLastSent=t;
+    mp.channel.send({type:'broadcast',event:'cursor',payload:{user_id:mp.userId,username:getUsername(),area:state.currentArea,x:lastCursorX,y:lastCursorY}})
+  }
+  function startCursorHeartbeat(){clearInterval(cursorHeartbeatTimer);cursorHeartbeatTimer=setInterval(()=>{if(mp.active&&mp.channel)sendCursor(lastCursorX,lastCursorY,true);renderRemotePlayers()},2000);sendCursor(lastCursorX,lastCursorY,true)}
   window.addEventListener('pointermove',e=>sendCursor(e.clientX/innerWidth,e.clientY/innerHeight),{passive:true});window.addEventListener('pointerdown',e=>sendCursor(e.clientX/innerWidth,e.clientY/innerHeight),{passive:true});
   document.addEventListener('focusin',e=>{if(!mp.active)return;const r=e.target?.getBoundingClientRect?.();if(r&&r.width&&r.height)sendCursor((r.left+r.width/2)/innerWidth,(r.top+r.height/2)/innerHeight)});
   window.addEventListener('resize',()=>{positionArrowPlayers();renderRemotePlayers()});
@@ -3015,7 +3049,7 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
   async function leaveGuestSession(message='Welcome home!'){
     if(!mp.guestActive)return;const sid=mp.sessionId,client=await window.ZoogleIslandSharing?.getClient?.();clearInterval(guestHealthTimer);clearInterval(mpHeartbeatTimer);clearTimeout(mp.hostMissingTimer);mp.hostMissingTimer=0;
     try{await mp.channel?.untrack?.()}catch(e){}try{if(client&&mp.channel)await client.removeChannel(mp.channel)}catch(e){}try{if(client&&sid)await client.rpc('zoogle_mp_leave_session',{p_session_id:sid})}catch(e){}
-    mp.channel=null;mp.presences.clear();mp.cursors.clear();mp.role=null;mp.active=false;mp.guestActive=false;mp.sessionId=null;mp.revision=0;document.body.classList.remove('mp-live','mp-guest');document.getElementById('visitorBanner')?.style.removeProperty('display');const returnBtn=document.getElementById('visitorReturnHome');if(returnBtn)returnBtn.onclick=()=>window.ZoogleIslandSharing?.returnHome?.();
+    mp.channel=null;clearInterval(cursorHeartbeatTimer);cursorHeartbeatTimer=0;mp.presences.clear();mp.presenceSeen.clear();mp.cursors.clear();mp.role=null;mp.active=false;mp.guestActive=false;mp.sessionId=null;mp.revision=0;document.body.classList.remove('mp-live','mp-guest');document.getElementById('visitorBanner')?.style.removeProperty('display');const returnBtn=document.getElementById('visitorReturnHome');if(returnBtn)returnBtn.onclick=()=>window.ZoogleIslandSharing?.returnHome?.();
     if(mp.homeState){state=mp.homeState;mp.homeState=null;ensureV6State.done=false;ensureV6State();state.currentArea=areaAvailableIn(state,mp.homeArea)?mp.homeArea:'main'}placement=null;closeZoogleMenu();document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id));renderAll();baseSave();renderRemotePlayers();ensureUsernameRow();showToast(message);setTimeout(startHostServices,350)
   }
 
@@ -3027,7 +3061,7 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
   window.addEventListener('keydown',e=>{if(mp.guestActive&&e.ctrlKey&&e.key.toLowerCase()==='d'){e.preventDefault();e.stopImmediatePropagation();showToast('Return home before resetting your save.')}},true);
   window.addEventListener('beforeunload',()=>{if(mp.guestActive){try{mp.channel?.untrack?.()}catch(e){}}});
 
-  window.addEventListener('focus',()=>{if(!mp.guestActive){pollRequests();connectRequestInbox()}});document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!mp.guestActive){pollRequests();connectRequestInbox()}});
+  window.addEventListener('focus',()=>{if(mp.active){trackPresence(true);sendCursor(lastCursorX,lastCursorY,true)}if(!mp.guestActive){pollRequests();connectRequestInbox()}});document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(mp.active){trackPresence(true);sendCursor(lastCursorX,lastCursorY,true)}if(!mp.guestActive){pollRequests();connectRequestInbox()}}});
   document.getElementById('worldVisitBtn')?.addEventListener('click',()=>setTimeout(()=>{pollRequests();connectRequestInbox()},0));
   restorePendingRequest();if(mp.pendingRequest)setTimeout(()=>{renderPendingJoinCard();startPendingPoll()},650);ensureMultiplayerUi();setTimeout(startHostServices,900);
   window.ZoogleMultiplayer={
