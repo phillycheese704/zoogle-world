@@ -1057,7 +1057,7 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
 body.user-reduced-motion .hatch-nest.ready .egg-shape{animation:none!important}
 </style>
 
-<script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789844677074&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000b4ec8210acc8135f064c37e1%26ts%3D497179%26p%3Dfs%26cid%3D1%26sig%3D3d1916128cae720018b716d405e76b3d4518a1f0079d50bbd5183929c8836937%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MyJ9LCB7ImJyYW5kIjoiTm90X0EgQnJhbmQiLCJ2ZXJzaW9uIjoiOCJ9LCB7ImJyYW5kIjoiQ2hyb21pdW0iLCJ2ZXJzaW9uIjoiMTUzIn1d&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789844677074&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
+<script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789848276290&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000ad8c81f492179da09cdb880e%26fn%3Dindex%252820260919-201416%2529.html%26cd%3Dattachment%26ts%3D497180%26p%3Dfs%26cid%3D1%26sig%3D900a7e62b8e6f4203fdc020a0df011c44b319629da989309d867a16c98cca1e8%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MyJ9LCB7ImJyYW5kIjoiTm90X0EgQnJhbmQiLCJ2ZXJzaW9uIjoiOCJ9LCB7ImJyYW5kIjoiQ2hyb21pdW0iLCJ2ZXJzaW9uIjoiMTUzIn1d&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789848276290&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
 <body>
 <div id="game">
   <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
@@ -2782,11 +2782,24 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
   }
   function applySharedSnapshot(snapshot,protectIdentity=false){
     if(!snapshot||typeof snapshot!=='object')return;
-    const keepArea=state.currentArea,keepBreed=clone(state.breedSelect||{p1:null,p2:null}),keepPending=state.pendingPlacement?clone(state.pendingPlacement):null,keepCode=state.islandCode,keepName=state.islandName;
+    const keepArea=state.currentArea,keepBreed=clone(state.breedSelect||{p1:null,p2:null}),keepPending=state.pendingPlacement?clone(state.pendingPlacement):null,keepShared=state.sharedPlacement?clone(state.sharedPlacement):null,keepCode=state.islandCode,keepName=state.islandName;
+    const localNewPlacement=!!(placement&&!placement.existingId);
     mp.applying=true;
     try{
       state=clone(snapshot);normalizeV5State();ensureV6State.done=false;ensureV6State();
-      state.currentArea=areaAvailableIn(state,keepArea)?keepArea:'main';state.breedSelect=keepBreed;state.pendingPlacement=keepPending;
+      state.currentArea=areaAvailableIn(state,keepArea)?keepArea:'main';state.breedSelect=keepBreed;
+      // A freshly-hatched guest result may be waiting a fraction of a second for the host
+      // to echo the shared placement. Preserve it only during that short hand-off window.
+      const incomingShared=state.sharedPlacement;
+      const grace=mp.guestActive&&keepShared&&keepShared.ownerId===mp.userId&&Date.now()<(mp.localPlacementGraceUntil||0);
+      if(grace&&(!incomingShared||incomingShared.id!==keepShared.id))state.sharedPlacement=keepShared;
+      const canonicalShared=state.sharedPlacement;
+      const ownsCanonical=!!(canonicalShared&&canonicalShared.ownerId===mp.userId&&(!mp.localPlacementId||canonicalShared.id===mp.localPlacementId));
+      if(localNewPlacement&&(ownsCanonical||grace))state.pendingPlacement=keepPending;
+      else{
+        state.pendingPlacement=null;
+        if(localNewPlacement){placement=null;els.placementGhost.classList.remove('show','invalid');els.placementHelp.classList.remove('show');els.island.classList.remove('valid-placement');els.island.tabIndex=-1;els.island.removeAttribute('aria-label')}
+      }
       if(protectIdentity){state.islandCode=keepCode;state.islandName=keepName}
       closeZoogleMenu();refreshOpenUi();
     }finally{mp.applying=false}
@@ -2935,6 +2948,7 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
     ch.on('broadcast',{event:'state'},({payload})=>receiveAuthoritativeState(payload));
     ch.on('broadcast',{event:'state-proposal'},({payload})=>receiveStateProposal(payload));
     ch.on('broadcast',{event:'state-reject'},({payload})=>receiveStateReject(payload));
+    ch.on('broadcast',{event:'shared-action'},({payload})=>window.ZoogleSharedActions?.receive?.(payload));
     ch.on('broadcast',{event:'need-state'},()=>{if(mp.role==='host')broadcastState()});
     ch.on('presence',{event:'sync'},syncPresence).on('presence',{event:'join'},syncPresence).on('presence',{event:'leave'},syncPresence);
     ch.subscribe(async status=>{if(status==='SUBSCRIBED'){await memberHeartbeat();await trackPresence(true);if(mp.role==='guest')ch.send({type:'broadcast',event:'need-state',payload:{user_id:mp.userId}});else{broadcastState();scheduleHostCommit()}}});
@@ -2979,7 +2993,7 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
   function receiveStateReject(p){if(!mp.guestActive||p?.to!==mp.userId)return;mp.revision=Number(p.revision)||mp.revision;if(p.snapshot){mp.lastGuestSerialized=JSON.stringify(p.snapshot);applySharedSnapshot(p.snapshot)}showToast('World changed — try that action again.')}
 
   save=function(){
-    if(mp.guestActive){if(!mp.applying)scheduleGuestProposal();return}
+    if(mp.guestActive){if(!mp.applying&&!mp.suppressProposal)scheduleGuestProposal();return}
     const out=baseSave.apply(this,arguments);if(mp.role==='host'&&mp.active&&!mp.applying)scheduleHostCommit();return out;
   };
   tickZoogles=function(dt){if(mp.guestActive){renderWeatherBanner();return}return baseTickZoogles.apply(this,arguments)};
@@ -3018,7 +3032,8 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
   restorePendingRequest();if(mp.pendingRequest)setTimeout(()=>{renderPendingJoinCard();startPendingPoll()},650);ensureMultiplayerUi();setTimeout(startHostServices,900);
   window.ZoogleMultiplayer={
     get guestActive(){return mp.guestActive},get active(){return mp.active},get role(){return mp.role},get username(){return getUsername()},
-    renderGuestPassport,requestJoin:requestJoinByCode,leave:leaveGuestSession,get state(){return mp}
+    renderGuestPassport,requestJoin:requestJoinByCode,leave:leaveGuestSession,
+    broadcast:()=>broadcastState(),commit:()=>scheduleHostCommit(true),get state(){return mp}
   };
 })();
 </script>
@@ -3194,6 +3209,55 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
   const oldOpenZoogleMenuLab=openZoogleMenu;
   openZoogleMenu=function(uid,x,y){oldOpenZoogleMenuLab.apply(this,arguments);ensureLabState();if(!state.mutationLabUnlocked)return;const z=getZoogle(uid);if(!z)return;const main=els.zoogleMenu.querySelector('.zoogle-menu-main');if(!main||els.zoogleMenu.querySelector('[data-act="mutation-lab"]'))return;const sec=document.createElement('section');sec.className='menu-section menu-lab-section';const occupied=!!state.mutationLab.zoogle;sec.innerHTML=`<div class="menu-section-title">Mutation Lab</div><button class="blue-btn compact-action" data-act="mutation-lab" ${occupied?'disabled':''}>${occupied?'Lab Occupied':'Send to Mutation Lab'}</button>`;main.appendChild(sec);sec.querySelector('[data-act="mutation-lab"]')?.addEventListener('click',()=>sendToMutationLab(uid))};
 
+  // Fast multiplayer actions (hatching/placement) are sent as explicit host-authoritative
+  // messages instead of whole-world guest snapshots. This prevents background revisions from
+  // swallowing an egg click or leaving a stale placement behind.
+  function suppressGuestProposal(fn){const m=mpState();if(!m?.guestActive)return fn();m.suppressProposal=(m.suppressProposal||0)+1;try{return fn()}finally{m.suppressProposal=Math.max(0,(m.suppressProposal||1)-1)}}
+  function sendSharedAction(action,payload={}){const m=mpState(),ch=m?.channel;if(!mpActive()||!ch)return Promise.resolve(false);return Promise.resolve(ch.send({type:'broadcast',event:'shared-action',payload:{action,from:myUserId(),username:myUsername(),...payload}})).then(()=>true).catch(e=>{console.warn('Shared action failed',action,e);return false})}
+  function findSharedSource(kind,uid){const arr=kind==='egg'?(state.eggs||[]):(state.breedings||[]),index=arr.findIndex(x=>x?.uid===uid);return{arr,index,entry:index>=0?arr[index]:null}}
+  function validSharedArea(id){return id==='main'||(id==='rocky'&&state.rockyUnlocked)||(id==='storage'&&state.storageCliffsUnlocked)||(id==='tribal'&&state.tribalUnlocked)}
+  async function handleSharedAction(p){
+    const m=mpState();if(!p||m?.role!=='host'||p.from===myUserId())return;
+    const action=p.action;
+    if(action==='hatch-claim'){
+      const q=findSharedSource(p.kind,p.sourceUid),e=q.entry;if(!e)return;
+      const left=p.kind==='egg'?Math.max(0,e.endAt-now()):Math.max(0,e.endAt-now());if(left>0)return;
+      if(e.hatching&&e.hatching.expiresAt>now()&&e.hatching.ownerId!==p.from)return;
+      e.hatching={ownerId:p.from,username:p.username||'Player',expiresAt:now()+15000,stage:'hatching'};save();if(p.kind==='egg')updateHatchSlot();else if(state.currentArea==='cave')renderCave();return;
+    }
+    if(action==='hatch-finish'){
+      const q=findSharedSource(p.kind,p.sourceUid),e=q.entry;if(!e||q.index<0)return;
+      if(e.hatching?.ownerId&&e.hatching.ownerId!==p.from)return;
+      const type=p.type,def=ZOOGLES[type];if(!def)return;const muts=Array.isArray(p.mutations)?p.mutations.filter(x=>V6_MUTATIONS[x]):[];
+      q.arr.splice(q.index,1);
+      state.discovered[type]=true;state.quests.stats.hatched=(state.quests.stats.hatched||0)+1;
+      if(p.kind==='egg')state.quests.stats.eggsHatched=(state.quests.stats.eggsHatched||0)+1;
+      else{state.quests.stats.bred=(state.quests.stats.bred||0)+1;state.breedSelect={p1:null,p2:null}}
+      if(muts.length)state.quests.stats.mutations=(state.quests.stats.mutations||0)+muts.length;
+      state.sharedPlacement={id:p.placementId,ownerId:p.from,username:p.username||'Player',type,mutations:muts,sourceKey:p.sourceKey,stage:'result',expiresAt:now()+10000};
+      save();updateHatchSlot();if(state.currentArea==='cave')renderCave();return;
+    }
+    if(action==='placement-start'){
+      const sp=state.sharedPlacement;if(!sp||sp.id!==p.placementId||sp.ownerId!==p.from)return;sp.stage='placing';sp.expiresAt=now()+10000;save();return;
+    }
+    if(action==='placement-heartbeat'){
+      const sp=state.sharedPlacement;if(!sp||sp.id!==p.placementId||sp.ownerId!==p.from)return;sp.expiresAt=now()+10000;mpApi()?.broadcast?.();return;
+    }
+    if(action==='placement-complete'){
+      const sp=state.sharedPlacement;if(!sp||sp.id!==p.placementId||sp.ownerId!==p.from)return;
+      const def=ZOOGLES[sp.type],area=validSharedArea(p.area)?p.area:'main';if(!def)return;
+      const uid=String(p.uid||id());if(!state.zoogles.some(z=>z.uid===uid)){const x=Math.max(7,Math.min(93,Number(p.x)||50)),y=Math.max(12,Math.min(90,Number(p.y)||50)),z={uid,type:sp.type,customName:def.name,island:area,x,y,stored:0,mode:'coin',earnProgress:0,mutations:[...(sp.mutations||[])],masteryXp:5,masteryLevel:0};z.masteryLevel=getMasteryLevel(z.masteryXp);state.zoogles.push(z)}
+      const key=sp.sourceKey;state.sharedPlacement=null;state.pendingPlacement=null;save();releaseResource(key);updateHatchSlot();return;
+    }
+    if(action==='placement-sell'){
+      const sp=state.sharedPlacement;if(!sp||sp.id!==p.placementId||sp.ownerId!==p.from)return;const val=getFreshSellValue(sp.type,sp.mutations||[]),key=sp.sourceKey;state.coins+=val;state.sharedPlacement=null;state.pendingPlacement=null;save();releaseResource(key);renderCurrencies();updateHatchSlot();return;
+    }
+    if(action==='placement-takeover'){
+      const sp=state.sharedPlacement;if(!sp||sp.id!==p.placementId||sp.expiresAt>now())return;sp.ownerId=p.from;sp.username=p.username||'Player';sp.stage='placing';sp.expiresAt=now()+10000;save();return;
+    }
+  }
+  window.ZoogleSharedActions={receive:handleSharedAction};
+
   // Shared hatch/breed claiming: exactly one connected player gets a ready result.
   function sourceEntry(kind,i){return kind==='egg'?state.eggs?.[i]:state.breedings?.[i]}
   function sourceKey(kind,e){return `${kind}:${e?.uid||'slot'}`}
@@ -3201,10 +3265,13 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
     ensureLabState();const e=sourceEntry(kind,i);if(!e)return;const left=kind==='egg'?getEggLeft(i):getBreedLeft(i);if(left>0)return;
     const t=now();if(e.hatching&&e.hatching.expiresAt>t&&e.hatching.ownerId!==myUserId())return showToast(`${e.hatching.username||'Another player'} is hatching this…`);
     if(!mpActive()){openFn(i);return}
-    const lock=await claimResource(sourceKey(kind,e),15);if(!lock.acquired)return showToast(`${lock.owner_username||'Another player'} got there first!`);
-    e.hatching={ownerId:myUserId(),username:myUsername(),expiresAt:t+15000,stage:'hatching'};save();updateHatchSlot();if(kind==='breed'&&state.currentArea==='cave')renderCave();
-    // Give the authoritative host/revision system time to reject a stale simultaneous action.
-    setTimeout(()=>{const live=(kind==='egg'?state.eggs:state.breedings||[]).find(x=>x.uid===e.uid);if(live?.hatching?.ownerId===myUserId())openFn((kind==='egg'?state.eggs:state.breedings).findIndex(x=>x.uid===e.uid));},320);
+    const key=sourceKey(kind,e),lock=await claimResource(key,15);if(!lock.acquired)return showToast(`${lock.owner_username||'Another player'} got there first!`);
+    const sourceUid=e.uid;e.hatching={ownerId:myUserId(),username:myUsername(),expiresAt:t+15000,stage:'hatching'};
+    if(mpState()?.guestActive){suppressGuestProposal(()=>save());sendSharedAction('hatch-claim',{kind,sourceUid,sourceKey:key})}else save();
+    updateHatchSlot();if(kind==='breed'&&state.currentArea==='cave')renderCave();
+    // The server lock already decided the winner, so open immediately instead of waiting on a
+    // whole-world revision round trip.
+    const liveIndex=(kind==='egg'?state.eggs:state.breedings).findIndex(x=>x.uid===sourceUid);if(liveIndex>=0)openFn(liveIndex);
   }
   const rawStartMarketHatch=startMarketHatch,rawStartBreedHatch=startBreedHatch;
   startMarketHatch=function(i=0){return claimReadySource('egg',i,rawStartMarketHatch)};
@@ -3216,23 +3283,56 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
   const baseRenderCave=renderCave;
   renderCave=function(){ensureLabState();const r=baseRenderCave.apply(this,arguments);(state.breedings||[]).forEach((e,i)=>{if(!e.hatching)return;if(e.hatching.expiresAt<=now()){e.hatching=null;return}const b=document.querySelector(`[data-hatch-breed="${i}"]`),row=b?.closest('.breed-row');if(b){b.disabled=true;b.textContent='HATCHING…'}row?.querySelector('[data-skip-breed]')?.setAttribute('disabled','');const txt=document.getElementById('breedTimerText'+i);if(txt)txt.textContent=e.hatching.stage==='placing'?'Placing…':'Hatching…'});return r};
 
-  // Preserve an unplaced shared result for 10 seconds so somebody else can take over if the winner disconnects.
+  // Preserve an unplaced shared result. The owner refreshes a 10-second lease while the
+  // hatch result/placement UI is active; if they disconnect, somebody else can take over.
   const baseFinishHatch=finishHatch;
   finishHatch=function(){
-    const kind=pendingMode==='breed'?'breed':'egg',idx=kind==='egg'?(pendingContext?.eggIndex??0):(pendingContext?.breedIndex??0),src=sourceEntry(kind,idx),owner=src?.hatching?.ownerId||myUserId(),sourceUid=src?.uid||('result_'+id());
-    const r=baseFinishHatch.apply(this,arguments);
-    if(mpActive()&&state.pendingPlacement){state.sharedPlacement={id:'place_'+id(),ownerId:owner,username:src?.hatching?.username||myUsername(),type:state.pendingPlacement.type,mutations:[...(state.pendingPlacement.mutations||[])],sourceKey:sourceKey(kind,{uid:sourceUid}),expiresAt:now()+10000};sharedPlacementId=state.sharedPlacement.id;save();setTimeout(updateHatchSlot,30)}
-    setTimeout(()=>{const sell=document.getElementById('sellNewBtn');if(sell&&!sell.__labWrapped){sell.__labWrapped=true;const old=sell.onclick;sell.onclick=()=>{if(state.sharedPlacement?.id===sharedPlacementId)state.sharedPlacement=null;releaseResource(sourceKey(kind,{uid:sourceUid}));return old?.()}}},620);
+    const kind=pendingMode==='breed'?'breed':'egg',idx=kind==='egg'?(pendingContext?.eggIndex??0):(pendingContext?.breedIndex??0),src=sourceEntry(kind,idx),owner=src?.hatching?.ownerId||myUserId(),sourceUid=src?.uid||('result_'+id()),sourceLock=sourceKey(kind,{uid:sourceUid});
+    const guest=!!mpState()?.guestActive;if(guest)mpState().suppressProposal=(mpState().suppressProposal||0)+1;
+    let r;try{r=baseFinishHatch.apply(this,arguments)}finally{if(guest)mpState().suppressProposal=Math.max(0,(mpState().suppressProposal||1)-1)}
+    if(mpActive()&&state.pendingPlacement){
+      const placementId='place_'+id();state.sharedPlacement={id:placementId,ownerId:owner,username:src?.hatching?.username||myUsername(),type:state.pendingPlacement.type,mutations:[...(state.pendingPlacement.mutations||[])],sourceKey:sourceLock,stage:'result',expiresAt:now()+10000};sharedPlacementId=placementId;
+      const m=mpState();if(m){m.localPlacementId=placementId;m.localPlacementGraceUntil=Date.now()+5000}
+      if(guest){suppressGuestProposal(()=>save());sendSharedAction('hatch-finish',{kind,sourceUid,sourceKey:sourceLock,placementId,type:state.pendingPlacement.type,mutations:[...(state.pendingPlacement.mutations||[])]})}else save();
+      setTimeout(updateHatchSlot,30)
+    }
+    setTimeout(()=>{
+      const sell=document.getElementById('sellNewBtn');if(sell&&!sell.__sharedWrapped){sell.__sharedWrapped=true;const old=sell.onclick;sell.onclick=()=>{
+        const sp=state.sharedPlacement&&state.sharedPlacement.id===sharedPlacementId?{...state.sharedPlacement}:null;
+        if(!sp)return old?.();
+        if(mpState()?.guestActive){mpState().suppressProposal=(mpState().suppressProposal||0)+1;try{old?.()}finally{mpState().suppressProposal=Math.max(0,(mpState().suppressProposal||1)-1)};state.sharedPlacement=null;mpState().localPlacementGraceUntil=0;sendSharedAction('placement-sell',{placementId:sp.id});releaseResource(sp.sourceKey);updateHatchSlot();return}
+        state.sharedPlacement=null;old?.();releaseResource(sp.sourceKey);save();updateHatchSlot();
+      }}
+    },620);
     return r;
   };
   const baseBeginPlacement=beginPlacement;
-  beginPlacement=function(data){const r=baseBeginPlacement.apply(this,arguments);if(mpActive()&&state.sharedPlacement&&data&&!data.existingId&&data.type===state.sharedPlacement.type&&myUserId()===state.sharedPlacement.ownerId){state.sharedPlacement.expiresAt=now()+10000;sharedPlacementId=state.sharedPlacement.id;save()}return r};
+  beginPlacement=function(data){
+    const sp=state.sharedPlacement&&data&&!data.existingId&&data.type===state.sharedPlacement.type&&myUserId()===state.sharedPlacement.ownerId?state.sharedPlacement:null,guest=!!mpState()?.guestActive;
+    if(guest&&sp)mpState().suppressProposal=(mpState().suppressProposal||0)+1;let r;try{r=baseBeginPlacement.apply(this,arguments)}finally{if(guest&&sp)mpState().suppressProposal=Math.max(0,(mpState().suppressProposal||1)-1)}
+    if(mpActive()&&sp){sp.stage='placing';sp.expiresAt=now()+10000;sharedPlacementId=sp.id;const m=mpState();if(m){m.localPlacementId=sp.id;m.localPlacementGraceUntil=Date.now()+5000}if(guest)sendSharedAction('placement-start',{placementId:sp.id});else save()}
+    return r
+  };
   const baseAttemptPlaceAt=attemptPlaceAt;
-  attemptPlaceAt=function(){const before=placement,sp=state.sharedPlacement?{...state.sharedPlacement}:null;const r=baseAttemptPlaceAt.apply(this,arguments);if(before&&!placement&&sp&&sp.ownerId===myUserId()){state.sharedPlacement=null;releaseResource(sp.sourceKey);save();updateHatchSlot()}return r};
-  async function takeOverSharedPlacement(){const sp=state.sharedPlacement;if(!sp||sp.expiresAt>now())return;const lock=await claimResource('placement:'+sp.id,12);if(!lock.acquired)return showToast(`${lock.owner_username||'Another player'} is placing it.`);sp.ownerId=myUserId();sp.username=myUsername();sp.expiresAt=now()+10000;sharedPlacementId=sp.id;save();beginPlacement({type:sp.type,mutations:[...(sp.mutations||[])]});showToast('You took over placement.')}
+  attemptPlaceAt=function(){
+    const before=placement,sp=state.sharedPlacement?{...state.sharedPlacement}:null,guest=!!mpState()?.guestActive,oldLen=state.zoogles.length;
+    if(guest&&before&&!before.existingId&&sp?.ownerId===myUserId())mpState().suppressProposal=(mpState().suppressProposal||0)+1;let r;try{r=baseAttemptPlaceAt.apply(this,arguments)}finally{if(guest&&before&&!before.existingId&&sp?.ownerId===myUserId())mpState().suppressProposal=Math.max(0,(mpState().suppressProposal||1)-1)}
+    if(before&&!placement&&sp&&sp.ownerId===myUserId()){
+      const placed=state.zoogles.length>oldLen?state.zoogles[state.zoogles.length-1]:null;state.sharedPlacement=null;const m=mpState();if(m){m.localPlacementId=null;m.localPlacementGraceUntil=0}
+      if(guest&&placed)sendSharedAction('placement-complete',{placementId:sp.id,uid:placed.uid,area:placed.island,x:placed.x,y:placed.y});else save();releaseResource(sp.sourceKey);updateHatchSlot()
+    }
+    return r
+  };
+  async function takeOverSharedPlacement(){
+    const sp=state.sharedPlacement;if(!sp||sp.expiresAt>now())return;const lock=await claimResource('placement:'+sp.id,12);if(!lock.acquired)return showToast(`${lock.owner_username||'Another player'} is placing it.`);
+    sp.ownerId=myUserId();sp.username=myUsername();sp.stage='placing';sp.expiresAt=now()+10000;sharedPlacementId=sp.id;const m=mpState();if(m){m.localPlacementId=sp.id;m.localPlacementGraceUntil=Date.now()+5000}
+    if(m?.guestActive){suppressGuestProposal(()=>save());sendSharedAction('placement-takeover',{placementId:sp.id})}else save();beginPlacement({type:sp.type,mutations:[...(sp.mutations||[])]});showToast('You took over placement.')
+  }
 
   // Keep hatch/breeding status ids and shared server clock warm.
   setInterval(async()=>{ensureLabState();await syncServerClock();normalizeTimersToServer();if(state.currentArea==='lab')renderMutationLab();finishLabExperiment();const sp=state.sharedPlacement;if(sp&&sp.expiresAt<=now())updateHatchSlot()},500);
+  let lastPlacementHeartbeat=0;
+  setInterval(()=>{const sp=state.sharedPlacement,m=mpState();if(!mpActive()||!sp||sp.ownerId!==myUserId())return;const hatchOpen=els.hatchOverlay?.classList.contains('open'),activelyPlacing=!!(placement&&!placement.existingId);if(!hatchOpen&&!activelyPlacing)return;if(Date.now()-lastPlacementHeartbeat<2200)return;lastPlacementHeartbeat=Date.now();sp.expiresAt=now()+10000;if(m?.guestActive)sendSharedAction('placement-heartbeat',{placementId:sp.id});else{save();mpApi()?.broadcast?.()}},1000);
   setTimeout(async()=>{await syncServerClock(true);normalizeTimersToServer()},1000);
 
   // Remaining shared cooldown/timer actions also use the synchronized clock.
