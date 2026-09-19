@@ -1057,7 +1057,7 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
 body.user-reduced-motion .hatch-nest.ready .egg-shape{animation:none!important}
 </style>
 
-<script type="text/javascript" nonce="9a20c0267d044dd9895e76711ea" src="//local.adguard.org?ts=1789807764667&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000e22881f4aeebd97d5d4387d4%26fn%3Dindex%252820260918-224006%2529.html%26cd%3Dattachment%26ts%3D497168%26p%3Dfs%26cid%3D1%26sig%3D08d73a73856af72fa530e9f02913ed7e2aab9a78c559116b132f457604c2802f%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MyJ9LCB7ImJyYW5kIjoiTm90X0EgQnJhbmQiLCJ2ZXJzaW9uIjoiOCJ9LCB7ImJyYW5kIjoiQ2hyb21pdW0iLCJ2ZXJzaW9uIjoiMTUzIn1d&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="9a20c0267d044dd9895e76711ea" src="//local.adguard.org?ts=1789807764667&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
+<script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789841076336&amp;type=content-script&amp;dmn=chatgpt.com&amp;url=https%3A%2F%2Fchatgpt.com%2Fbackend-api%2Festuary%2Fcontent%3Fid%3Dfile_00000000d3c08243bae3d080c22f7625%26fn%3Dindex%252820260919-184332%2529.html%26cd%3Dattachment%26ts%3D497178%26p%3Dfs%26cid%3D1%26sig%3D3efecc8aed31c9bcbc27966b6f207483fdcc1f306c10e34d7998eb3de660c755%26v%3D0&amp;app=chrome.exe&amp;css=2&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-ua=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzE1My4wLjAuMCBTYWZhcmkvNTM3LjM2&amp;st-ch-brands=W3siYnJhbmQiOiJHb29nbGUgQ2hyb21lIiwidmVyc2lvbiI6IjE1MyJ9LCB7ImJyYW5kIjoiTm90X0EgQnJhbmQiLCJ2ZXJzaW9uIjoiOCJ9LCB7ImJyYW5kIjoiQ2hyb21pdW0iLCJ2ZXJzaW9uIjoiMTUzIn1d&amp;st-ch-mobile=ZmFsc2U=&amp;st-ch-platform=V2luZG93cw==&amp;st-push&amp;st-loc&amp;st-dnt&amp;st-1pcttl=4320"></script><script type="text/javascript" nonce="4e53bb74f069429eb1392230e02" src="//local.adguard.org?ts=1789841076336&amp;name=AdGuard%20Extra&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
 <body>
 <div id="game">
   <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
@@ -2456,6 +2456,7 @@ const ZOOGLE_CLOUD_CONFIG={
   function areaLabel(id){return ({main:'Main Island',rocky:'Rocky Island',storage:'Storage Cliffs',tribal:'Tribal Island'})[id]||id}
   function renderPassport(){
     ensurePassportUi();const c=document.getElementById('passportContent');if(!c)return;
+    if(window.ZoogleMultiplayer?.guestActive&&window.ZoogleMultiplayer?.renderGuestPassport){window.ZoogleMultiplayer.renderGuestPassport(c);return}
     if(visitorMode){
       const meta=visitorMeta||{name:DEFAULT_ISLAND_NAME,likes:0,visits:0,liked:false};
       const buttons=visitorAreaIds().map(id=>`<button class="passport-island-btn ${state.currentArea===id?'active':''}" type="button" data-visit-area="${id}">${escapeHtml(areaLabel(id))}</button>`).join('');
@@ -2476,7 +2477,7 @@ const ZOOGLE_CLOUD_CONFIG={
   }
   async function openPassport(){
     ensurePassportUi();renderPassport();openModal('islandPassportModal');
-    if(!visitorMode){await refreshHomeMeta();renderPassport()}
+    if(!visitorMode&&!window.ZoogleMultiplayer?.guestActive){await refreshHomeMeta();renderPassport()}
   }
   function setVisitError(msg){const e=document.getElementById('visitCodeError');if(e)e.textContent=msg}
 
@@ -2535,14 +2536,14 @@ const ZOOGLE_CLOUD_CONFIG={
     }catch(e){console.warn('Passport refresh failed',e);cloudStatus='error';refreshSettingsIslandRow()}
   }
   async function publishCloudNow(){
-    if(!cloudConfigured()||visitorMode||deletingSave)return;if(!cloudReserved&&!(await ensureCloudWorld()))return;
+    if(!cloudConfigured()||visitorMode||deletingSave||window.ZoogleMultiplayer?.guestActive)return;if(!cloudReserved&&!(await ensureCloudWorld()))return;
     const snapshot=createPublicSnapshot(),name=sanitizeIslandName(state.islandName),encoded=JSON.stringify({snapshot,name});if(encoded===lastPublishedState)return;
     try{
       const client=await getCloudClient();const q=await client.from(CLOUD_TABLE).update({snapshot,island_name:name,updated_at:new Date().toISOString()}).eq('code',state.islandCode).eq('owner_id',cloudUserId);
       if(q.error)throw q.error;lastPublishedState=encoded;cloudStatus='online';refreshSettingsIslandRow();
     }catch(e){console.warn('Island publish failed',e);cloudStatus='error';refreshSettingsIslandRow()}
   }
-  function scheduleCloudPublish(){if(!cloudConfigured()||visitorMode||deletingSave)return;clearTimeout(cloudTimer);cloudTimer=setTimeout(publishCloudNow,1400)}
+  function scheduleCloudPublish(){if(!cloudConfigured()||visitorMode||deletingSave||window.ZoogleMultiplayer?.guestActive)return;clearTimeout(cloudTimer);cloudTimer=setTimeout(publishCloudNow,1400)}
   async function saveIslandName(){
     if(visitorMode)return;const input=document.getElementById('passportNameInput');const name=sanitizeIslandName(input?.value);
     state.islandName=name;originalSave();lastPublishedState='';await publishCloudNow();await refreshHomeMeta();renderPassport();showToast('Island name saved!');
@@ -2603,11 +2604,11 @@ const ZOOGLE_CLOUD_CONFIG={
     try{const client=await getCloudClient();await client?.auth?.signOut?.()}catch(e){console.warn('Could not clear anonymous session during reset',e)}
     safeStorage.removeItem(SAVE_KEY);for(const k of OLD_KEYS)safeStorage.removeItem(k);location.reload();
   }
-  function requestFullReset(){showConfirm({title:'Reset Progress?',body:`Are you sure you want to delete your save?<br><strong>This permanently erases your Island Code ${escapeHtml(state.islandCode||'')} and Island Passport too.</strong>`,okText:'Reset Save',danger:true,onOk:performFullReset})}
+  function requestFullReset(){if(window.ZoogleMultiplayer?.guestActive){showToast('Return home before resetting your save.');return}showConfirm({title:'Reset Progress?',body:`Are you sure you want to delete your save?<br><strong>This permanently erases your Island Code ${escapeHtml(state.islandCode||'')} and Island Passport too.</strong>`,okText:'Reset Save',danger:true,onOk:performFullReset})}
 
   const originalSave=save;try{window.removeEventListener('beforeunload',originalSave)}catch(e){}
   save=function(){if(visitorMode||deletingSave)return;const out=originalSave.apply(this,arguments);scheduleCloudPublish();return out};
-  window.addEventListener('beforeunload',()=>{if(!visitorMode&&!deletingSave)originalSave()});
+  window.addEventListener('beforeunload',()=>{if(!visitorMode&&!deletingSave&&!window.ZoogleMultiplayer?.guestActive)originalSave()});
   const originalSwitchArea=switchArea;switchArea=function(dir){if(visitorMode)return visitorSwitchArea(dir);return originalSwitchArea.apply(this,arguments)};
 
   document.addEventListener('click',e=>{
@@ -2625,7 +2626,7 @@ const ZOOGLE_CLOUD_CONFIG={
   window.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key.toLowerCase()==='d'){e.preventDefault();e.stopImmediatePropagation();requestFullReset()}},true);
   if(window.ZoogleDebug)window.ZoogleDebug.reset=()=>requestFullReset();
   if(cloudConfigured())setTimeout(async()=>{await ensureCloudWorld();scheduleCloudPublish()},350);
-  window.ZoogleIslandSharing={generateIslandCode,validIslandCode,get code(){return state.islandCode},get visiting(){return visitorMode},open:openPassport,returnHome,publish:publishCloudNow,refreshPassport:refreshHomeMeta};
+  window.ZoogleIslandSharing={generateIslandCode,validIslandCode,get code(){return state.islandCode},get visiting(){return visitorMode},open:openPassport,returnHome,publish:publishCloudNow,refreshPassport:refreshHomeMeta,getClient:getCloudClient,ensureAuth:ensureCloudAuth};
 })();
 </script>
 
@@ -2716,5 +2717,261 @@ const ZOOGLE_CLOUD_CONFIG={
 })();
 </script>
 
+\n<!-- === ZOOGLE WORLD MULTIPLAYER V1 === -->
+<style id="zoogle-multiplayer-v1-style">
+.mp-username-input{width:min(260px,100%);padding:10px 12px;border-radius:13px;border:3px solid #8d5927;background:#fff9df;color:#35220f;font-weight:1000;font-size:16px;outline:none}
+.mp-username-input:focus{border-color:#3199c7;box-shadow:0 0 0 4px rgba(70,190,230,.2)}
+.mp-request-badge{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;margin-left:5px;border-radius:999px;background:#d44242;color:#fff;font-size:11px;font-weight:1000;vertical-align:middle}
+.mp-request-badge:empty{display:none}
+.passport-actions.mp-home-actions{grid-template-columns:repeat(3,minmax(0,1fr))}
+.mp-waiting-card{margin-top:10px;padding:11px;border-radius:15px;background:rgba(101,190,235,.14);border:2px solid rgba(49,112,151,.3);font-weight:900;text-align:center}
+.mp-waiting-card .small-note{margin:5px 0 8px}
+.mp-request-list{display:grid;gap:9px}.mp-request-item{padding:12px;border-radius:16px;background:rgba(255,255,255,.45);border:3px solid rgba(104,62,25,.22)}
+.mp-request-top{display:flex;justify-content:space-between;gap:10px;align-items:center}.mp-request-name{font-weight:1000;font-size:18px;overflow-wrap:anywhere}.mp-request-time{font-size:12px;opacity:.67;font-weight:900}
+.mp-request-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}.mp-empty{text-align:center;padding:16px;font-weight:900;opacity:.72}
+.mp-live-info{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:9px 0 0}.mp-live-chip{padding:5px 9px;border-radius:999px;background:rgba(63,161,92,.13);border:2px solid rgba(48,130,70,.25);font-size:12px;font-weight:1000}
+#mpCursorLayer{position:fixed;inset:0;z-index:119;pointer-events:none;overflow:hidden}
+.mp-cursor{position:fixed;transform:translate(-50%,-54%);transition:left .07s linear,top .07s linear;will-change:left,top;filter:drop-shadow(0 4px 4px rgba(0,0,0,.25));max-width:130px;text-align:center}
+.mp-cursor-name,.mp-off-name{display:block;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;font-weight:1000;color:#fff;text-shadow:0 2px 2px rgba(0,0,0,.75);margin-bottom:2px}
+.mp-zhead{position:relative;display:block;width:32px;height:32px;margin:auto;border-radius:50%;background:radial-gradient(circle at 30% 24%,#fff,#deded4 58%,#b3b3aa);border:2px solid rgba(59,49,35,.55);box-shadow:inset 5px 5px 6px rgba(255,255,255,.34),inset -5px -6px 6px rgba(0,0,0,.13),0 0 0 3px var(--mp-ring,#5fd3ff)}
+.mp-zhead .mp-eye{position:absolute;top:12px;width:4px;height:5px;border-radius:50%;background:#282219}.mp-zhead .mp-eye.left{left:8px}.mp-zhead .mp-eye.right{right:8px}.mp-zhead .mp-mouth{position:absolute;left:50%;top:19px;width:10px;height:5px;transform:translateX(-50%);border-bottom:2px solid rgba(40,34,25,.65);border-radius:50%}
+.mp-arrow-presence{position:fixed;z-index:118;display:flex;align-items:flex-start;justify-content:center;gap:5px;pointer-events:none;transform:translateX(-50%);max-width:min(210px,42vw)}
+.mp-off-player{width:54px;text-align:center;filter:drop-shadow(0 3px 3px rgba(0,0,0,.22))}.mp-off-player .mp-zhead{width:25px;height:25px}.mp-off-player .mp-zhead .mp-eye{top:9px;width:3px;height:4px}.mp-off-player .mp-zhead .mp-eye.left{left:6px}.mp-off-player .mp-zhead .mp-eye.right{right:6px}.mp-off-player .mp-zhead .mp-mouth{top:15px;width:8px;height:4px}
+.mp-off-name{font-size:9px;max-width:54px;margin-top:2px;margin-bottom:0}.mp-more{margin-top:23px;padding:4px 7px;border-radius:999px;background:rgba(28,43,57,.9);border:2px solid rgba(255,255,255,.5);color:#fff;font-size:10px;font-weight:1000}
+#mpLiveBadge{position:absolute;right:-5px;top:-6px;display:none;min-width:19px;height:19px;padding:0 4px;border-radius:999px;background:#48b85b;border:2px solid #fff;color:#fff;font-size:10px;font-weight:1000;place-items:center;box-shadow:0 2px 5px rgba(0,0,0,.25)}
+#worldVisitBtn{position:fixed}body.mp-live #mpLiveBadge{display:grid}
+body.mp-guest #visitorBanner{display:flex}body.mp-guest #visitorBannerText::before{content:'LIVE • '}
+body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons{display:flex!important}body.mp-guest #hatchSlot{display:block}body.mp-guest .weather-banner{display:block}
+.mp-guest-passport-note{margin:9px 0;padding:9px;border-radius:13px;background:rgba(75,180,100,.12);border:2px solid rgba(48,130,70,.24);font-weight:900}
+@media(max-width:900px),(pointer:coarse){.passport-actions.mp-home-actions{grid-template-columns:1fr 1fr}.passport-actions.mp-home-actions #mpRequestsBtn{grid-column:1/-1}.mp-cursor-name{font-size:10px}.mp-zhead{width:29px;height:29px}.mp-arrow-presence{max-width:46vw}}
+@media(max-width:560px){.mp-request-actions{grid-template-columns:1fr}.mp-off-player{width:47px}.mp-off-name{max-width:47px;font-size:8px}.mp-more{padding:3px 6px}}
+</style>
+<script id="zoogle-multiplayer-v1-script">
+(()=>{
+  const MP_USERNAME_KEY='zoogleWorldUsernameV1';
+  const MP_MAX_PLAYERS=4;
+  const mp={role:null,active:false,guestActive:false,sessionId:null,revision:0,userId:null,hostUsername:'',islandCode:'',islandName:'',homeState:null,homeArea:'main',channel:null,presences:new Map(),cursors:new Map(),requests:[],pendingRequest:null,hostCommitBusy:false,hostCommitQueued:false,applying:false,lastHostSerialized:'',lastGuestSerialized:'',hostMissingTimer:0,available:true};
+  let mpHeartbeatTimer=0,requestPollTimer=0,pendingPollTimer=0,cursorLastSent=0,presenceQueued=0,guestHealthTimer=0;
+  const baseSave=save,baseTickZoogles=tickZoogles,baseRenderArea=renderArea;
+
+  function clone(v){try{return structuredClone(v)}catch(e){return JSON.parse(JSON.stringify(v))}}
+  function usernameFallback(){return 'Player'+String(Math.floor(Math.random()*10000)).padStart(4,'0')}
+  function sanitizeUsername(v){let s=String(v||'').replace(/[^A-Za-z0-9 _-]/g,'').replace(/\s+/g,' ').trim().slice(0,16);return s||usernameFallback()}
+  function getUsername(){let u=sanitizeUsername(safeStorage.getItem(MP_USERNAME_KEY)||'');if(!safeStorage.getItem(MP_USERNAME_KEY))safeStorage.setItem(MP_USERNAME_KEY,u);return u}
+  function setUsername(v){const u=sanitizeUsername(v);safeStorage.setItem(MP_USERNAME_KEY,u);return u}
+  function rowOf(data){return Array.isArray(data)?data[0]:data}
+  async function clientAndUser(){const api=window.ZoogleIslandSharing;if(!api?.getClient||!api?.ensureAuth)throw new Error('Island sharing is not ready');const client=await api.getClient(),user=await api.ensureAuth();if(!client||!user)throw new Error('Could not connect');mp.userId=user.id;return{client,user}}
+  function multiplayerUnavailable(e){const m=String(e?.message||e||'');return /zoogle_mp_|function .* does not exist|Could not find the function/i.test(m)}
+
+  function buildSharedSnapshot(){
+    const snap=clone(state);snap.currentArea='main';snap.breedSelect={p1:null,p2:null};snap.pendingPlacement=null;return snap;
+  }
+  function areaAvailableIn(s,id){if(id==='main'||id==='cave')return id!=='cave'||!!s.breedingUnlocked;if(id==='rocky')return !!s.rockyUnlocked;if(id==='storage')return !!s.storageCliffsUnlocked;if(id==='tribal')return !!s.tribalUnlocked;return false}
+  function refreshOpenUi(){
+    renderAll();
+    if(document.getElementById('shopModal')?.classList.contains('open'))renderShop();
+    if(document.getElementById('bookModal')?.classList.contains('open'))renderBook();
+    if(document.getElementById('questsModal')?.classList.contains('open')){const active=document.querySelector('[data-quest-tab].active')?.dataset.questTab||'daily';renderQuests(active)}
+    if(state.currentArea==='cave')renderCave();
+  }
+  function applySharedSnapshot(snapshot,protectIdentity=false){
+    if(!snapshot||typeof snapshot!=='object')return;
+    const keepArea=state.currentArea,keepBreed=clone(state.breedSelect||{p1:null,p2:null}),keepPending=state.pendingPlacement?clone(state.pendingPlacement):null,keepCode=state.islandCode,keepName=state.islandName;
+    mp.applying=true;
+    try{
+      state=clone(snapshot);normalizeV5State();ensureV6State.done=false;ensureV6State();
+      state.currentArea=areaAvailableIn(state,keepArea)?keepArea:'main';state.breedSelect=keepBreed;state.pendingPlacement=keepPending;
+      if(protectIdentity){state.islandCode=keepCode;state.islandName=keepName}
+      closeZoogleMenu();refreshOpenUi();
+    }finally{mp.applying=false}
+  }
+
+  function ensureUsernameRow(){
+    const c=document.getElementById('settingsContent');if(!c)return;
+    let row=document.getElementById('multiplayerUsernameRow');
+    if(!row){
+      row=document.createElement('div');row.id='multiplayerUsernameRow';row.className='settings-row';
+      row.innerHTML=`<div><strong>Username</strong><div class="small-note">Used for multiplayer join requests and live player names. Letters, numbers, spaces, _ and - only.</div></div><div class="settings-controls"><input id="multiplayerUsernameInput" class="mp-username-input" maxlength="16" autocomplete="off" spellcheck="false"><button id="multiplayerUsernameSave" class="green-btn" type="button">SAVE</button></div>`;
+      const islandRow=c.querySelector('#islandCodeSettingsRow'),danger=c.querySelector('.settings-danger');if(islandRow)c.insertBefore(row,islandRow);else if(danger)c.insertBefore(row,danger);else c.appendChild(row);
+      row.querySelector('#multiplayerUsernameSave').onclick=async()=>{const input=row.querySelector('#multiplayerUsernameInput'),u=setUsername(input.value);input.value=u;showToast('Username saved!');await refreshIdentityLive()};
+      row.querySelector('#multiplayerUsernameInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();row.querySelector('#multiplayerUsernameSave').click()}});
+    }
+    row.querySelector('#multiplayerUsernameInput').value=getUsername();
+    if(mp.guestActive){const code=document.getElementById('islandCodeValue');if(code&&mp.homeState?.islandCode)code.textContent=mp.homeState.islandCode;const cloud=document.getElementById('islandCloudState');if(cloud)cloud.textContent=`Live in ${mp.islandName||'another island'} • your home save is safe`;}
+  }
+  const settingsObserver=new MutationObserver(()=>setTimeout(ensureUsernameRow,0));
+  const settingsContent=document.getElementById('settingsContent');if(settingsContent)settingsObserver.observe(settingsContent,{childList:true,subtree:false});
+  document.getElementById('settingsBtn')?.addEventListener('click',()=>setTimeout(ensureUsernameRow,0));
+
+  function ensureMultiplayerUi(){
+    const worldBtn=document.getElementById('worldVisitBtn');if(worldBtn&&!document.getElementById('mpLiveBadge')){const badge=document.createElement('span');badge.id='mpLiveBadge';worldBtn.appendChild(badge)}
+    if(!document.getElementById('mpCursorLayer')){const l=document.createElement('div');l.id='mpCursorLayer';document.body.appendChild(l)}
+    if(!document.getElementById('mpLeftPlayers')){const l=document.createElement('div');l.id='mpLeftPlayers';l.className='mp-arrow-presence';document.body.appendChild(l);const r=document.createElement('div');r.id='mpRightPlayers';r.className='mp-arrow-presence';document.body.appendChild(r)}
+    if(!document.getElementById('multiplayerRequestsModal')){
+      const m=document.createElement('div');m.id='multiplayerRequestsModal';m.className='modal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label','Multiplayer Requests');m.setAttribute('aria-hidden','true');
+      m.innerHTML=`<div class="modal-card" style="width:min(560px,95vw)"><button class="close-x" type="button" aria-label="Close">×</button><h2 class="modal-title">Join Requests</h2><div id="multiplayerRequestsContent" class="mp-request-list"></div></div>`;
+      document.body.appendChild(m);m.querySelector('.close-x').onclick=()=>closeModal('multiplayerRequestsModal');m.addEventListener('pointerdown',e=>{if(e.target===m)closeModal('multiplayerRequestsModal')});
+    }
+  }
+  function requestCount(){return mp.requests.length}
+  function updateRequestBadge(){const b=document.getElementById('mpRequestsBadge');if(!b)return;const t=requestCount()?String(requestCount()):'';if(b.textContent!==t)b.textContent=t}
+  function augmentPassport(){
+    const c=document.getElementById('passportContent');if(!c||mp.guestActive)return;
+    const copy=document.getElementById('passportCopyBtn');if(copy){const actions=copy.parentElement;actions?.classList.add('mp-home-actions');if(actions&&!document.getElementById('mpRequestsBtn')){const b=document.createElement('button');b.id='mpRequestsBtn';b.className='purple-btn';b.type='button';b.innerHTML=`REQUESTS <span id="mpRequestsBadge" class="mp-request-badge"></span>`;b.onclick=()=>{renderRequestsModal();openModal('multiplayerRequestsModal')};actions.appendChild(b)}updateRequestBadge();}
+    const visit=document.getElementById('visitCodeGo');if(visit&&visit.parentElement&&!document.getElementById('mpRequestJoinBtn')){visit.parentElement.classList.remove('one');const b=document.createElement('button');b.id='mpRequestJoinBtn';b.className='purple-btn';b.type='button';b.textContent='REQUEST TO JOIN';b.onclick=requestJoinByCode;visit.parentElement.appendChild(b)}
+    renderPendingJoinCard();
+    if(mp.role==='host'&&mp.active&&!document.getElementById('mpHostLiveInfo')){const card=c.querySelector('.passport-card');if(card){const d=document.createElement('div');d.id='mpHostLiveInfo';d.className='mp-live-info';d.innerHTML=`<span class="mp-live-chip">LIVE ${Math.min(MP_MAX_PLAYERS,Math.max(1,mp.presences.size||1))}/${MP_MAX_PLAYERS}</span><span class="mp-live-chip">${escapeHtml(getUsername())}</span>`;card.appendChild(d)}}
+  }
+  function renderPendingJoinCard(){
+    const input=document.getElementById('visitCodeInput');if(!input)return;let card=document.getElementById('mpWaitingCard');
+    if(!mp.pendingRequest){card?.remove();return}
+    if(!card){card=document.createElement('div');card.id='mpWaitingCard';card.className='mp-waiting-card';input.closest('.passport-section')?.appendChild(card)}
+    const key=[mp.pendingRequest.id,mp.pendingRequest.islandName,mp.pendingRequest.hostOnline].join('|');if(card.dataset.key===key)return;card.dataset.key=key;
+    card.innerHTML=`Waiting for <strong>${escapeHtml(mp.pendingRequest.islandName||mp.pendingRequest.code)}</strong> to accept…<div class="small-note">${mp.pendingRequest.hostOnline?'Host is online.':'Host may be offline. Requests expire after 5 minutes.'}</div><button id="mpCancelRequest" class="red-btn" type="button">CANCEL REQUEST</button>`;
+    card.querySelector('#mpCancelRequest').onclick=cancelPendingRequest;
+  }
+  const passportObserver=new MutationObserver(()=>setTimeout(augmentPassport,0));
+  function watchPassport(){const c=document.getElementById('passportContent');if(c)passportObserver.observe(c,{childList:true,subtree:true})}
+
+  function renderGuestPassport(c){
+    const people=[...mp.presences.values()].filter(p=>p.user_id!==mp.userId);const names=people.map(p=>p.username).filter(Boolean);
+    c.innerHTML=`<div class="passport-card"><div class="passport-name">${escapeHtml(mp.islandName||'Zoogle Island')}</div><div class="passport-code">${escapeHtml(mp.islandCode||'')}</div><div class="mp-guest-passport-note">Live multiplayer with <strong>${escapeHtml(mp.hostUsername||'Host')}</strong></div><div class="mp-live-info"><span class="mp-live-chip">LIVE ${Math.min(MP_MAX_PLAYERS,Math.max(1,mp.presences.size||1))}/${MP_MAX_PLAYERS}</span>${names.slice(0,3).map(n=>`<span class="mp-live-chip">${escapeHtml(n)}</span>`).join('')}</div></div><div class="passport-section"><p class="visit-code-note">Coins, gems, Zoogles, eggs, upgrades, breeding, quests and weather are shared while you are in this world. Your own save stays separate.</p><div class="passport-actions one"><button id="mpGuestReturnHome" class="wood-btn" type="button">RETURN HOME</button></div></div>`;
+    c.querySelector('#mpGuestReturnHome').onclick=()=>{closeModal('islandPassportModal');leaveGuestSession('Welcome home!')};
+  }
+
+  async function requestJoinByCode(){
+    const input=document.getElementById('visitCodeInput'),error=document.getElementById('visitCodeError'),button=document.getElementById('mpRequestJoinBtn');const code=(input?.value||'').trim();if(error)error.textContent='';
+    if(!window.ZoogleIslandSharing?.validIslandCode?.(code)){if(error)error.textContent='Invalid code';return}
+    if(code===state.islandCode){if(error)error.textContent='That is your Island Code';return}
+    if(mp.pendingRequest){if(error)error.textContent='You already have a join request waiting';return}
+    button.disabled=true;button.textContent='SENDING…';
+    try{
+      const {client}=await clientAndUser();const res=await client.rpc('zoogle_mp_request_join',{p_code:code,p_username:getUsername()});if(res.error)throw res.error;const row=rowOf(res.data);if(!row?.request_id){if(error)error.textContent='Invalid code';return}
+      mp.pendingRequest={id:row.request_id,code,islandName:row.island_name||code,hostOnline:!!row.host_online};renderPendingJoinCard();startPendingPoll();showToast('Join request sent!');
+    }catch(e){console.warn('Join request failed',e);if(error)error.textContent=multiplayerUnavailable(e)?'Multiplayer database update not installed yet':'Could not send request right now'}
+    finally{button.disabled=false;button.textContent='REQUEST TO JOIN'}
+  }
+  async function cancelPendingRequest(){const p=mp.pendingRequest;if(!p)return;try{const {client}=await clientAndUser();await client.rpc('zoogle_mp_cancel_request',{p_request_id:p.id})}catch(e){}mp.pendingRequest=null;clearInterval(pendingPollTimer);pendingPollTimer=0;renderPendingJoinCard();showToast('Join request cancelled.')}
+  function startPendingPoll(){clearInterval(pendingPollTimer);pendingPollTimer=setInterval(checkPendingRequest,1400);checkPendingRequest()}
+  async function checkPendingRequest(){
+    if(!mp.pendingRequest||mp.guestActive)return;
+    try{const {client}=await clientAndUser();const res=await client.rpc('zoogle_mp_check_request',{p_request_id:mp.pendingRequest.id});if(res.error)throw res.error;const row=rowOf(res.data);if(!row)return;
+      if(row.status==='accepted'&&row.session_id&&row.snapshot){const pending=mp.pendingRequest;mp.pendingRequest=null;clearInterval(pendingPollTimer);pendingPollTimer=0;await joinGuestSession(row,pending);return}
+      if(['declined','expired','cancelled','left'].includes(row.status)){const msg=row.status==='declined'?'Join request declined.':row.status==='expired'?'Join request expired.':'Join request ended.';mp.pendingRequest=null;clearInterval(pendingPollTimer);pendingPollTimer=0;renderPendingJoinCard();showToast(msg)}
+    }catch(e){console.warn('Request status failed',e)}
+  }
+
+  async function renderRequestsModal(){ensureMultiplayerUi();const c=document.getElementById('multiplayerRequestsContent');if(!c)return;if(!mp.requests.length){c.innerHTML='<div class="mp-empty">No pending requests.</div>';return}const now=Date.now();c.innerHTML=mp.requests.map(r=>{const age=Math.max(0,Math.floor((now-new Date(r.created_at).getTime())/1000));return `<div class="mp-request-item"><div class="mp-request-top"><span class="mp-request-name">${escapeHtml(r.username)}</span><span class="mp-request-time">${age<60?age+'s':Math.floor(age/60)+'m'} ago</span></div><div class="mp-request-actions"><button class="green-btn" data-mp-accept="${r.request_id}">ACCEPT</button><button class="red-btn" data-mp-decline="${r.request_id}">DECLINE</button></div></div>`}).join('');c.querySelectorAll('[data-mp-accept]').forEach(b=>b.onclick=()=>respondRequest(b.dataset.mpAccept,true));c.querySelectorAll('[data-mp-decline]').forEach(b=>b.onclick=()=>respondRequest(b.dataset.mpDecline,false))}
+  async function pollRequests(){
+    if(mp.guestActive||window.ZoogleIslandSharing?.visiting||!state.islandCode)return;
+    try{const {client}=await clientAndUser();const res=await client.rpc('zoogle_mp_list_requests',{p_code:state.islandCode});if(res.error)throw res.error;mp.requests=Array.isArray(res.data)?res.data:[];updateRequestBadge();if(document.getElementById('multiplayerRequestsModal')?.classList.contains('open'))renderRequestsModal()}catch(e){if(multiplayerUnavailable(e))mp.available=false}
+  }
+  async function respondRequest(id,accept){
+    try{await ensureHostSession();const {client}=await clientAndUser();const res=await client.rpc('zoogle_mp_respond_request',{p_request_id:id,p_accept:!!accept});if(res.error)throw res.error;showToast(accept?'Player accepted!':'Request declined.');await pollRequests()}catch(e){console.warn('Request response failed',e);showToast(String(e?.message||'Could not respond to request').includes('full')?'World is full.':'Could not respond right now.')}
+  }
+
+  async function ensureHostSession(){
+    if(mp.guestActive||window.ZoogleIslandSharing?.visiting||!state.islandCode)return false;
+    try{
+      const {client,user}=await clientAndUser();const res=await client.rpc('zoogle_mp_host_heartbeat',{p_code:state.islandCode,p_username:getUsername(),p_snapshot:buildSharedSnapshot()});if(res.error)throw res.error;const row=rowOf(res.data);if(!row?.session_id)return false;
+      const changed=mp.sessionId!==row.session_id||mp.role!=='host';mp.role='host';mp.active=true;mp.guestActive=false;mp.sessionId=row.session_id;mp.revision=Number(row.revision)||0;mp.islandCode=state.islandCode;mp.islandName=state.islandName||'Zoogle Island';mp.hostUsername=getUsername();mp.available=true;
+      document.body.classList.add('mp-live');document.body.classList.remove('mp-guest');if(changed)await connectRealtime();updateLiveBadge();return true;
+    }catch(e){if(multiplayerUnavailable(e)){mp.available=false;console.warn('Multiplayer SQL update is not installed yet.',e)}else console.warn('Host multiplayer heartbeat failed',e);return false}
+  }
+  async function refreshIdentityLive(){if(mp.role==='host')await ensureHostSession();if(mp.active){await memberHeartbeat();await trackPresence(true)}}
+  async function memberHeartbeat(){if(!mp.sessionId)return;try{const {client}=await clientAndUser();await client.rpc('zoogle_mp_member_heartbeat',{p_session_id:mp.sessionId,p_username:getUsername()})}catch(e){}}
+
+  async function connectRealtime(){
+    if(!mp.sessionId)return;const {client}=await clientAndUser();if(mp.channel){try{await mp.channel.untrack()}catch(e){}try{await client.removeChannel(mp.channel)}catch(e){}}
+    const ch=client.channel('zoogle-mp:'+mp.sessionId,{config:{broadcast:{self:false,ack:false},presence:{key:mp.userId}}});mp.channel=ch;
+    ch.on('broadcast',{event:'cursor'},({payload})=>receiveCursor(payload));
+    ch.on('broadcast',{event:'state'},({payload})=>receiveAuthoritativeState(payload));
+    ch.on('broadcast',{event:'state-proposal'},({payload})=>receiveStateProposal(payload));
+    ch.on('broadcast',{event:'state-reject'},({payload})=>receiveStateReject(payload));
+    ch.on('broadcast',{event:'need-state'},()=>{if(mp.role==='host')broadcastState()});
+    ch.on('presence',{event:'sync'},syncPresence).on('presence',{event:'join'},syncPresence).on('presence',{event:'leave'},syncPresence);
+    ch.subscribe(async status=>{if(status==='SUBSCRIBED'){await memberHeartbeat();await trackPresence(true);if(mp.role==='guest')ch.send({type:'broadcast',event:'need-state',payload:{user_id:mp.userId}});else{broadcastState();scheduleHostCommit()}}});
+  }
+  async function trackPresence(force=false){if(!mp.channel||!mp.active)return;clearTimeout(presenceQueued);const run=async()=>{try{await mp.channel.track({user_id:mp.userId,username:getUsername(),area:state.currentArea,role:mp.role,online_at:new Date().toISOString()})}catch(e){}};if(force)return run();presenceQueued=setTimeout(run,80)}
+  function syncPresence(){
+    if(!mp.channel)return;const raw=mp.channel.presenceState(),next=new Map();Object.values(raw||{}).forEach(arr=>(arr||[]).forEach(p=>{if(p?.user_id)next.set(p.user_id,p)}));mp.presences=next;renderRemotePlayers();updateLiveBadge();
+    if(mp.guestActive){const hostPresent=[...next.values()].some(p=>p.role==='host');if(hostPresent){clearTimeout(mp.hostMissingTimer);mp.hostMissingTimer=0}else if(!mp.hostMissingTimer){mp.hostMissingTimer=setTimeout(()=>{if(mp.guestActive&&!([...mp.presences.values()].some(p=>p.role==='host')))leaveGuestSession('Host disconnected.')},12000)}}
+  }
+  function updateLiveBadge(){const b=document.getElementById('mpLiveBadge');if(!b)return;const count=Math.max(1,mp.presences.size||1);b.textContent=String(count);document.body.classList.toggle('mp-live',!!mp.active)}
+
+  function userRing(id){let h=0;for(const c of String(id||''))h=(h*31+c.charCodeAt(0))>>>0;return `hsl(${h%360} 75% 58%)`}
+  function zHeadHtml(){return `<span class="mp-zhead"><i class="mp-eye left"></i><i class="mp-eye right"></i><i class="mp-mouth"></i></span>`}
+  function receiveCursor(p){if(!p||p.user_id===mp.userId)return;mp.cursors.set(p.user_id,{...p,seen:Date.now()});renderRemotePlayers()}
+  function currentPlayers(){const out=[];for(const [id,p] of mp.presences){if(id===mp.userId)continue;const cur=mp.cursors.get(id)||{};out.push({user_id:id,username:p.username||cur.username||'Player',area:p.area||cur.area||'main',x:Number.isFinite(cur.x)?cur.x:.5,y:Number.isFinite(cur.y)?cur.y:.5})}return out}
+  function areaDirection(from,to){const ids=AREAS.map(a=>a.id),a=ids.indexOf(from),b=ids.indexOf(to);if(a<0||b<0||a===b)return null;const n=ids.length,f=(b-a+n)%n,back=(a-b+n)%n;return f<=back?'right':'left'}
+  function renderRemotePlayers(){
+    ensureMultiplayerUi();const layer=document.getElementById('mpCursorLayer'),left=[],right=[];if(!layer)return;layer.innerHTML='';
+    currentPlayers().forEach(p=>{if(p.area===state.currentArea){const el=document.createElement('div');el.className='mp-cursor';el.style.left=(Math.max(0,Math.min(1,p.x))*100)+'vw';el.style.top=(Math.max(0,Math.min(1,p.y))*100)+'vh';el.style.setProperty('--mp-ring',userRing(p.user_id));el.innerHTML=`<span class="mp-cursor-name">${escapeHtml(p.username)}</span>${zHeadHtml()}`;layer.appendChild(el)}else{const d=areaDirection(state.currentArea,p.area);if(d==='left')left.push(p);else if(d==='right')right.push(p)}});
+    renderArrowPlayers('mpLeftPlayers',left);renderArrowPlayers('mpRightPlayers',right);positionArrowPlayers();
+  }
+  function renderArrowPlayers(id,list){const el=document.getElementById(id);if(!el)return;const shown=list.slice(0,2);el.innerHTML=shown.map(p=>`<span class="mp-off-player" style="--mp-ring:${userRing(p.user_id)}">${zHeadHtml()}<span class="mp-off-name">${escapeHtml(p.username)}</span></span>`).join('')+(list.length>2?`<span class="mp-more">+${list.length-2}</span>`:'');el.style.display=list.length?'flex':'none'}
+  function positionArrowPlayers(){[['mpLeftPlayers','prevArea'],['mpRightPlayers','nextArea']].forEach(([id,bid])=>{const el=document.getElementById(id),b=document.getElementById(bid);if(!el||!b)return;const r=b.getBoundingClientRect();el.style.left=(r.left+r.width/2)+'px';el.style.top=(r.bottom+5)+'px'})}
+  function sendCursor(x,y){if(!mp.active||!mp.channel)return;const now=performance.now();if(now-cursorLastSent<48)return;cursorLastSent=now;mp.channel.send({type:'broadcast',event:'cursor',payload:{user_id:mp.userId,username:getUsername(),area:state.currentArea,x:Math.max(0,Math.min(1,x)),y:Math.max(0,Math.min(1,y))}})}
+  window.addEventListener('pointermove',e=>sendCursor(e.clientX/innerWidth,e.clientY/innerHeight),{passive:true});window.addEventListener('pointerdown',e=>sendCursor(e.clientX/innerWidth,e.clientY/innerHeight),{passive:true});
+  document.addEventListener('focusin',e=>{if(!mp.active)return;const r=e.target?.getBoundingClientRect?.();if(r&&r.width&&r.height)sendCursor((r.left+r.width/2)/innerWidth,(r.top+r.height/2)/innerHeight)});
+  window.addEventListener('resize',()=>{positionArrowPlayers();renderRemotePlayers()});
+
+  async function hostPersistAndBroadcast(snapshot){
+    if(mp.role!=='host'||!mp.sessionId)return;if(mp.hostCommitBusy){mp.hostCommitQueued=true;return}mp.hostCommitBusy=true;
+    try{const {client}=await clientAndUser();const res=await client.rpc('zoogle_mp_host_save',{p_session_id:mp.sessionId,p_snapshot:snapshot,p_expected_revision:mp.revision});if(res.error)throw res.error;const row=rowOf(res.data);mp.revision=Number(row?.revision)||mp.revision+1;mp.lastHostSerialized=JSON.stringify(snapshot);broadcastState(snapshot)}
+    catch(e){console.warn('Shared world save failed',e);if(String(e?.message||'').includes('REVISION_CONFLICT')){try{const {client}=await clientAndUser();const r=await client.rpc('zoogle_mp_get_session',{p_session_id:mp.sessionId});const row=rowOf(r.data);if(row){mp.revision=Number(row.revision)||mp.revision;mp.hostCommitQueued=true}}catch(_){}}}
+    finally{mp.hostCommitBusy=false;if(mp.hostCommitQueued){mp.hostCommitQueued=false;scheduleHostCommit(true)}}
+  }
+  let hostCommitTimer=0;
+  function scheduleHostCommit(immediate=false){if(mp.role!=='host'||!mp.active||mp.applying)return;clearTimeout(hostCommitTimer);hostCommitTimer=setTimeout(()=>{const snap=buildSharedSnapshot(),encoded=JSON.stringify(snap);if(encoded===mp.lastHostSerialized&&!immediate)return;hostPersistAndBroadcast(snap)},immediate?0:180)}
+  function broadcastState(snapshot=buildSharedSnapshot()){if(mp.role!=='host'||!mp.channel)return;mp.channel.send({type:'broadcast',event:'state',payload:{revision:mp.revision,snapshot}})}
+  let guestProposalTimer=0;
+  function scheduleGuestProposal(){if(!mp.guestActive||!mp.channel||mp.applying)return;clearTimeout(guestProposalTimer);guestProposalTimer=setTimeout(()=>{const snap=buildSharedSnapshot(),encoded=JSON.stringify(snap);if(encoded===mp.lastGuestSerialized)return;mp.lastGuestSerialized=encoded;mp.channel.send({type:'broadcast',event:'state-proposal',payload:{user_id:mp.userId,base_revision:mp.revision,snapshot:snap}})},120)}
+  function receiveStateProposal(p){if(mp.role!=='host'||!p?.snapshot||p.user_id===mp.userId)return;if(mp.hostCommitBusy||Number(p.base_revision)!==Number(mp.revision)){mp.channel?.send({type:'broadcast',event:'state-reject',payload:{to:p.user_id,revision:mp.revision,snapshot:buildSharedSnapshot()}});return}applySharedSnapshot(p.snapshot,true);baseSave();scheduleHostCommit(true)}
+  function receiveAuthoritativeState(p){if(!mp.guestActive||!p?.snapshot)return;const rev=Number(p.revision)||0;if(rev<mp.revision)return;mp.revision=rev;mp.lastGuestSerialized=JSON.stringify(p.snapshot);applySharedSnapshot(p.snapshot)}
+  function receiveStateReject(p){if(!mp.guestActive||p?.to!==mp.userId)return;mp.revision=Number(p.revision)||mp.revision;if(p.snapshot){mp.lastGuestSerialized=JSON.stringify(p.snapshot);applySharedSnapshot(p.snapshot)}showToast('World changed — try that action again.')}
+
+  save=function(){
+    if(mp.guestActive){if(!mp.applying)scheduleGuestProposal();return}
+    const out=baseSave.apply(this,arguments);if(mp.role==='host'&&mp.active&&!mp.applying)scheduleHostCommit();return out;
+  };
+  tickZoogles=function(dt){if(mp.guestActive){renderWeatherBanner();return}return baseTickZoogles.apply(this,arguments)};
+  renderArea=function(){const r=baseRenderArea.apply(this,arguments);if(mp.active){trackPresence();requestAnimationFrame(renderRemotePlayers)}return r};
+
+  async function joinGuestSession(row,pending){
+    try{
+      const {client,user}=await clientAndUser();mp.homeState=clone(state);mp.homeArea=state.currentArea;baseSave();
+      mp.role='guest';mp.active=true;mp.guestActive=true;mp.sessionId=row.session_id;mp.revision=Number(row.revision)||0;mp.islandCode=row.island_code||pending.code;mp.islandName=row.island_name||pending.islandName||'Zoogle Island';mp.hostUsername=row.host_username||'Host';mp.userId=user.id;mp.lastGuestSerialized='';
+      const hb=await client.rpc('zoogle_mp_member_heartbeat',{p_session_id:mp.sessionId,p_username:getUsername()});if(hb.error)throw hb.error;
+      try{await client.rpc('visit_zoogle_world',{p_code:mp.islandCode})}catch(e){}
+      state=clone(row.snapshot);normalizeV5State();ensureV6State.done=false;ensureV6State();state.currentArea='main';state.breedSelect={p1:null,p2:null};state.pendingPlacement=null;placement=null;
+      document.body.classList.add('mp-live','mp-guest');document.getElementById('visitorBannerText').textContent=`Playing in ${mp.islandName}`;document.getElementById('visitorBanner')?.style.setProperty('display','flex');
+      const homeBtn=document.getElementById('visitorReturnHome');if(homeBtn)homeBtn.onclick=()=>leaveGuestSession('Welcome home!');
+      closeZoogleMenu();document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id));refreshOpenUi();await connectRealtime();clearInterval(guestHealthTimer);guestHealthTimer=setInterval(checkGuestHealth,8000);clearInterval(mpHeartbeatTimer);mpHeartbeatTimer=setInterval(memberHeartbeat,9000);showToast(`Joined ${mp.islandName}!`);
+    }catch(e){console.warn('Could not join multiplayer session',e);if(mp.homeState){state=mp.homeState;mp.homeState=null;renderAll()}mp.role=null;mp.active=false;mp.guestActive=false;showToast('Could not join the live world.')}
+  }
+  async function checkGuestHealth(){if(!mp.guestActive||!mp.sessionId)return;try{const {client}=await clientAndUser();const res=await client.rpc('zoogle_mp_get_session',{p_session_id:mp.sessionId});if(res.error)throw res.error;const row=rowOf(res.data);if(!row||!row.host_alive){if(!mp.hostMissingTimer)mp.hostMissingTimer=setTimeout(()=>{if(mp.guestActive)leaveGuestSession('Host disconnected.')},12000);return}clearTimeout(mp.hostMissingTimer);mp.hostMissingTimer=0;if(Number(row.revision)>mp.revision&&row.snapshot){mp.revision=Number(row.revision);mp.lastGuestSerialized=JSON.stringify(row.snapshot);applySharedSnapshot(row.snapshot)}}catch(e){}}
+  async function leaveGuestSession(message='Welcome home!'){
+    if(!mp.guestActive)return;const sid=mp.sessionId,client=await window.ZoogleIslandSharing?.getClient?.();clearInterval(guestHealthTimer);clearInterval(mpHeartbeatTimer);clearTimeout(mp.hostMissingTimer);mp.hostMissingTimer=0;
+    try{await mp.channel?.untrack?.()}catch(e){}try{if(client&&mp.channel)await client.removeChannel(mp.channel)}catch(e){}try{if(client&&sid)await client.rpc('zoogle_mp_leave_session',{p_session_id:sid})}catch(e){}
+    mp.channel=null;mp.presences.clear();mp.cursors.clear();mp.role=null;mp.active=false;mp.guestActive=false;mp.sessionId=null;mp.revision=0;document.body.classList.remove('mp-live','mp-guest');document.getElementById('visitorBanner')?.style.removeProperty('display');const returnBtn=document.getElementById('visitorReturnHome');if(returnBtn)returnBtn.onclick=()=>window.ZoogleIslandSharing?.returnHome?.();
+    if(mp.homeState){state=mp.homeState;mp.homeState=null;ensureV6State.done=false;ensureV6State();state.currentArea=areaAvailableIn(state,mp.homeArea)?mp.homeArea:'main'}placement=null;closeZoogleMenu();document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id));renderAll();baseSave();renderRemotePlayers();ensureUsernameRow();showToast(message);setTimeout(startHostServices,350)
+  }
+
+  async function hostHeartbeat(){if(mp.guestActive||window.ZoogleIslandSharing?.visiting)return;const ready=await ensureHostSession();if(ready){await memberHeartbeat();await pollRequests()}}
+  async function startHostServices(){ensureMultiplayerUi();watchPassport();ensureUsernameRow();await hostHeartbeat();clearInterval(mpHeartbeatTimer);mpHeartbeatTimer=setInterval(hostHeartbeat,9000);clearInterval(requestPollTimer);requestPollTimer=setInterval(pollRequests,2400)}
+
+  // Prevent the host-reset action from being triggered while a guest is inside someone else's live world.
+  document.addEventListener('click',e=>{if(mp.guestActive&&e.target.closest('#settingsReset,#resetProgressBtn')){e.preventDefault();e.stopImmediatePropagation();showToast('Return home before resetting your save.')}},true);
+  window.addEventListener('keydown',e=>{if(mp.guestActive&&e.ctrlKey&&e.key.toLowerCase()==='d'){e.preventDefault();e.stopImmediatePropagation();showToast('Return home before resetting your save.')}},true);
+  window.addEventListener('beforeunload',()=>{if(mp.guestActive){try{mp.channel?.untrack?.()}catch(e){}}});
+
+  ensureMultiplayerUi();setTimeout(startHostServices,900);
+  window.ZoogleMultiplayer={
+    get guestActive(){return mp.guestActive},get active(){return mp.active},get role(){return mp.role},get username(){return getUsername()},
+    renderGuestPassport,requestJoin:requestJoinByCode,leave:leaveGuestSession,get state(){return mp}
+  };
+})();
+</script>
 </body>
 </html>
