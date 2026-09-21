@@ -32,7 +32,7 @@ The game has no build step. The playable game is simply:
 index.html
 ```
 
-For GitHub Pages, enable Pages for the repository and serve the repository root. Once deployed, open the GitHub Pages URL in a modern browser.
+the link is; https://phillycheese704.github.io/zoogle-world/
 
 ## 💻 Run locally
 
