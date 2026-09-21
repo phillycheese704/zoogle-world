@@ -3060,7 +3060,8 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
         mp.role='host';mp.active=true;mp.guestActive=false;mp.sessionId=sid;if(changed)mp.revision=-1;mp.userId=user.id;mp.islandCode=state.islandCode;mp.islandName=state.islandName||'Zoogle Island';mp.hostUsername=getUsername();mp.available=true;
         document.body.classList.add('mp-live');document.body.classList.remove('mp-guest');
         if(row.snapshot)window.ZoogleAtomic.accept({...row,revision:rev});if(changed)await connectRealtime();
-        updateLiveBadge();showToast('Player accepted — joining now!');
+        startLiveHostServices();
+        updateLiveBadge();showToast('Player accepted — multiplayer is live!');
       }else showToast('Request declined.');
       await pollRequests();
     }catch(e){
@@ -3201,7 +3202,7 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
       if(window.ZoogleIslandSharing?.visiting)window.ZoogleIslandSharing.returnHome();
       const {client,user}=await clientAndUser();
       baseSave();const home=clone(state),area=state.currentArea;
-      if(mp.active&&mp.role==='host')home.__sharedSession=mp.sessionId;
+      delete home.__sharedSession;
       await suspend();mp.homeState=home;mp.homeArea=area;window.ZoogleAtomic.clearTransient();
       mp.role='guest';mp.active=true;mp.guestActive=true;mp.sessionId=row.session_id;mp.revision=-1;mp.islandCode=row.island_code||pending.code;mp.islandName=row.island_name||pending.islandName||'Zoogle Island';mp.hostUsername=row.host_username||'Host';mp.userId=user.id;
       const hb=await client.rpc('zoogle_v1_heartbeat',{p_session_id:mp.sessionId,p_username:getUsername()});if(hb.error)throw hb.error;
@@ -3225,20 +3226,29 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
     // Invalidate responses before any awaited cleanup; they can never write into home.
     mp.epoch++;mp.active=false;mp.guestActive=false;window.ZoogleAtomic.cancel();window.ZoogleAtomic.clearTransient();
     const leaving=suspend();mp.homeState=null;window.ZoogleAtomic.confirmed=null;
-    if(home){state=home;state.currentArea=area;window.ZoogleAtomic.migrate(state);window.ZoogleAtomic.awaitingHome=!!home.__sharedSession}
+    if(home){state=home;state.currentArea=area;delete state.__sharedSession;window.ZoogleAtomic.migrate(state);window.ZoogleAtomic.awaitingHome=false}
     document.body.classList.remove('mp-live','mp-guest');document.getElementById('visitorBanner')?.style.removeProperty('display');document.getElementById('visitorReturnHome').onclick=()=>window.ZoogleIslandSharing.returnHome();
     document.querySelectorAll('.modal.open').forEach(m=>closeModal(m.id));renderAll();baseSave();showToast(message);
     await leaving;try{const client=await window.ZoogleIslandSharing.getClient();await client.rpc('zoogle_v1_leave',{p_session_id:sid})}catch(e){}
     window.ZoogleAtomic.transitioning=false;startHostServices();
   }
 
-  async function hostHeartbeat(){if(hostBusy||mp.guestActive||window.ZoogleIslandSharing?.visiting)return;hostBusy=true;try{const ready=await ensureHostSession();if(ready){await memberHeartbeat();await pollRequests()}}finally{hostBusy=false}}
-  async function startHostServices(){if(mp.guestActive||window.ZoogleIslandSharing?.visiting)return;ensureMultiplayerUi();watchPassport();ensureUsernameRow();clearInterval(mpHeartbeatTimer);clearInterval(requestPollTimer);mpHeartbeatTimer=setInterval(hostHeartbeat,9000);requestPollTimer=setInterval(pollRequests,2000);await hostHeartbeat();await pollRequests()}
+  async function hostHeartbeat(){if(hostBusy||!mp.active||mp.role!=='host'||mp.guestActive||window.ZoogleIslandSharing?.visiting)return;hostBusy=true;try{const ready=await ensureHostSession();if(ready){await memberHeartbeat();await pollRequests()}}finally{hostBusy=false}}
+  async function startHostServices(){
+    // Offline by default: keep Passport viewing and join-request polling available,
+    // but do not create a live multiplayer session until the host accepts a request.
+    if(mp.guestActive||window.ZoogleIslandSharing?.visiting)return;
+    ensureMultiplayerUi();watchPassport();ensureUsernameRow();clearInterval(mpHeartbeatTimer);mpHeartbeatTimer=0;clearInterval(requestPollTimer);requestPollTimer=setInterval(pollRequests,2000);await pollRequests();
+  }
+  async function startLiveHostServices(){
+    if(!mp.active||mp.role!=='host'||mp.guestActive||window.ZoogleIslandSharing?.visiting)return;
+    ensureMultiplayerUi();watchPassport();ensureUsernameRow();clearInterval(mpHeartbeatTimer);clearInterval(requestPollTimer);mpHeartbeatTimer=setInterval(hostHeartbeat,9000);requestPollTimer=setInterval(pollRequests,2000);await memberHeartbeat();await pollRequests();
+  }
 
   // Prevent the host-reset action from being triggered while a guest is inside someone else's live world.
   document.addEventListener('click',e=>{if(mp.guestActive&&e.target.closest('#settingsReset,#resetProgressBtn')){e.preventDefault();e.stopImmediatePropagation();showToast('Return home before resetting your save.')}},true);
   window.addEventListener('keydown',e=>{if(mp.guestActive&&e.ctrlKey&&e.key.toLowerCase()==='d'){e.preventDefault();e.stopImmediatePropagation();showToast('Return home before resetting your save.')}},true);
-  window.addEventListener('online',()=>{if(mp.active){connectRealtime();window.ZoogleAtomic.pull()}else startHostServices()});
+  window.addEventListener('online',()=>{if(mp.active){connectRealtime();window.ZoogleAtomic.pull();if(mp.role==='host')startLiveHostServices()}else startHostServices()});
   window.addEventListener('beforeunload',()=>{if(mp.guestActive){try{mp.channel?.untrack?.()}catch(e){}}});
 
   window.addEventListener('focus',()=>{if(mp.active){trackPresence(true);sendCursor(lastCursorX,lastCursorY,true)}if(!mp.guestActive){pollRequests();connectRequestInbox()}});document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(mp.active){trackPresence(true);sendCursor(lastCursorX,lastCursorY,true)}if(!mp.guestActive){pollRequests();connectRequestInbox()}}});
@@ -3742,7 +3752,9 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
   const uuid=()=>crypto.randomUUID?.()||'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)});
   const KEYS=['coins','gems','rockyUnlocked','storageCliffsUnlocked','tribalUnlocked','breedingUnlocked','mutationLabUnlocked','moonUnlocked','mothershipUnlocked','zoogles','storageChest','discovered','claimed','eggs','breedings','collectAllReadyAt','upgrades','weather','nextAncientRollAt','ancientMeteorActive','quests','mutationLab','sharedPlacement','merchant','totemInventory','simulationAt','islandCode','islandName','schemaVersion'];
   let offset=0,lastClockSample=0,transactionEpoch=0,pulling=false,pullQueued=false,effects=[],renderKeys={},lastBackground=0,pendingCommit=null;
-  const W=window.ZoogleAtomic={busy:false,reducing:false,transitioning:false,confirmed:null,awaitingHome:!!state.__sharedSession,tutorialDone:!!state.tutorialDone,
+  // Live multiplayer is session-only. A page load always starts the home world offline.
+  if(state&&state.__sharedSession)delete state.__sharedSession;
+  const W=window.ZoogleAtomic={busy:false,reducing:false,transitioning:false,confirmed:null,awaitingHome:false,tutorialDone:!!state.tutorialDone,
     now:()=>Date.now()+offset,
     clock(ms,start=Date.now()){
       const end=Date.now();if(!Number.isFinite(Number(ms))||end-start>5000)return;
@@ -3752,7 +3764,7 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
     effect(fn){if(W.reducing)effects.push(fn);else fn()},
     localSaveState(){
       if(mp()?.guestActive||window.ZoogleIslandSharing?.visiting)return null;
-      if(active()&&W.confirmed)return {...clone(W.confirmed),__sharedSession:mp().sessionId,currentArea:state.currentArea,breedSelect:clone(state.breedSelect),tutorialDone:W.tutorialDone,pendingPlacement:null};
+      if(active()&&W.confirmed)return {...clone(W.confirmed),currentArea:state.currentArea,breedSelect:clone(state.breedSelect),tutorialDone:W.tutorialDone,pendingPlacement:null};
       return state;
     },
     cancel(){transactionEpoch++;pendingCommit=null;W.busy=false;W.reducing=false;effects=[]},
