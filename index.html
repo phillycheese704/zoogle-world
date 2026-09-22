@@ -1247,6 +1247,31 @@ body.user-reduced-motion .hatch-nest.ready .egg-shape{animation:none!important}
 @media(orientation:landscape) and (max-height:600px) and (max-width:1000px){#island.moon{height:92%!important;min-height:230px}.moon-merchant-panel{left:auto;right:7px;top:8px;bottom:8px;transform:none;width:min(310px,35vw);max-height:none}.moon-merchant-panel .merchant-stock{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.moon-merchant-panel .merchant-card{min-width:0}#island .moon-merchant-craft{transform:translateX(-50%) scale(.72)}#island .moon-merchant-craft.away{transform:translate(-50%,-80px) scale(.72)}}
 </style>
 
+
+<style id="egg-style-pass">
+/* Egg art pass: give every shop egg a distinct filled style. */
+.egg-shape{background:var(--egg-bg,linear-gradient(145deg,#fff6d3,#ddb56a 58%,#a86e2e));}
+.egg-shape::before{content:"";position:absolute;inset:auto 14% 10% 14%;height:20%;border-radius:50%;opacity:.38;pointer-events:none;background:radial-gradient(ellipse at center,rgba(0,0,0,.18),transparent 72%)}
+.egg-starter{--egg-bg:radial-gradient(circle at 30% 28%,#fffdf1 0 10%,transparent 11%),radial-gradient(circle at 68% 58%,#7fc8ff 0 9%,transparent 10%),linear-gradient(150deg,#fff8cf 0%,#f4d684 52%,#d49343 100%)}
+.egg-basic{--egg-bg:radial-gradient(circle at 28% 32%,#fff 0 9%,transparent 10%),radial-gradient(circle at 70% 62%,#86dd82 0 10%,transparent 11%),radial-gradient(circle at 40% 72%,#9dd9ff 0 8%,transparent 9%),linear-gradient(150deg,#fff7de 0%,#e8c26a 54%,#ba782d 100%)}
+.egg-normal{--egg-bg:radial-gradient(circle at 32% 28%,#fff 0 9%,transparent 10%),radial-gradient(circle at 66% 42%,#7dc8ff 0 10%,transparent 11%),radial-gradient(circle at 42% 72%,#a66bff 0 9%,transparent 10%),linear-gradient(150deg,#fff2cf 0%,#dbab56 55%,#945724 100%)}
+.egg-great{--egg-bg:radial-gradient(circle at 50% 28%,#9adfff 0 10%,transparent 11%),radial-gradient(circle at 31% 58%,#ffd95e 0 9%,transparent 10%),radial-gradient(circle at 70% 68%,#68dc78 0 9%,transparent 10%),linear-gradient(150deg,#fff8da 0%,#df9f43 55%,#7a431c 100%)}
+.egg-super{--egg-bg:radial-gradient(circle at 32% 28%,#fff 0 9%,transparent 10%),radial-gradient(circle at 66% 42%,#ffe66a 0 10%,transparent 11%),radial-gradient(circle at 38% 72%,#ab68ff 0 10%,transparent 11%),linear-gradient(150deg,#defbff 0%,#58b8ff 50%,#6a35c6 100%)}
+.egg-nature{--egg-bg:radial-gradient(circle at 33% 30%,#f5ffd8 0 10%,transparent 11%),radial-gradient(circle at 65% 55%,#79d85a 0 10%,transparent 11%),radial-gradient(circle at 39% 75%,#3b7f36 0 8%,transparent 9%),linear-gradient(150deg,#ecffc8 0%,#8ccd5a 50%,#3c8036 100%)}
+.egg-simple{--egg-bg:radial-gradient(circle at 30% 29%,#fff 0 10%,transparent 11%),radial-gradient(circle at 68% 58%,#b4c1d3 0 10%,transparent 11%),linear-gradient(145deg,#fffdf1 0%,#e4dfcc 56%,#aab4c0 100%)}
+.egg-quality{--egg-bg:radial-gradient(circle at 32% 26%,#fff 0 9%,transparent 10%),radial-gradient(circle at 68% 60%,#c6b98a 0 10%,transparent 11%),radial-gradient(circle at 42% 75%,#9ca9b7 0 8%,transparent 9%),linear-gradient(145deg,#fffdf2 0%,#e9dfbf 48%,#b4beca 100%)}
+.egg-premium{--egg-bg:radial-gradient(circle at 34% 28%,#fff9eb 0 9%,transparent 10%),radial-gradient(circle at 67% 58%,#ebc96c 0 10%,transparent 11%),radial-gradient(circle at 40% 74%,#9c6c4b 0 8%,transparent 9%),linear-gradient(150deg,#fff6d2 0%,#f0cb77 50%,#ae7a43 100%)}
+.egg-deluxe{--egg-bg:radial-gradient(circle at 31% 27%,#fff8e9 0 9%,transparent 10%),radial-gradient(circle at 68% 40%,#bb9fe4 0 10%,transparent 11%),radial-gradient(circle at 38% 71%,#f0cf79 0 8%,transparent 9%),radial-gradient(circle at 64% 70%,#8c70bb 0 7%,transparent 8%),linear-gradient(150deg,#fff5d8 0%,#c8ade8 48%,#765c9e 74%,#e0bc67 100%)}
+.egg-godly{--egg-bg:radial-gradient(circle at 50% 24%,#fffef5 0 10%,transparent 11%),radial-gradient(circle at 30% 62%,#ffe36a 0 10%,transparent 11%),radial-gradient(circle at 72% 63%,#fff 0 8%,transparent 9%),linear-gradient(150deg,#fff9d6 0%,#ffe06d 50%,#d59b16 100%)}
+.egg-masters{--egg-bg:radial-gradient(circle at 31% 28%,#ffffff 0 9%,transparent 10%),radial-gradient(circle at 67% 42%,#ffde75 0 9%,transparent 10%),radial-gradient(circle at 39% 73%,#7b61ff 0 10%,transparent 11%),radial-gradient(circle at 68% 74%,#49d8ff 0 8%,transparent 9%),linear-gradient(150deg,#eefcff 0%,#88cbff 36%,#6f53d0 70%,#f0c864 100%)}
+.egg-alien{--egg-bg:radial-gradient(circle at 31% 27%,#dffff0 0 8%,transparent 9%),radial-gradient(circle at 67% 42%,#b9ffc8 0 9%,transparent 10%),radial-gradient(circle at 43% 73%,#7ff0cb 0 9%,transparent 10%),linear-gradient(150deg,#23384b 0%,#54a68d 46%,#14243f 100%)}
+.egg-lunar{--egg-bg:radial-gradient(circle at 30% 28%,#ffffff 0 8%,transparent 9%),radial-gradient(circle at 68% 44%,#bac5d6 0 10%,transparent 11%),radial-gradient(circle at 38% 73%,#8b99b1 0 9%,transparent 10%),linear-gradient(150deg,#eef3fb 0%,#bbc6d6 48%,#8a96ac 100%)}
+/* subtle stripe details */
+.egg-simple::after,.egg-quality::after,.egg-premium::after,.egg-deluxe::after,.egg-godly::after,.egg-masters::after,.egg-alien::after,.egg-lunar::after{content:"";position:absolute;inset:18% 18% 20% 18%;border-radius:50%;opacity:.28;pointer-events:none;background:repeating-linear-gradient(135deg,rgba(255,255,255,.65) 0 6px,rgba(255,255,255,0) 6px 14px)}
+.egg-alien::after{background:radial-gradient(circle at 50% 28%,rgba(190,255,214,.9) 0 4px,transparent 5px),radial-gradient(circle at 34% 66%,rgba(190,255,214,.75) 0 5px,transparent 6px),radial-gradient(circle at 68% 66%,rgba(190,255,214,.75) 0 5px,transparent 6px);opacity:.55;inset:15% 16% 18% 16%}
+.egg-lunar::after{background:radial-gradient(circle at 38% 38%,rgba(122,132,151,.6) 0 6px,transparent 7px),radial-gradient(circle at 66% 62%,rgba(122,132,151,.54) 0 7px,transparent 8px),radial-gradient(circle at 52% 76%,rgba(122,132,151,.42) 0 4px,transparent 5px);opacity:.75;inset:14% 16% 18% 16%}
+</style>
+
 </head>
 <body>
 <div id="game">
@@ -1679,6 +1704,20 @@ for(const id of ['simple','quality','premium','deluxe']){
 }
 AREAS.splice(AREAS.findIndex(a=>a.id==='rocky')+1,0,{id:'moon',name:'Moon',system:true});
 AREAS.push({id:'mothership',name:'Mothership',system:true});
+(function normalizeAreaOrder(){
+  const defs={main:'Main Island',rocky:'Rocky Island',moon:'Moon',storage:'Storage Cliffs',tribal:'Tribal Island',cave:'Breeding Cave',mothership:'Mothership',lab:'Mutation Lab'};
+  const wanted=['main','rocky','moon','storage','tribal','cave','mothership','lab'];
+  for(const id of wanted){
+    if(id==='lab') continue;
+    if(!AREAS.some(a=>a.id===id))AREAS.push({id,name:defs[id],system:id==='moon'||id==='mothership'});
+  }
+  const current=new Map(AREAS.map(a=>[a.id,a]));
+  const extras=AREAS.filter(a=>!wanted.includes(a.id));
+  AREAS.length=0;
+  for(const id of wanted){if(current.has(id))AREAS.push(current.get(id));}
+  AREAS.push(...extras);
+})();
+
 UPGRADE_DATA.eggSlots.module='hatchery';
 UPGRADE_DATA.breedingSlots.module='cave';
 UPGRADE_DATA.storageExpansion.module='storage';
@@ -4220,6 +4259,15 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
     els.island.classList.remove('moon');
     const craft=$('moonMerchantCraft');if(craft)craft.hidden=true;
     document.body.dataset.spaceArea=['moon','mothership'].includes(state.currentArea)?state.currentArea:'';
+    if(state.currentArea==='cave'){
+      els.island.classList.remove('moon','rocky','storage','tribal');
+      els.island.style.display='none';
+      els.islandShadow.style.display='none';
+      els.areaPanel.classList.add('hidden');
+      renderCave();
+      window.ZoogleMusic?.setArea?.(state.currentArea);
+      return;
+    }
     if(!['moon','mothership'].includes(state.currentArea))return previousArea();
     els.areaName.textContent=AREAS.find(a=>a.id===state.currentArea).name;
     els.caveScreen.style.display='none';
