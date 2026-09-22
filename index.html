@@ -1192,72 +1192,40 @@ body.user-reduced-motion .hatch-nest.ready .egg-shape{animation:none!important}
   background:linear-gradient(180deg,rgba(70,76,95,.08),rgba(44,49,65,.56));
   pointer-events:none;
 }\n.distant-world{z-index:1}.floating-rock{z-index:3}.merchant-craft{z-index:5;top:18%}\n\n.mothership-screen{\n  background:rgba(4,14,10,.82);\n  border-color:#527e66;\n  box-shadow:inset 0 0 70px rgba(0,0,0,.65),0 22px 55px #0008;\n}\n.mothership-screen>.ship-window{\n  position:absolute;inset:0;width:100%;height:100%;min-height:100%;z-index:0;\n  border:0;border-radius:inherit;opacity:.98;pointer-events:none;\n  background:\n    radial-gradient(circle at 15% 19%,rgba(225,255,234,.72) 0 1px,transparent 2px) 0 0/93px 51px,\n    radial-gradient(circle at 72% 26%,rgba(124,255,163,.22),transparent 26%),\n    linear-gradient(180deg,#030812 0%,#07171a 48%,#07110d 100%);\n  box-shadow:inset 0 0 85px #010704, inset 0 -110px 120px rgba(4,21,12,.78);\n}\n.mothership-screen>.ship-window::before{\n  content:"";position:absolute;inset:0;\n  background:\n    linear-gradient(90deg,rgba(20,46,33,.9) 0 3%,transparent 3% 97%,rgba(20,46,33,.9) 97%),\n    linear-gradient(180deg,rgba(16,42,29,.88) 0 4%,transparent 4% 93%,rgba(11,31,21,.92) 93%);\n  box-shadow:inset 0 0 0 3px rgba(98,176,119,.22);\n}\n.mothership-screen>.ship-window::after{\n  content:"";position:absolute;inset:0;\n  background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,10,5,.18) 34%,rgba(0,12,6,.58) 68%,rgba(0,10,5,.82));\n}\n.mothership-screen>.ship-window .ship-planet{\n  right:8%;top:8%;width:clamp(180px,31vw,360px);height:clamp(180px,31vw,360px);\n  opacity:.88;box-shadow:-12px -8px 44px rgba(141,252,181,.28),0 0 70px rgba(74,164,127,.12);\n}\n.mothership-screen>.ship-window .ship-conduit{left:5%;right:5%;bottom:5%;height:4px;opacity:.8}\n.mothership-screen>.terminal-heading,.mothership-screen>.terminal-locked,.mothership-screen>.system-modules{position:relative;z-index:2}\n.mothership-screen>.terminal-heading{\n  margin:-2px -2px 0;padding:18px 16px;\n  background:linear-gradient(180deg,rgba(4,20,12,.76),rgba(4,18,11,.45));\n  border:1px solid rgba(117,218,143,.22);border-radius:12px;backdrop-filter:blur(4px);\n}\n.mothership-screen>.system-modules{padding:18px 4px 6px}\n.mothership-screen .system-module{background:rgba(5,24,14,.88);backdrop-filter:blur(6px);box-shadow:0 8px 24px rgba(0,0,0,.24)}\n.mothership-screen>.terminal-locked{margin-top:18px;background:rgba(4,20,12,.76);border:1px solid rgba(117,218,143,.22);border-radius:12px;backdrop-filter:blur(4px)}\n\n@media(max-width:600px){\n  .lunar-scene{height:190px!important;min-height:190px!important}\n  .lunar-ground{width:min(62%,300px);height:30%;bottom:25%;border-width:4px;box-shadow:inset 0 7px 0 rgba(255,255,255,.22),inset 0 -10px 0 rgba(64,70,91,.28),0 10px 0 #61687a,0 17px 0 #464d60,0 25px 20px rgba(0,0,0,.34)}\n  .merchant-craft{transform:translateX(-50%) scale(.82);transform-origin:50% 100%;top:19%}.merchant-craft.away{transform:translate(-50%,-110px) scale(.82)}\n  .mothership-screen>.ship-window .ship-planet{width:180px;height:180px;right:-18px;top:30px}\n}\n@media(orientation:landscape) and (max-height:600px) and (max-width:1000px){\n  .lunar-scene{height:145px!important;min-height:145px!important}\n  .lunar-ground{width:min(60%,280px);height:31%;bottom:25%}.merchant-craft{top:7%;transform:translateX(-50%) scale(.72)}.merchant-craft.away{transform:translate(-50%,-90px) scale(.72)}\n  .mothership-screen>.ship-window .ship-planet{width:155px;height:155px;top:6px}\n}\n</style>\n
-<style id="true-moon-island-fix">
+<style id="moon-surface-fix">
 #island.moon{
   width:min(84vw,1050px);
   height:min(58vh,560px);
   min-height:340px;
-  border-radius:51% 49% 46% 54%/55% 54% 46% 45%;
+  border-radius:50% 50% 46% 54%/58% 58% 42% 42%;
   background:
-    radial-gradient(ellipse at 20% 30%,#62697b 0 3.2%,#b7bdca 3.5% 5.2%,transparent 5.5%),
-    radial-gradient(ellipse at 72% 29%,#70788c 0 4.4%,#c1c6d2 4.7% 6.2%,transparent 6.5%),
-    radial-gradient(ellipse at 52% 61%,#727a8c 0 2.6%,#afb6c5 2.9% 4.2%,transparent 4.5%),
-    radial-gradient(ellipse at 35% 70%,#697184 0 2.2%,#aab1c0 2.5% 3.7%,transparent 4%),
-    radial-gradient(circle at 31% 19%,rgba(255,255,255,.28),transparent 18%),
-    linear-gradient(155deg,#cbd0db 0%,#969eaf 58%,#697185 100%);
-  border:10px solid #666f84;
-  box-shadow:
-    inset 0 12px 0 rgba(255,255,255,.23),
-    inset 0 -16px 0 rgba(47,54,73,.30),
-    0 32px 0 #596174,
-    0 47px 0 #383f52,
-    0 55px 30px rgba(0,0,0,.34);
-}
-#island.moon .island-rim{
-  box-shadow:inset 0 -12px 0 rgba(55,62,79,.28),inset 0 8px 0 rgba(255,255,255,.18);
-}
-#island.moon .bush{display:none}
-#island.moon .rock{
-  background:linear-gradient(145deg,#d3d7df,#858c9c 58%,#555d70);
-  box-shadow:inset 3px 3px 0 rgba(255,255,255,.20),inset -3px -3px 0 rgba(0,0,0,.22);
-}
-#island.moon .dirt-speck{
-  width:18px;height:9px;border-radius:50%;
-  background:#687083;
-  border:2px solid rgba(203,210,222,.48);
-  box-shadow:inset 0 2px 3px rgba(22,27,39,.42);
+    radial-gradient(circle at 18% 26%, rgba(255,255,255,.22), transparent 12%),
+    radial-gradient(ellipse at 23% 31%, #586072 0 4%, #b4b9c5 4.2% 6.5%, transparent 6.8%),
+    radial-gradient(ellipse at 70% 29%, #646d82 0 5%, #c8ced8 5.2% 7.5%, transparent 7.8%),
+    radial-gradient(ellipse at 52% 56%, #666e82 0 3.5%, #bbc2ce 3.7% 5.6%, transparent 5.9%),
+    radial-gradient(ellipse at 36% 68%, #61697d 0 3.2%, #aab2bf 3.4% 5%, transparent 5.3%),
+    radial-gradient(ellipse at 78% 62%, #5f677b 0 2.8%, #b5bdc8 3% 4.6%, transparent 4.9%),
+    radial-gradient(ellipse at 60% 18%, #6b7388 0 2.2%, #d0d5de 2.4% 3.6%, transparent 3.9%),
+    linear-gradient(160deg,#d5d8de 0%,#a7aebb 44%,#7a8396 72%,#626a7d 100%);
+  border:10px solid #667083;
+  box-shadow:inset 0 11px 0 rgba(255,255,255,.22), inset 0 -16px 0 rgba(47,54,72,.28), 0 28px 0 #576072, 0 42px 0 #3b4254, 0 54px 30px rgba(0,0,0,.34);
 }
 #island.moon::before{
-  content:"";
-  position:absolute;
-  inset:7% 7% 13%;
-  pointer-events:none;
-  border-radius:50%;
+  content:"";position:absolute;inset:6% 7% 13%;pointer-events:none;border-radius:inherit;
   background:
-    radial-gradient(ellipse at 15% 56%,rgba(68,76,94,.65) 0 2.5%,rgba(215,220,230,.25) 2.8% 4.1%,transparent 4.4%),
-    radial-gradient(ellipse at 83% 61%,rgba(65,72,90,.58) 0 3%,rgba(218,222,232,.23) 3.3% 4.6%,transparent 4.9%),
-    radial-gradient(ellipse at 63% 18%,rgba(66,74,91,.56) 0 2%,rgba(225,229,236,.20) 2.3% 3.5%,transparent 3.8%);
+    radial-gradient(ellipse at 15% 55%, rgba(66,73,89,.62) 0 2.6%, rgba(221,225,232,.24) 2.9% 4.1%, transparent 4.4%),
+    radial-gradient(ellipse at 84% 61%, rgba(64,71,87,.58) 0 3.1%, rgba(219,223,231,.23) 3.4% 4.8%, transparent 5.1%),
+    radial-gradient(ellipse at 63% 19%, rgba(71,78,95,.56) 0 2.1%, rgba(230,234,240,.2) 2.4% 3.6%, transparent 3.9%),
+    radial-gradient(ellipse at 41% 38%, rgba(69,76,92,.5) 0 2.1%, rgba(227,231,237,.16) 2.4% 3.2%, transparent 3.5%),
+    radial-gradient(ellipse at 33% 78%, rgba(67,74,90,.48) 0 1.8%, rgba(223,228,235,.14) 2.1% 3.1%, transparent 3.4%);
   z-index:0;
 }
+#island.moon .island-rim{box-shadow:inset 0 -12px 0 rgba(52,58,75,.28),inset 0 8px 0 rgba(255,255,255,.16)}
+#island.moon .bush{display:none}
+#island.moon .rock{background:linear-gradient(145deg,#d0d4dc,#8d95a6 58%,#596174);box-shadow:inset 3px 3px 0 rgba(255,255,255,.18),inset -3px -3px 0 rgba(0,0,0,.2)}
+#island.moon .dirt-speck{width:18px;height:9px;border-radius:50%;background:#697184;border:2px solid rgba(205,212,223,.45);box-shadow:inset 0 2px 3px rgba(22,27,39,.42)}
 #island.moon #zoogleLayer{display:none}
-
-.moon-merchant-panel{
-  position:absolute;
-  left:50%;
-  bottom:clamp(10px,2.2vh,24px);
-  transform:translateX(-50%);
-  z-index:28;
-  width:min(880px,calc(100% - 28px));
-  max-height:min(31vh,245px);
-  overflow:auto;
-  overscroll-behavior:contain;
-  padding:10px 12px 12px;
-  border:2px solid rgba(133,157,191,.52);
-  border-radius:18px;
-  background:linear-gradient(180deg,rgba(15,24,45,.94),rgba(26,38,62,.94));
-  box-shadow:0 12px 28px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.1);
-  color:#f4f7ff;
-}
+.moon-merchant-panel{position:absolute;left:50%;bottom:clamp(10px,2.2vh,24px);transform:translateX(-50%);z-index:28;width:min(880px,calc(100% - 28px));max-height:min(31vh,245px);overflow:auto;overscroll-behavior:contain;padding:10px 12px 12px;border:2px solid rgba(133,157,191,.52);border-radius:18px;background:linear-gradient(180deg,rgba(15,24,45,.94),rgba(26,38,62,.94));box-shadow:0 12px 28px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.1);color:#f4f7ff}
 .moon-merchant-panel .space-heading{margin:0 0 8px}
 .moon-merchant-panel .space-heading h2{font-size:clamp(18px,2.5vw,25px);margin:1px 0}
 .moon-merchant-panel .merchant-stock{grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:8px}
@@ -1269,41 +1237,14 @@ body.user-reduced-motion .hatch-nest.ready .egg-shape{animation:none!important}
 .moon-merchant-panel .merchant-bag{margin-top:7px}
 .moon-merchant-panel .merchant-bag button{min-height:34px;padding:5px 9px}
 .moon-merchant-panel .space-empty{padding:8px}
-
-#island .moon-merchant-craft{
-  position:absolute;
-  left:50%;
-  top:22%;
-  width:145px;
-  height:80px;
-  transform:translateX(-50%);
-  z-index:18;
-  pointer-events:none;
-  filter:drop-shadow(0 12px 10px rgba(165,232,255,.22));
-  transition:opacity .5s,transform .5s;
-}
+#island .moon-merchant-craft{position:absolute;left:50%;top:18%;width:145px;height:80px;transform:translateX(-50%);z-index:18;pointer-events:none;filter:drop-shadow(0 12px 10px rgba(165,232,255,.22));transition:opacity .5s,transform .5s}
 #island .moon-merchant-craft.away{opacity:0;transform:translate(-50%,-105px)}
 #island .moon-merchant-craft.landed{animation:craftArrival .7s ease-out}
 #island .moon-merchant-craft .craft-dome{position:absolute;left:28%;top:0;width:44%;height:54px;border-radius:50% 50% 10% 10%;background:radial-gradient(ellipse at 32% 20%,#c6fffbbf,#3fa096 40%,#254e6b);border:3px solid #a9c8d7}
 #island .moon-merchant-craft .craft-hull{position:absolute;left:0;bottom:10px;width:100%;height:35px;border-radius:50%;background:linear-gradient(#c8d4e5,#596b83 45%,#172a4a);border:3px solid #8dacc4}
 #island .moon-merchant-craft .craft-lights{position:absolute;left:18%;bottom:17px;width:9px;height:5px;border-radius:50%;background:#b7ffb1;box-shadow:30px 4px #b7ffb1,60px 4px #b7ffb1,90px 0 #b7ffb1;filter:drop-shadow(0 0 6px #8fffcc)}
-
-@media(max-width:740px){
-  #island.moon{width:min(92vw,760px);height:min(52vh,500px);min-height:290px}
-  .moon-merchant-panel{width:calc(100% - 16px);bottom:6px;max-height:34vh;padding:8px}
-  .moon-merchant-panel .merchant-stock{display:flex;overflow-x:auto;grid-template-columns:none;padding-bottom:3px}
-  .moon-merchant-panel .merchant-card{flex:0 0 128px}
-  #island .moon-merchant-craft{transform:translateX(-50%) scale(.82);transform-origin:50% 100%}
-  #island .moon-merchant-craft.away{transform:translate(-50%,-90px) scale(.82)}
-}
-@media(orientation:landscape) and (max-height:600px) and (max-width:1000px){
-  #island.moon{height:92%!important;min-height:230px}
-  .moon-merchant-panel{left:auto;right:7px;top:8px;bottom:8px;transform:none;width:min(310px,35vw);max-height:none}
-  .moon-merchant-panel .merchant-stock{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
-  .moon-merchant-panel .merchant-card{min-width:0}
-  #island .moon-merchant-craft{transform:translateX(-50%) scale(.72)}
-  #island .moon-merchant-craft.away{transform:translate(-50%,-80px) scale(.72)}
-}
+@media(max-width:740px){#island.moon{width:min(92vw,760px);height:min(52vh,500px);min-height:290px}.moon-merchant-panel{width:calc(100% - 16px);bottom:6px;max-height:34vh;padding:8px}.moon-merchant-panel .merchant-stock{display:flex;overflow-x:auto;grid-template-columns:none;padding-bottom:3px}.moon-merchant-panel .merchant-card{flex:0 0 128px}#island .moon-merchant-craft{transform:translateX(-50%) scale(.82);transform-origin:50% 100%}#island .moon-merchant-craft.away{transform:translate(-50%,-90px) scale(.82)}}
+@media(orientation:landscape) and (max-height:600px) and (max-width:1000px){#island.moon{height:92%!important;min-height:230px}.moon-merchant-panel{left:auto;right:7px;top:8px;bottom:8px;transform:none;width:min(310px,35vw);max-height:none}.moon-merchant-panel .merchant-stock{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.moon-merchant-panel .merchant-card{min-width:0}#island .moon-merchant-craft{transform:translateX(-50%) scale(.72)}#island .moon-merchant-craft.away{transform:translate(-50%,-80px) scale(.72)}}
 </style>
 
 </head>
@@ -4225,6 +4166,14 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
     const root=screen('moonScreen','moon-merchant-panel');
     root.className='moon-merchant-panel';
     root.hidden=false;
+    let terrain=$('moonTerrain');
+    if(!terrain){
+      terrain=document.createElement('div');
+      terrain.id='moonTerrain';
+      terrain.className='moon-terrain';
+      terrain.innerHTML='<div class="moon-under"></div><div class="moon-top"><span class="moon-horizon"></span></div><span class="moon-boulder b1"></span><span class="moon-boulder b2"></span><span class="moon-boulder b3"></span>';
+      els.island.insertBefore(terrain,els.island.firstChild);
+    }
     let craft=$('moonMerchantCraft');
     if(!craft){
       craft=document.createElement('div');
@@ -4238,30 +4187,21 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
       const key='locked';
       if(root.dataset.key!==key){
         root.dataset.key=key;
-        root.innerHTML='<div class="space-heading"><div><span class="space-eyebrow">MOON</span><h2>Moon</h2></div><button class="green-btn" id="unlockMoon">UNLOCK — 🪙2,000</button></div>';
+        root.innerHTML='<div class="space-heading"><h2>Moon</h2><button class="green-btn" id="unlockMoon">UNLOCK — 🪙2,000</button></div>';
         $('unlockMoon').onclick=()=>unlockSystem('moon',2000);
       }
       return;
     }
-    const m=state.merchant;
+    const m=state.merchant,key=m?JSON.stringify([m.phase,m.visitId,m.stock]):'waiting';
     craft.className='moon-merchant-craft '+(m?.phase==='active'?'landed':'away');
-    const key=m?JSON.stringify([m.phase,m.visitId,m.stock]):'waiting';
     if(root.dataset.key!==key){
       root.dataset.key=key;
       root.innerHTML=`<div class="space-heading"><div><span class="space-eyebrow">MOON</span><h2>Space Merchant</h2></div><span id="merchantTimer" class="space-timer"></span></div><div class="merchant-stock">${m?.phase==='active'?Object.entries(m.stock).filter(([id,n])=>n>0&&MERCHANT_ITEMS[id]).sort((a,b)=>MERCHANT_ITEMS[a[0]].cost-MERCHANT_ITEMS[b[0]].cost).map(([id,n])=>{const item=MERCHANT_ITEMS[id];return `<article class="merchant-card">${item.kind==='egg'?`<div class="egg-shape ${EGGS[item.eggId].eggClass}"></div>`:`<div class="totem-icon">${TOTEM_DATA[item.totemId].icon}</div>`}<h3>${escapeHtml(item.name)} (x${n})</h3>${item.normal?`<span class="old-price">💎${item.normal}</span>`:'<span class="merchant-exclusive">EXCLUSIVE</span>'}<button class="blue-btn" data-merchant-buy="${id}">💎${item.cost}</button></article>`}).join('')||'<p class="space-empty">Sold out this visit.</p>':'<p class="space-empty">The landing pad is quiet.</p>'}</div><div class="merchant-bag"><button class="wood-btn" id="merchantBag">TOTEMS${Object.values(state.totemInventory).some(n=>n>0)?' · OWNED':''}</button></div>`;
       root.querySelectorAll('[data-merchant-buy]').forEach(b=>b.onclick=()=>buyMerchant(b.dataset.merchantBuy,m.visitId));
       $('merchantBag').onclick=()=>{currentShopTab='totems';document.querySelectorAll('[data-shop-tab]').forEach(b=>b.classList.toggle('active',b.dataset.shopTab==='totems'));renderShop();openModal('shopModal')};
     }
-    const timer=$('merchantTimer');
-    if(timer){
-      const label=m?.phase==='active'?'DEPARTS':m?.phase==='cooldown'?'COOLDOWN':'ARRIVES';
-      timer.textContent=m?`${label} ${formatTime(Math.max(0,m.endAt-worldNow()))}`:'ARRIVING…';
-    }
-    root.querySelectorAll('[data-merchant-buy]').forEach(b=>{
-      const item=MERCHANT_ITEMS[b.dataset.merchantBuy];
-      b.disabled=state.gems<item.cost||(item.kind==='egg'&&state.eggs.length>=getMaxEggSlots())||!!m&&m.endAt<=worldNow();
-      b.title=item.kind==='egg'&&state.eggs.length>=getMaxEggSlots()?'Free a Hatchery slot':'';
-    });
+    const timer=$('merchantTimer');if(timer){const label=m?.phase==='active'?'DEPARTS':m?.phase==='cooldown'?'COOLDOWN':'ARRIVES';timer.textContent=m?`${label} ${formatTime(Math.max(0,m.endAt-worldNow()))}`:'ARRIVING…'}
+    root.querySelectorAll('[data-merchant-buy]').forEach(b=>{const item=MERCHANT_ITEMS[b.dataset.merchantBuy];b.disabled=state.gems<item.cost||(item.kind==='egg'&&state.eggs.length>=getMaxEggSlots())||!!m&&m.endAt<=worldNow();b.title=item.kind==='egg'&&state.eggs.length>=getMaxEggSlots()?'Free a Hatchery slot':''});
   }
   function upgradeCard(id){const u=UPGRADE_DATA[id],lvl=state.upgrades[id]||0,max=getUpgradeMax(id),done=lvl>=max;return `<article class="upgrade-compact"><div class="upgrade-top"><h3>${u.name}</h3><span>${done?'MAX':`Lv ${lvl} / ${max}`}</span></div><p>${upgradeDescription(id,lvl)}</p><div class="upgrade-level-track"><span style="width:${lvl/max*100}%"></span></div>${done?'<span class="upgrade-max">MAX</span>':`<div class="shop-actions"><button class="gold-btn" data-upgrade="${id}" data-currency="coin">🪙${getUpgradeCost(id)}</button><button class="blue-btn" data-upgrade="${id}" data-currency="gem">💎${getUpgradeGemCost(id)}</button></div>`}</article>`}
   function bindUpgrades(root){root.querySelectorAll('[data-upgrade]').forEach(b=>b.onclick=()=>buyUpgrade(b.dataset.upgrade,b.dataset.currency))}
@@ -4278,16 +4218,14 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
   renderArea=function(){
     for(const id of ['moonScreen','mothershipScreen'])if($(id))$(id).hidden=true;
     els.island.classList.remove('moon');
-    const oldCraft=$('moonMerchantCraft');if(oldCraft)oldCraft.hidden=true;
+    const craft=$('moonMerchantCraft');if(craft)craft.hidden=true;
     document.body.dataset.spaceArea=['moon','mothership'].includes(state.currentArea)?state.currentArea:'';
     if(!['moon','mothership'].includes(state.currentArea))return previousArea();
-
     els.areaName.textContent=AREAS.find(a=>a.id===state.currentArea).name;
     els.caveScreen.style.display='none';
     els.areaPanel.classList.add('hidden');
     els.hatchSlot.style.display='none';
     if($('mutationLabScreen'))$('mutationLabScreen').style.display='none';
-
     if(state.currentArea==='moon'){
       els.island.style.display='block';
       els.islandShadow.style.display='block';
@@ -4295,7 +4233,7 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
       els.island.classList.add('moon');
       els.zoogleLayer.innerHTML='';
       renderMoon();
-      const craft=$('moonMerchantCraft');if(craft)craft.hidden=false;
+      const currentCraft=$('moonMerchantCraft');if(currentCraft)currentCraft.hidden=false;
     }else{
       els.island.style.display='none';
       els.islandShadow.style.display='none';
@@ -4353,5 +4291,140 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
 })();
 
 </script>
+
+<style id="moon-final-no-grass-fix">
+/* FINAL override: base V6 island rules use !important, so Moon must override them too. */
+body[data-space-area="moon"] #island.moon{
+  background:
+    radial-gradient(ellipse at 22% 30%,#555d70 0 4.3%,#aeb5c2 4.6% 6.5%,transparent 6.8%),
+    radial-gradient(ellipse at 71% 28%,#626b80 0 5.2%,#c3c8d2 5.5% 7.5%,transparent 7.8%),
+    radial-gradient(ellipse at 51% 57%,#60697d 0 3.8%,#b5bdc9 4.1% 5.7%,transparent 6%),
+    radial-gradient(ellipse at 36% 70%,#596176 0 3.2%,#a7afbd 3.5% 5%,transparent 5.3%),
+    radial-gradient(ellipse at 81% 62%,#555e72 0 2.7%,#aeb6c4 3% 4.4%,transparent 4.7%),
+    radial-gradient(ellipse at 59% 17%,#697286 0 2.1%,#cdd2da 2.4% 3.5%,transparent 3.8%),
+    radial-gradient(circle at 30% 16%,rgba(255,255,255,.18),transparent 20%),
+    linear-gradient(156deg,#d2d5db 0%,#a9afba 42%,#7c8495 71%,#626a7c 100%) !important;
+  border-color:#656e81 !important;
+  box-shadow:
+    inset 0 11px 0 rgba(255,255,255,.18),
+    inset 0 -19px 0 rgba(46,52,69,.30),
+    0 27px 0 #596174,
+    0 39px 0 #3d4457,
+    0 48px 35px rgba(0,0,0,.34) !important;
+  filter:none !important;
+}
+body[data-space-area="moon"] #island.moon::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:5% 5% 10% !important;
+  border-radius:50% !important;
+  z-index:1 !important;
+  pointer-events:none !important;
+  mix-blend-mode:normal !important;
+  background:
+    radial-gradient(ellipse at 15% 54%,rgba(56,63,78,.68) 0 3%,rgba(218,222,230,.27) 3.3% 4.5%,transparent 4.8%),
+    radial-gradient(ellipse at 84% 59%,rgba(58,64,80,.64) 0 3.4%,rgba(221,225,232,.24) 3.7% 5%,transparent 5.3%),
+    radial-gradient(ellipse at 65% 19%,rgba(61,68,83,.6) 0 2.5%,rgba(226,230,236,.22) 2.8% 4%,transparent 4.3%),
+    radial-gradient(ellipse at 42% 38%,rgba(63,70,85,.54) 0 2.4%,rgba(227,231,237,.18) 2.7% 3.8%,transparent 4.1%),
+    radial-gradient(ellipse at 31% 79%,rgba(59,66,81,.52) 0 2%,rgba(218,223,231,.15) 2.3% 3.3%,transparent 3.6%),
+    radial-gradient(ellipse at 55% 78%,rgba(65,71,87,.44) 0 1.6%,rgba(218,223,230,.12) 1.9% 2.8%,transparent 3.1%) !important;
+}
+body[data-space-area="moon"] #island.moon::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  border-radius:50% !important;
+  z-index:2 !important;
+  pointer-events:none !important;
+  background:none !important;
+  box-shadow:inset 0 0 0 8px rgba(255,255,255,.045),inset 0 -20px 22px rgba(40,46,61,.22) !important;
+}
+body[data-space-area="moon"] #island.moon .island-rim{
+  box-shadow:inset 0 -13px 0 rgba(56,62,79,.28),inset 0 8px 0 rgba(255,255,255,.13) !important;
+}
+body[data-space-area="moon"] #island.moon .bush{display:none !important}
+body[data-space-area="moon"] #island.moon .rock{
+  background:linear-gradient(145deg,#c9ced7,#8991a2 58%,#51596c) !important;
+  filter:grayscale(.15) contrast(1.08) drop-shadow(0 4px 3px rgba(0,0,0,.22)) !important;
+}
+body[data-space-area="moon"] #island.moon .dirt-speck{
+  width:20px !important;height:10px !important;border-radius:50% !important;
+  background:#636b7e !important;border:2px solid rgba(200,207,219,.42) !important;
+  box-shadow:inset 0 2px 4px rgba(30,35,48,.45) !important;
+}
+body[data-space-area="moon"] #islandShadow{
+  background:radial-gradient(ellipse,rgba(18,22,34,.46),transparent 70%) !important;
+}
+</style>
+
+
+<style id="moon-terrain-rebuild">
+/* True lunar terrain: Moon no longer uses the Main Island body at all. */
+body[data-space-area="moon"] #island.moon{
+  background:transparent !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  filter:none !important;
+  overflow:visible !important;
+}
+body[data-space-area="moon"] #island.moon::before,
+body[data-space-area="moon"] #island.moon::after,
+body[data-space-area="moon"] #island.moon>.island-rim,
+body[data-space-area="moon"] #island.moon>.rock,
+body[data-space-area="moon"] #island.moon>.bush,
+body[data-space-area="moon"] #island.moon>.dirt-speck{display:none !important}
+#island .moon-terrain{display:none}
+#island.moon .moon-terrain{display:block;position:absolute;inset:0;z-index:1;pointer-events:none;filter:drop-shadow(0 24px 18px rgba(0,0,0,.34))}
+#island.moon .moon-under{
+  position:absolute;left:10%;right:10%;top:46%;height:46%;z-index:1;
+  background:
+    linear-gradient(104deg,transparent 0 8%,rgba(255,255,255,.08) 8.5% 10%,transparent 10.5% 23%,rgba(0,0,0,.16) 23.5% 26%,transparent 26.5% 45%,rgba(255,255,255,.05) 45.5% 47%,transparent 47.5%),
+    linear-gradient(180deg,#747c8d 0%,#555d70 35%,#343b4e 68%,#202638 100%);
+  clip-path:polygon(2% 0,98% 0,94% 14%,88% 24%,84% 39%,77% 48%,72% 66%,64% 73%,58% 100%,51% 79%,45% 94%,39% 72%,32% 80%,27% 58%,19% 49%,15% 30%,8% 21%);
+}
+#island.moon .moon-top{
+  position:absolute;left:4%;right:4%;top:13%;height:51%;z-index:3;
+  border:6px solid #737b8d;
+  border-radius:48% 52% 45% 55% / 41% 43% 57% 59%;
+  background:
+    radial-gradient(ellipse at 18% 43%,#555d70 0 4.6%,#aeb5c2 4.9% 7.1%,transparent 7.4%),
+    radial-gradient(ellipse at 38% 24%,#686f80 0 2.6%,#c3c8d1 2.9% 4.3%,transparent 4.6%),
+    radial-gradient(ellipse at 66% 34%,#596174 0 6%,#b9c0cb 6.3% 8.7%,transparent 9%),
+    radial-gradient(ellipse at 80% 61%,#5e6678 0 3.3%,#aeb6c3 3.6% 5.2%,transparent 5.5%),
+    radial-gradient(ellipse at 49% 68%,#626a7c 0 4%,#b7bec9 4.3% 6%,transparent 6.3%),
+    radial-gradient(ellipse at 27% 74%,#5b6375 0 2.4%,#aab2bf 2.7% 4.1%,transparent 4.4%),
+    radial-gradient(circle at 31% 15%,rgba(255,255,255,.28),transparent 18%),
+    linear-gradient(155deg,#d6d9df 0%,#abb1bc 45%,#868e9f 70%,#737b8d 100%);
+  box-shadow:inset 0 10px 0 rgba(255,255,255,.18),inset 0 -17px 0 rgba(56,63,81,.28),0 13px 0 #646c7f,0 19px 0 #4c5366;
+  transform:rotate(-1deg);
+}
+#island.moon .moon-top::before{
+  content:"";position:absolute;inset:7% 6% 12%;border-radius:inherit;
+  background:
+    radial-gradient(ellipse at 12% 56%,rgba(49,55,69,.52) 0 2.4%,rgba(232,235,240,.22) 2.7% 4%,transparent 4.3%),
+    radial-gradient(ellipse at 58% 12%,rgba(55,61,75,.48) 0 1.8%,rgba(232,235,240,.18) 2.1% 3.1%,transparent 3.4%),
+    radial-gradient(ellipse at 91% 38%,rgba(50,56,70,.48) 0 2.2%,rgba(230,233,239,.18) 2.5% 3.5%,transparent 3.8%),
+    radial-gradient(ellipse at 44% 49%,rgba(60,66,80,.38) 0 1.6%,rgba(235,238,242,.13) 1.9% 2.7%,transparent 3%);
+}
+#island.moon .moon-boulder{position:absolute;z-index:5;border-radius:48% 52% 42% 58%;background:linear-gradient(145deg,#c7ccd5,#81899b 58%,#50586b);box-shadow:inset 4px 4px 0 rgba(255,255,255,.16),0 7px 7px rgba(0,0,0,.22)}
+#island.moon .moon-boulder.b1{left:16%;top:30%;width:38px;height:26px;transform:rotate(-11deg)}
+#island.moon .moon-boulder.b2{right:15%;top:43%;width:29px;height:20px;transform:rotate(14deg)}
+#island.moon .moon-boulder.b3{left:58%;top:23%;width:22px;height:16px;transform:rotate(5deg)}
+#island.moon .moon-horizon{
+  position:absolute;left:12%;right:12%;top:14%;height:9%;z-index:4;border-radius:50%;
+  background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,0));opacity:.52
+}
+body[data-space-area="moon"] #islandShadow{width:min(69vw,820px) !important;height:min(10vw,95px) !important;top:80% !important;background:rgba(0,0,0,.3) !important;filter:blur(18px) !important}
+body[data-space-area="moon"]{background:radial-gradient(circle at 80% 18%,rgba(214,225,255,.08),transparent 19%),radial-gradient(circle at 20% 25%,#fff 0 1px,transparent 2px) 0 0/85px 91px,radial-gradient(circle at 63% 70%,#d7ddff 0 1px,transparent 2px) 0 0/139px 127px,linear-gradient(180deg,#050817,#0b1026 55%,#141b35 100%) !important}
+@media(max-width:740px){
+  #island.moon .moon-top{left:3%;right:3%;top:16%;height:47%;border-width:4px}
+  #island.moon .moon-under{left:9%;right:9%;top:48%;height:42%}
+  #island.moon .moon-boulder.b1{left:12%;top:34%;transform:scale(.82) rotate(-11deg)}
+  #island.moon .moon-boulder.b2{right:10%;top:43%;transform:scale(.78) rotate(14deg)}
+  #island.moon .moon-boulder.b3{left:59%;top:27%;transform:scale(.72)}
+}
+</style>
+
 </body>
 </html>
