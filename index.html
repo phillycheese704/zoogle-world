@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>🥚🌍 ZOOGLE WORLD 🌍🥚</title>
+<meta name="zoogle-release" content="Pass &amp; Polish V1">
 <style>
 :root{
   --dark:#2e2216;--panel:rgba(255,246,214,.97);--wood:#6e411b;--coin:#f5c53a;--gem:#56ddff;
@@ -1351,7 +1352,7 @@ const $=id=>document.getElementById(id);
 const els={coinsText:$("coinsText"),gemsText:$("gemsText"),areaName:$("areaName"),prevArea:$("prevArea"),nextArea:$("nextArea"),island:$("island"),islandShadow:$("islandShadow"),zoogleLayer:$("zoogleLayer"),areaPanel:$("areaPanel"),caveScreen:$("caveScreen"),shopBtn:$("shopBtn"),bookBtn:$("bookBtn"),collectAllBtn:$("collectAllBtn"),shopModal:$("shopModal"),bookModal:$("bookModal"),infoModal:$("infoModal"),shopGrid:$("shopGrid"),bookGrid:$("bookGrid"),infoTitle:$("infoTitle"),infoContent:$("infoContent"),hatchSlot:$("hatchSlot"),slotTitle:$("slotTitle"),slotEgg:$("slotEgg"),slotTimer:$("slotTimer"),skipBtn:$("skipBtn"),hatchBtn:$("hatchBtn"),zoogleMenu:$("zoogleMenu"),placementHelp:$("placementHelp"),placementGhost:$("placementGhost"),toast:$("toast"),hatchOverlay:$("hatchOverlay"),eggClickArea:$("eggClickArea"),hatchInstruction:$("hatchInstruction"),resultCard:$("resultCard"),flash:$("flash")};
 
 
-function load(){try{let raw=safeStorage.getItem(SAVE_KEY);if(!raw){for(const k of OLD_KEYS){raw=safeStorage.getItem(k);if(raw)break}}if(!raw)return;const s=JSON.parse(raw);state={...defaultState(),...s,discovered:s.discovered||{},claimed:s.claimed||{},breedSelect:s.breedSelect||{p1:null,p2:null},upgrades:{...defaultState().upgrades,...(s.upgrades||{})},zoogles:Array.isArray(s.zoogles)?s.zoogles:[]};if(state.egg&&state.egg.type&&!state.egg.eggId)state.egg.eggId=state.egg.type;state.zoogles.forEach(z=>{if(!z.island)z.island="main";if(!z.customName&&ZOOGLES[z.type])z.customName=ZOOGLES[z.type].name;if(z.stored==null)z.stored=z.storedCoins||0;if(!z.mode)z.mode="coin";if(z.earnProgress==null)z.earnProgress=0});if(!AREAS.some(a=>a.id===state.currentArea))state.currentArea="main"}catch(e){console.warn(e);state=defaultState()}}
+function load(){try{let raw=safeStorage.getItem(SAVE_KEY);if(!raw){for(const k of OLD_KEYS){raw=safeStorage.getItem(k);if(raw)break}}if(!raw)return;const s=JSON.parse(raw);state={...defaultState(),...s,discovered:s.discovered||{},claimed:s.claimed||{},breedSelect:s.breedSelect||{p1:null,p2:null},upgrades:{...defaultState().upgrades,...(s.upgrades||{})},zoogles:Array.isArray(s.zoogles)?s.zoogles:[]};if(state.egg&&state.egg.type&&!state.egg.eggId)state.egg.eggId=state.egg.type;state.zoogles.forEach(z=>{if(!z.island)z.island="main";if(!z.customName&&ZOOGLES[z.type])z.customName=ZOOGLES[z.type].name;if(z.stored==null)z.stored=z.storedCoins||0;if(!z.mode)z.mode="coin";if(z.earnProgress==null)z.earnProgress=0});if(!["main","rocky","storage","tribal","cave","lab","moon","mothership"].includes(state.currentArea))state.currentArea="main"}catch(e){console.warn(e);state=defaultState()}}
 function save(){if(deletingSave)return;try{(()=>{const s=window.ZoogleAtomic?window.ZoogleAtomic.localSaveState():state;if(s)safeStorage.setItem(SAVE_KEY,JSON.stringify(s))})()}catch(e){console.warn("Save unavailable",e)}}
 
 
@@ -2043,7 +2044,12 @@ function renderShop(){
 }
 function renderEggsShop(){
   els.shopGrid.className='shop-grid';
-  els.shopGrid.innerHTML=Object.values(EGGS).filter(e=>!e.legacy&&!e.merchantOnly).sort((a,b)=>a.coinCost-b.coinCost||a.gemCost-b.gemCost||a.name.localeCompare(b.name)).map(egg=>`<div class="shop-card"><div class="egg-shape ${egg.eggClass}"></div><h3>${egg.name}</h3><p>⏱ ${formatTime(getAdjustedHatchMs(egg.hatchMs))}</p><div class="chance-list">${rarityChanceText(applyWeatherToChances(applyLuck(egg.chances)))}</div><div class="shop-actions"><button class="green-btn" data-buy-coin="${egg.id}">🪙${egg.coinCost}</button><button class="blue-btn" data-buy-gem="${egg.id}">💎${egg.gemCost}</button></div><button class="wood-btn" style="width:100%;margin-top:8px" data-egg-info="${egg.id}">INFO</button></div>`).join('');
+  const full=state.eggs.length>=getMaxEggSlots();
+  els.shopGrid.innerHTML=Object.values(EGGS).filter(e=>!e.legacy&&!e.merchantOnly).sort((a,b)=>a.coinCost-b.coinCost||a.gemCost-b.gemCost||a.name.localeCompare(b.name)).map(egg=>{
+    const coinReason=full?'Hatchery full':state.coins<egg.coinCost?'Not enough coins':'';
+    const gemReason=full?'Hatchery full':state.gems<egg.gemCost?'Not enough gems':'';
+    return `<div class="shop-card egg-shop-card" data-egg-card="${egg.id}"><div class="egg-shape ${egg.eggClass}" aria-hidden="true"></div><h3>${egg.name}</h3><p>⏱ ${formatTime(getAdjustedHatchMs(egg.hatchMs))}</p><div class="chance-list">${rarityChanceText(applyWeatherToChances(applyLuck(egg.chances)))}</div><div class="shop-actions"><button class="green-btn" data-buy-coin="${egg.id}" ${coinReason?'disabled':''} title="${coinReason}">🪙${egg.coinCost}</button><button class="blue-btn" data-buy-gem="${egg.id}" ${gemReason?'disabled':''} title="${gemReason}">💎${egg.gemCost}</button></div><button class="wood-btn" style="width:100%;margin-top:8px" data-egg-info="${egg.id}">INFO</button></div>`;
+  }).join('');
   els.shopGrid.querySelectorAll('[data-buy-coin]').forEach(b=>b.onclick=()=>buyEgg(b.dataset.buyCoin,'coin'));
   els.shopGrid.querySelectorAll('[data-buy-gem]').forEach(b=>b.onclick=()=>buyEgg(b.dataset.buyGem,'gem'));
   els.shopGrid.querySelectorAll('[data-egg-info]').forEach(b=>b.onclick=()=>showEggInfo(b.dataset.eggInfo));
@@ -3884,6 +3890,11 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
       s.totemInventory=s.totemInventory&&typeof s.totemInventory==='object'?s.totemInventory:{};
       s.merchant=s.merchant&&['active','cooldown','waiting'].includes(s.merchant.phase)?s.merchant:null;
       s.eggs=Array.isArray(s.eggs)?s.eggs:[];s.breedings=Array.isArray(s.breedings)?s.breedings:[];
+      s.breedSelect=s.breedSelect&&typeof s.breedSelect==='object'?s.breedSelect:{p1:null,p2:null};
+      const ownedIds=new Set((Array.isArray(s.zoogles)?s.zoogles:[]).map(z=>z?.uid).filter(Boolean));
+      if(!ownedIds.has(s.breedSelect.p1))s.breedSelect.p1=null;
+      if(!ownedIds.has(s.breedSelect.p2)||s.breedSelect.p2===s.breedSelect.p1)s.breedSelect.p2=null;
+      if(!AREAS.some(a=>a.id===s.currentArea))s.currentArea='main';
       for(const [arr,prefix] of [[s.eggs,'egg'],[s.breedings,'breed']])for(const e of arr){
         e.uid=e.uid||prefix+'_'+id();if(prefix==='egg'){e.eggId=e.eggId||e.type||'starter';if(!EGGS[e.eggId])e.eggId='starter'}
         if(!Number.isFinite(e.endAt))e.endAt=worldNow();
@@ -4242,7 +4253,11 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
     const timer=$('merchantTimer');if(timer){const label=m?.phase==='active'?'DEPARTS':m?.phase==='cooldown'?'COOLDOWN':'ARRIVES';timer.textContent=m?`${label} ${formatTime(Math.max(0,m.endAt-worldNow()))}`:'ARRIVING…'}
     root.querySelectorAll('[data-merchant-buy]').forEach(b=>{const item=MERCHANT_ITEMS[b.dataset.merchantBuy];b.disabled=state.gems<item.cost||(item.kind==='egg'&&state.eggs.length>=getMaxEggSlots())||!!m&&m.endAt<=worldNow();b.title=item.kind==='egg'&&state.eggs.length>=getMaxEggSlots()?'Free a Hatchery slot':''});
   }
-  function upgradeCard(id){const u=UPGRADE_DATA[id],lvl=state.upgrades[id]||0,max=getUpgradeMax(id),done=lvl>=max;return `<article class="upgrade-compact"><div class="upgrade-top"><h3>${u.name}</h3><span>${done?'MAX':`Lv ${lvl} / ${max}`}</span></div><p>${upgradeDescription(id,lvl)}</p><div class="upgrade-level-track"><span style="width:${lvl/max*100}%"></span></div>${done?'<span class="upgrade-max">MAX</span>':`<div class="shop-actions"><button class="gold-btn" data-upgrade="${id}" data-currency="coin">🪙${getUpgradeCost(id)}</button><button class="blue-btn" data-upgrade="${id}" data-currency="gem">💎${getUpgradeGemCost(id)}</button></div>`}</article>`}
+  function upgradeCard(id){
+    const u=UPGRADE_DATA[id],lvl=state.upgrades[id]||0,max=getUpgradeMax(id),done=lvl>=max,coin=getUpgradeCost(id),gems=getUpgradeGemCost(id);
+    const coinReason=state.coins<coin?'Not enough coins':'',gemReason=state.gems<gems?'Not enough gems':'';
+    return `<article class="upgrade-compact"><div class="upgrade-top"><h3>${u.name}</h3><span>${done?'MAX':`Lv ${lvl} / ${max}`}</span></div><p>${upgradeDescription(id,lvl)}</p><div class="upgrade-level-track"><span style="width:${lvl/max*100}%"></span></div>${done?'<span class="upgrade-max">MAX</span>':`<div class="shop-actions"><button class="gold-btn" data-upgrade="${id}" data-currency="coin" ${coinReason?'disabled':''} title="${coinReason}">🪙${coin}</button><button class="blue-btn" data-upgrade="${id}" data-currency="gem" ${gemReason?'disabled':''} title="${gemReason}">💎${gems}</button></div>`}</article>`
+  }
   function bindUpgrades(root){root.querySelectorAll('[data-upgrade]').forEach(b=>b.onclick=()=>buyUpgrade(b.dataset.upgrade,b.dataset.currency))}
   renderUpgrades=function(){if(W.reducing){W.effect(()=>renderUpgrades());return}els.shopGrid.className='shop-grid upgrade-grid';els.shopGrid.innerHTML=Object.keys(UPGRADE_DATA).filter(id=>!UPGRADE_DATA[id].module).sort((a,b)=>UPGRADE_DATA[a].base-UPGRADE_DATA[b].base).map(upgradeCard).join('');bindUpgrades(els.shopGrid)};
   function renderMothership(){
@@ -4293,7 +4308,7 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
   const previousCave=renderCave;let caveKey='';
   renderCave=function(){const key=JSON.stringify([state.breedingUnlocked,getMaxBreedingSlots(),state.breedSelect,state.breedings.map(b=>[b.uid,b.p1Name,b.p2Name,b.intended,b.fallbackRarity])]);if(caveKey!==key||!els.caveScreen.firstElementChild){caveKey=key;previousCave()}renderCaveTimerOnly()};
   const previousHatchery=updateHatchSlot;
-  updateHatchSlot=function(){const toggle=$('hatcheryToggle');if(toggle){toggle.hidden=!state.eggs.length;toggle.textContent='🥚 '+state.eggs.length;toggle.setAttribute('aria-expanded',String(!document.body.classList.contains('hatchery-collapsed')))}if(['lab','moon','mothership'].includes(state.currentArea)){els.hatchSlot.classList.remove('active');return}previousHatchery();renderSharedPlacement()};
+  updateHatchSlot=function(){const toggle=$('hatcheryToggle');if(toggle){const max=getMaxEggSlots(),full=state.eggs.length>=max;toggle.hidden=!state.eggs.length;toggle.textContent=`🥚 ${state.eggs.length}/${max}`;toggle.classList.toggle('hatchery-full',full);toggle.title=full?'Hatchery full':'Toggle Hatchery';toggle.setAttribute('aria-expanded',String(!document.body.classList.contains('hatchery-collapsed')))}if(['lab','moon','mothership'].includes(state.currentArea)){els.hatchSlot.classList.remove('active');return}previousHatchery();renderSharedPlacement()};
   // World positions remain unchanged by display size; small screens clamp only their projection.
   safeBounds=function(){const r=els.island.getBoundingClientRect(),h=innerWidth<=740?104:124;return{minX:Math.min(25,48/Math.max(1,r.width)*100),maxX:Math.max(75,100-48/Math.max(1,r.width)*100),minY:Math.min(68,(h*.82+12)/Math.max(1,r.height)*100),maxY:88}};
   renderCollectAllButton=function(){const lvl=state.upgrades.collectAll||0,left=Math.max(0,(state.collectAllReadyAt||0)-worldNow());els.collectAllBtn.className='round-icon collect-all-btn '+(!lvl?'locked':left?'cooldown':'ready');els.collectAllBtn.style.display=lvl?'grid':'none';els.collectAllBtn.textContent=left?formatTime(left):'ALL';els.collectAllBtn.setAttribute('aria-label',left?'Collect all ready in '+formatTime(left):'Collect all earnings')};
@@ -4328,8 +4343,9 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
     const t=worldNow();if(W.busy||W.transitioning||W.awaitingHome||window.ZoogleIslandSharing?.visiting)return;
     const sp=state.sharedPlacement;
     if(sp?.ownerId===user()&&(placement||els.hatchOverlay.classList.contains('open'))&&sp.expiresAt-t<9000)W.run('placement-heartbeat',()=>{if(state.sharedPlacement?.id===sp.id&&state.sharedPlacement.ownerId===user())state.sharedPlacement.expiresAt=worldNow()+15000});
-    if(t-lastBackground<1000)return;lastBackground=t;
-    if(active()){
+    const liveWorld=active(),backgroundCadence=liveWorld?5000:1000;
+    if(t-lastBackground<backgroundCadence)return;lastBackground=t;
+    if(liveWorld){
       if(mp().role==='host')W.run('tick',()=>{const dt=Math.max(0,Math.min(60000,t-(state.simulationAt||t)));state.simulationAt=t;window.ZoogleMultiplayer.tick(dt);refreshDailyQuestsIfNeeded();window.ZoogleMutationLab.finish()});
     }else W.run('tick',()=>{advanceMerchant();advanceAbduction();window.ZoogleMutationLab.finish()});
   },250);
@@ -4475,36 +4491,153 @@ body[data-space-area="moon"]{background:radial-gradient(circle at 80% 18%,rgba(2
 </style>
 
 
-<script id="zoogle-core-stability-fix">
+
+<style id="zoogle-pass-polish-style">
+/* Pass & Polish V1 — interaction clarity, egg identity and small-screen resilience. */
+:where(button,[role="button"],input,select):focus-visible{outline:3px solid rgba(82,157,255,.78)!important;outline-offset:3px!important}
+button:disabled{cursor:not-allowed!important;filter:saturate(.55) brightness(.9);opacity:.62}
+.shop-card,.upgrade-compact,.quest-card,.breed-row,.hatch-nest{transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease}
+@media(hover:hover) and (pointer:fine){.shop-card:hover,.upgrade-compact:hover,.quest-card:hover{transform:translateY(-2px);box-shadow:inset 0 2px 0 rgba(255,255,255,.55),0 9px 16px rgba(0,0,0,.15)}}
+#hatcheryToggle.hatchery-full{background:linear-gradient(#f2ad87,#bd5f47)!important;border-color:#743a2d!important;color:#fff!important}
+.egg-shop-card .egg-shape{width:64px;height:80px;margin-top:3px;filter:drop-shadow(0 7px 5px rgba(60,38,20,.18))}
+/* Final egg fills live here so older expansion CSS cannot flatten them back to generic gradients. */
+.egg-simple{--egg-bg:radial-gradient(circle at 30% 28%,#fff 0 9%,transparent 10%),radial-gradient(circle at 68% 62%,#b7c5d6 0 10%,transparent 11%),linear-gradient(150deg,#fffdf2 0%,#dedfd8 54%,#9ca9ba 100%)!important}
+.egg-quality{--egg-bg:radial-gradient(circle at 30% 28%,#fff 0 8%,transparent 9%),radial-gradient(circle at 68% 62%,#d7c88f 0 10%,transparent 11%),linear-gradient(150deg,#fffdf0 0%,#e6dcba 45%,#aab8c7 100%)!important}
+.egg-premium{--egg-bg:radial-gradient(circle at 31% 27%,#fffaf0 0 8%,transparent 9%),radial-gradient(circle at 67% 61%,#efcf6c 0 10%,transparent 11%),linear-gradient(150deg,#fff4cb 0%,#e7bd62 52%,#9d6c41 100%)!important}
+.egg-deluxe{--egg-bg:radial-gradient(circle at 30% 25%,#fff8e7 0 8%,transparent 9%),radial-gradient(circle at 68% 42%,#c4a7eb 0 10%,transparent 11%),radial-gradient(circle at 39% 72%,#f1d27a 0 9%,transparent 10%),linear-gradient(150deg,#fff4d6 0%,#baa0df 46%,#735792 72%,#d9b45e 100%)!important}
+.egg-alien{--egg-bg:radial-gradient(ellipse at 31% 27%,#d7ffe4 0 8%,transparent 9%),radial-gradient(ellipse at 67% 61%,#87efbb 0 10%,transparent 11%),linear-gradient(150deg,#1b3340 0%,#4e9d84 48%,#102238 100%)!important}
+.egg-lunar{--egg-bg:radial-gradient(ellipse at 30% 30%,#7b8499 0 8%,#d4d9e1 9% 12%,transparent 13%),radial-gradient(ellipse at 70% 66%,#737d92 0 11%,#c7ced9 12% 15%,transparent 16%),linear-gradient(150deg,#edf1f6 0%,#b7bfcb 50%,#7f899d 100%)!important}
+/* Give each egg family its own motif rather than only a recolour. */
+.egg-starter::after{background:radial-gradient(circle at 50% 50%,rgba(102,185,255,.75) 0 20%,transparent 22%);inset:25% 22% 25%;opacity:.72}
+.egg-basic::after{background:radial-gradient(circle at 28% 28%,#78d779 0 9%,transparent 10%),radial-gradient(circle at 72% 68%,#85cfff 0 10%,transparent 11%),radial-gradient(circle at 58% 28%,#f7e59c 0 7%,transparent 8%);inset:14%;opacity:.8}
+.egg-normal::after{background:linear-gradient(135deg,transparent 0 35%,rgba(113,190,255,.68) 36% 45%,transparent 46% 58%,rgba(164,91,255,.62) 59% 68%,transparent 69%);inset:17%;opacity:.9}
+.egg-great::after{background:radial-gradient(circle at 50% 18%,#8ed8ff 0 9%,transparent 10%),radial-gradient(circle at 28% 63%,#ffe16d 0 10%,transparent 11%),radial-gradient(circle at 72% 67%,#71df80 0 10%,transparent 11%);inset:13%;opacity:.92}
+.egg-super::after{background:conic-gradient(from 15deg at 50% 52%,rgba(255,255,255,.85),rgba(255,224,87,.7),rgba(160,91,255,.72),rgba(70,183,255,.72),rgba(255,255,255,.85));inset:18%;border-radius:45%;opacity:.58}
+.egg-simple::after{background:repeating-linear-gradient(0deg,rgba(255,255,255,.64) 0 5px,transparent 5px 13px);inset:18% 20%;opacity:.45}
+.egg-quality::after{background:linear-gradient(45deg,transparent 42%,rgba(255,255,255,.6) 43% 49%,transparent 50%),linear-gradient(-45deg,transparent 42%,rgba(174,151,87,.4) 43% 49%,transparent 50%);background-size:18px 18px;inset:17%;opacity:.62}
+.egg-premium::after{background:repeating-linear-gradient(135deg,rgba(255,248,213,.65) 0 7px,transparent 7px 16px);inset:17%;opacity:.55}
+.egg-deluxe::after{background:radial-gradient(circle at 50% 15%,#fff0ac 0 8%,transparent 9%),radial-gradient(circle at 25% 52%,#d9bfff 0 8%,transparent 9%),radial-gradient(circle at 75% 63%,#f4d979 0 8%,transparent 9%),linear-gradient(135deg,transparent 35%,rgba(255,255,255,.38) 36% 43%,transparent 44%);inset:12%;opacity:.82}
+.egg-godly::after{background:radial-gradient(circle at 50% 50%,#fffbe4 0 16%,#ffe374 17% 25%,transparent 26%),linear-gradient(0deg,transparent 46%,rgba(255,255,255,.65) 47% 53%,transparent 54%),linear-gradient(90deg,transparent 46%,rgba(255,255,255,.65) 47% 53%,transparent 54%);inset:10%;opacity:.9;filter:drop-shadow(0 0 5px rgba(255,222,85,.7))}
+.egg-masters::after{background:conic-gradient(from 45deg,#fff 0 6%,transparent 7% 19%,#f7d96e 20% 27%,transparent 28% 43%,#8b73ff 44% 52%,transparent 53% 69%,#67dfff 70% 77%,transparent 78%);inset:10%;opacity:.8}
+.egg-alien::after{background:radial-gradient(ellipse at 35% 40%,#c7ffd8 0 9%,transparent 10%),radial-gradient(ellipse at 65% 40%,#c7ffd8 0 9%,transparent 10%),linear-gradient(90deg,transparent 46%,rgba(140,255,198,.68) 47% 53%,transparent 54%);inset:15%;opacity:.8;filter:drop-shadow(0 0 5px rgba(115,255,187,.55))}
+.egg-lunar::after{background:radial-gradient(ellipse at 30% 30%,#717c92 0 8%,#c9d0db 9% 12%,transparent 13%),radial-gradient(ellipse at 70% 62%,#778197 0 11%,#cbd1dc 12% 15%,transparent 16%),radial-gradient(ellipse at 42% 78%,#7f899d 0 6%,#cbd1dc 7% 10%,transparent 11%);inset:10%;opacity:.88}
+.egg-nature::after{background:linear-gradient(55deg,transparent 0 44%,rgba(61,126,51,.55) 45% 50%,transparent 51%),radial-gradient(ellipse at 35% 35%,#7dd55c 0 10%,transparent 11%),radial-gradient(ellipse at 65% 65%,#4a923e 0 10%,transparent 11%);inset:15%;opacity:.78}
+/* Breeding eggs keep rarity language but receive a subtle heart seal. */
+[class*="egg-breed-"]::after{background:radial-gradient(circle at 38% 42%,rgba(255,255,255,.65) 0 8%,transparent 9%),radial-gradient(circle at 62% 42%,rgba(255,255,255,.65) 0 8%,transparent 9%),linear-gradient(45deg,transparent 42%,rgba(255,255,255,.48) 43% 57%,transparent 58%);inset:22%;opacity:.62;transform:rotate(45deg)}
+/* Cave and Lab should always remain usable on narrow phones/tablets. */
+@media(max-width:600px){
+  .cave-screen{width:calc(100vw - 12px)!important;max-height:calc(var(--usable-height,100dvh) - var(--hud-bottom,90px) - 12px)!important;padding:10px!important;border-width:4px!important}
+  .cave-screen h2{font-size:27px!important}.cave-art{width:150px;height:92px;margin-bottom:8px}
+  .breed-row{grid-template-columns:42px minmax(0,1fr)!important;text-align:left}.breed-row>.egg-shape{width:38px;height:48px;margin:0}
+  .breed-row .row-actions{display:grid;grid-template-columns:1fr 1fr}.breed-row .row-actions button{min-width:0}
+  #mutationLabScreen{max-height:calc(var(--usable-height,100dvh) - var(--hud-bottom,90px) - 12px)!important}
+  .moon-merchant-panel{max-width:calc(100vw - 12px)!important}
+}
+@media(max-width:350px){.currency-pill{font-size:11px!important}.title-badge{font-size:10px!important}.shop-grid,.book-grid{grid-template-columns:1fr!important}.modal-card{padding:9px!important}.tabs{gap:5px!important}.tab{font-size:11px!important;padding:9px 4px!important}}
+body.user-reduced-motion .shop-card,body.user-reduced-motion .upgrade-compact,body.user-reduced-motion .quest-card{transition:none!important}
+</style>
+
+<script id="zoogle-pass-polish-router">
 (()=>{
+  const RELEASE='Pass & Polish V1';
   const order=['main','rocky','moon','storage','tribal','cave','lab','mothership'];
   const names={main:'Main Island',rocky:'Rocky Island',moon:'Moon',storage:'Storage Cliffs',tribal:'Tribal Island',cave:'Breeding Cave',lab:'Mutation Lab',mothership:'Mothership'};
-  const existing=new Map(AREAS.map(a=>[a.id,a]));
-  for(const id of order)if(!existing.has(id))existing.set(id,{id,name:names[id],system:id==='moon'||id==='mothership'});
-  AREAS.splice(0,AREAS.length,...order.map(id=>existing.get(id)),...([...existing.values()].filter(a=>!order.includes(a.id))));
-  const routedRenderArea=renderArea;
-  function normalizeAreaShell(){
-    const id=AREAS.some(a=>a.id===state.currentArea)?state.currentArea:'main';
-    if(id!==state.currentArea)state.currentArea=id;
-    const area=AREAS.find(a=>a.id===id);
-    els.areaName.textContent=area?.name||names[id]||'Main Island';
-    document.body.dataset.spaceArea=(id==='moon'||id==='mothership')?id:'';
-    const moon=$('moonScreen'),ship=$('mothershipScreen'),lab=$('mutationLabScreen');
-    if(moon)moon.hidden=id!=='moon';
-    if(ship)ship.hidden=id!=='mothership';
-    if(lab)lab.style.display=id==='lab'?'block':'none';
-    els.caveScreen.style.display=id==='cave'?'block':'none';
-    if(['main','rocky','storage','tribal','moon'].includes(id)){els.island.style.display='block';els.islandShadow.style.display='block'}
-    else{els.island.style.display='none';els.islandShadow.style.display='none'}
-    els.island.classList.toggle('moon',id==='moon');
-    const craft=$('moonMerchantCraft');if(craft)craft.hidden=id!=='moon';
-    els.hatchSlot.style.display=['cave','lab','moon','mothership'].includes(id)?'none':'';
+  const existing=new Map();
+  for(const a of AREAS)if(a?.id&&!existing.has(a.id))existing.set(a.id,a);
+  for(const id of order){
+    const old=existing.get(id)||{};
+    existing.set(id,{...old,id,name:names[id],system:id==='moon'||id==='mothership'});
   }
-  renderArea=function(...args){let out;try{out=routedRenderArea.apply(this,args)}finally{normalizeAreaShell();requestAnimationFrame(normalizeAreaShell)}return out};
-  switchArea=function(dir){if(placement){showToast('Finish placing your Zoogle first!');return}let i=AREAS.findIndex(a=>a.id===state.currentArea);if(i<0)i=0;state.currentArea=AREAS[(i+dir+AREAS.length)%AREAS.length].id;closeZoogleMenu();renderArea();save()};
-  setArea=function(id){if(!AREAS.some(a=>a.id===id))id='main';state.currentArea=id;renderArea();save()};
+  const extras=[...existing.values()].filter(a=>!order.includes(a.id));
+  AREAS.splice(0,AREAS.length,...order.map(id=>existing.get(id)),...extras);
+
+  const routedRenderArea=renderArea;
+  let repairing=false,queued=false,lastArea=null;
+  const unlocked=id=>id==='main'||(id==='rocky'&&state.rockyUnlocked)||(id==='storage'&&state.storageCliffsUnlocked)||(id==='tribal'&&state.tribalUnlocked);
+  function areaId(){
+    if(!AREAS.some(a=>a.id===state.currentArea))state.currentArea='main';
+    return state.currentArea;
+  }
+  function clearSpecialTransient(id){
+    if(id!=='moon'){$('moonMerchantCraft')?.setAttribute('hidden','');}
+    if(id!=='tribal')document.querySelectorAll('.meteor-glow').forEach(e=>e.remove());
+    if(state.weather?.type!=='abduction'||state.weather?.abduction?.area!==id)$('abductionFx')?.remove();
+  }
+  function directFallback(id){
+    try{
+      if(['main','rocky','storage','tribal'].includes(id)){
+        els.island.style.display='block';els.islandShadow.style.display='block';
+        els.caveScreen.style.display='none';$('mutationLabScreen')?.style.setProperty('display','none');
+        if(id==='rocky'&&!state.rockyUnlocked)return lockedPanel('Rocky Island','A rough new island with more space for Zoogles.',1000,unlockRocky);
+        if(id==='storage'&&!state.storageCliffsUnlocked)return lockedPanel('Storage Cliffs','Store Zoogles in a chest and let their sell value grow.',500,unlockStorageCliffs);
+        if(id==='tribal'&&!state.tribalUnlocked)return lockedPanel('Tribal Island','Ancient ruins where red meteors can awaken Ancient Zoogles.',1500,unlockTribalIsland);
+        els.areaPanel.classList.add('hidden');els.areaPanel.classList.remove('storage-panel');renderZoogles(false);
+        if(id==='storage')renderStoragePanel();if(id==='tribal')renderTribalMeteor();return;
+      }
+      if(id==='cave'){els.island.style.display='none';els.islandShadow.style.display='none';renderCave();return}
+      if(id==='lab'){els.island.style.display='none';els.islandShadow.style.display='none';window.ZoogleMutationLab?.render?.();return}
+      if(id==='moon'){els.island.style.display='block';els.islandShadow.style.display='block';window.ZoogleAliens?.renderMoon?.();return}
+      if(id==='mothership'){els.island.style.display='none';els.islandShadow.style.display='none';window.ZoogleAliens?.renderMothership?.();return}
+    }catch(e){console.warn('Area fallback failed',id,e)}
+  }
+  function repairAreaShell(forceRender=false){
+    if(repairing)return;repairing=true;
+    try{
+      const id=areaId(),area=AREAS.find(a=>a.id===id);
+      els.areaName.textContent=names[id]||area?.name||'Main Island';
+      document.body.dataset.spaceArea=(id==='moon'||id==='mothership')?id:'';
+      document.body.dataset.zoogleArea=id;
+      const moon=$('moonScreen'),ship=$('mothershipScreen'),lab=$('mutationLabScreen');
+      if(moon)moon.hidden=id!=='moon';if(ship)ship.hidden=id!=='mothership';if(lab)lab.style.display=id==='lab'?'block':'none';
+      els.caveScreen.style.display=id==='cave'?'block':'none';
+      const islandArea=['main','rocky','storage','tribal','moon'].includes(id);
+      els.island.style.display=islandArea?'block':'none';els.islandShadow.style.display=islandArea?'block':'none';
+      els.island.classList.toggle('rocky',id==='rocky');els.island.classList.toggle('storage',id==='storage');els.island.classList.toggle('tribal',id==='tribal');els.island.classList.toggle('moon',id==='moon');
+      els.hatchSlot.style.display=['cave','lab','moon','mothership'].includes(id)?'none':'';
+      clearSpecialTransient(id);
+      if(id==='moon'){$('moonMerchantCraft')?.removeAttribute('hidden');window.ZoogleAliens?.renderMoon?.()}
+      else if(id==='mothership')window.ZoogleAliens?.renderMothership?.();
+      else if(id==='cave')renderCave();
+      else if(id==='lab')window.ZoogleMutationLab?.render?.();
+      else if(forceRender&&unlocked(id)){renderZoogles(false);if(id==='storage')renderStoragePanel();if(id==='tribal')renderTribalMeteor()}
+      window.ZoogleMusic?.setArea?.(id);
+      lastArea=id;
+    }finally{repairing=false}
+  }
+  renderArea=function(...args){
+    const id=areaId();let out,failed=false;
+    try{out=routedRenderArea.apply(this,args)}catch(e){failed=true;console.warn('Area renderer recovered from an error',id,e);directFallback(id)}
+    repairAreaShell(failed);
+    if(!queued){queued=true;requestAnimationFrame(()=>{queued=false;repairAreaShell(false)})}
+    return out;
+  };
+  switchArea=function(dir){
+    if(placement){showToast('Finish placing your Zoogle first!');return}
+    let i=AREAS.findIndex(a=>a.id===areaId());if(i<0)i=0;
+    state.currentArea=AREAS[(i+dir+AREAS.length)%AREAS.length].id;closeZoogleMenu();renderArea();save();
+  };
+  setArea=function(id){if(!AREAS.some(a=>a.id===id))id='main';state.currentArea=id;closeZoogleMenu();renderArea();save()};
   els.prevArea.onclick=()=>switchArea(-1);els.nextArea.onclick=()=>switchArea(1);
-  normalizeAreaShell();renderArea();
+
+  // Keyboard/QOL: Escape closes the topmost modal or action sheet.
+  window.addEventListener('keydown',e=>{
+    if(e.key!=='Escape')return;
+    const modal=[...document.querySelectorAll('.modal.open')].pop();
+    if(modal&&modal.id!=='confirmModal'){e.preventDefault();closeModal(modal.id);return}
+    if(els.zoogleMenu?.classList.contains('open')){e.preventDefault();closeZoogleMenu()}
+  });
+
+  // Small diagnostics helper for future bug reports. It never changes the save.
+  window.ZoogleHealthCheck=()=>{
+    const duplicateIds=[...document.querySelectorAll('[id]')].map(e=>e.id).filter((id,i,a)=>a.indexOf(id)!==i);
+    const areaIds=AREAS.map(a=>a.id),duplicateAreas=areaIds.filter((id,i,a)=>a.indexOf(id)!==i);
+    const badEggs=(state.eggs||[]).filter(e=>!EGGS[e.eggId||e.type]).map(e=>e.eggId||e.type||'?');
+    const badZoogles=(state.zoogles||[]).filter(z=>!ZOOGLES[z.type]).map(z=>z.type||'?');
+    const result={release:RELEASE,area:state.currentArea,areaName:els.areaName.textContent,areas:areaIds,duplicateIds:[...new Set(duplicateIds)],duplicateAreas:[...new Set(duplicateAreas)],badEggs,badZoogles,multiplayer:{active:!!window.ZoogleMultiplayer?.active,role:window.ZoogleMultiplayer?.role||null,busy:!!window.ZoogleAtomic?.busy,action:window.ZoogleAtomic?.currentAction||null},ok:!duplicateIds.length&&!duplicateAreas.length&&!badEggs.length&&!badZoogles.length};
+    return result;
+  };
+  repairAreaShell(true);renderArea();
+  const health=window.ZoogleHealthCheck();if(!health.ok)console.warn('Zoogle Health Check',health);
 })();
 </script>
 
