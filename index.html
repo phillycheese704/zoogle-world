@@ -1704,19 +1704,6 @@ for(const id of ['simple','quality','premium','deluxe']){
 }
 AREAS.splice(AREAS.findIndex(a=>a.id==='rocky')+1,0,{id:'moon',name:'Moon',system:true});
 AREAS.push({id:'mothership',name:'Mothership',system:true});
-(function normalizeAreaOrder(){
-  const defs={main:'Main Island',rocky:'Rocky Island',moon:'Moon',storage:'Storage Cliffs',tribal:'Tribal Island',cave:'Breeding Cave',mothership:'Mothership',lab:'Mutation Lab'};
-  const wanted=['main','rocky','moon','storage','tribal','cave','mothership','lab'];
-  for(const id of wanted){
-    if(id==='lab') continue;
-    if(!AREAS.some(a=>a.id===id))AREAS.push({id,name:defs[id],system:id==='moon'||id==='mothership'});
-  }
-  const current=new Map(AREAS.map(a=>[a.id,a]));
-  const extras=AREAS.filter(a=>!wanted.includes(a.id));
-  AREAS.length=0;
-  for(const id of wanted){if(current.has(id))AREAS.push(current.get(id));}
-  AREAS.push(...extras);
-})();
 
 UPGRADE_DATA.eggSlots.module='hatchery';
 UPGRADE_DATA.breedingSlots.module='cave';
@@ -3173,7 +3160,7 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
     if(mp.guestActive||window.ZoogleAtomic.transitioning)return;const epoch=mp.epoch;
     try{
       const {client,user}=await clientAndUser();
-      const res=await client.rpc('zoogle_v1_respond',{p_request_id:id,p_accept:!!accept,p_username:getUsername(),p_snapshot:buildSharedSnapshot(),p_client_ms:worldNow()});
+      const seed=buildSharedSnapshot();if(accept&&!mp.active)seed.__reseed=true;const res=await client.rpc('zoogle_v1_respond',{p_request_id:id,p_accept:!!accept,p_username:getUsername(),p_snapshot:seed,p_client_ms:worldNow()});
       if(res.error)throw res.error;if(epoch!==mp.epoch||mp.guestActive)return;
       const row=rowOf(res.data);
       if(accept){
@@ -3232,7 +3219,7 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
       await disconnectRealtime();const epoch=connectionEpoch,sid=mp.sessionId;
       const {client}=await clientAndUser();if(!mp.active||mp.sessionId!==sid||epoch!==connectionEpoch)return;
       await memberHeartbeat();if(!mp.active||mp.sessionId!==sid||epoch!==connectionEpoch)return;
-      const ch=client.channel('zoogle-v1:'+sid,{config:{private:true,broadcast:{self:false,ack:true},presence:{key:mp.userId}}});mp.channel=ch;
+      const ch=client.channel('zoogle-v1:'+sid,{config:{broadcast:{self:false,ack:false},presence:{key:mp.userId}}});mp.channel=ch;
       const live=()=>mp.channel===ch&&mp.sessionId===sid&&epoch===connectionEpoch;
       ch.on('broadcast',{event:'cursor'},({payload})=>{if(live())receiveCursor(payload)});
       ch.on('broadcast',{event:'state'},()=>{if(live())window.ZoogleAtomic.pull()});
@@ -3357,7 +3344,7 @@ body.mp-guest .currency-row{display:flex!important}body.mp-guest .corner-buttons
     window.ZoogleAtomic.transitioning=false;startHostServices();
   }
 
-  async function hostHeartbeat(){if(hostBusy||!mp.active||mp.role!=='host'||mp.guestActive||window.ZoogleIslandSharing?.visiting)return;hostBusy=true;try{const ready=await ensureHostSession();if(ready){await memberHeartbeat();await pollRequests()}}finally{hostBusy=false}}
+  async function hostHeartbeat(){if(hostBusy||!mp.active||mp.role!=='host'||mp.guestActive||window.ZoogleIslandSharing?.visiting)return;hostBusy=true;try{await memberHeartbeat();await pollRequests()}finally{hostBusy=false}}
   async function startHostServices(){
     // Offline by default: keep Passport viewing and join-request polling available,
     // but do not create a live multiplayer session until the host accepts a request.
@@ -3875,10 +3862,10 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
   const username=()=>window.ZoogleMultiplayer?.username||'Player';
   const uuid=()=>crypto.randomUUID?.()||'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)});
   const KEYS=['coins','gems','rockyUnlocked','storageCliffsUnlocked','tribalUnlocked','breedingUnlocked','mutationLabUnlocked','moonUnlocked','mothershipUnlocked','zoogles','storageChest','discovered','claimed','eggs','breedings','collectAllReadyAt','upgrades','weather','nextAncientRollAt','ancientMeteorActive','quests','mutationLab','sharedPlacement','merchant','totemInventory','simulationAt','islandCode','islandName','schemaVersion'];
-  let offset=0,lastClockSample=0,transactionEpoch=0,pulling=false,pullQueued=false,effects=[],renderKeys={},lastBackground=0,pendingCommit=null;
+  let offset=0,lastClockSample=0,transactionEpoch=0,pulling=false,pullQueued=false,effects=[],renderKeys={},lastBackground=0,pendingCommit=null,lastUserActionAt=0,lastLiveTickTxn=0;
   // Live multiplayer is session-only. A page load always starts the home world offline.
   if(state&&state.__sharedSession)delete state.__sharedSession;
-  const W=window.ZoogleAtomic={busy:false,reducing:false,transitioning:false,confirmed:null,awaitingHome:false,tutorialDone:!!state.tutorialDone,
+  const W=window.ZoogleAtomic={busy:false,currentAction:null,reducing:false,transitioning:false,confirmed:null,awaitingHome:false,tutorialDone:!!state.tutorialDone,
     now:()=>Date.now()+offset,
     clock(ms,start=Date.now()){
       const end=Date.now();if(!Number.isFinite(Number(ms))||end-start>5000)return;
@@ -3891,7 +3878,7 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
       if(active()&&W.confirmed)return {...clone(W.confirmed),currentArea:state.currentArea,breedSelect:clone(state.breedSelect),tutorialDone:W.tutorialDone,pendingPlacement:null};
       return state;
     },
-    cancel(){transactionEpoch++;pendingCommit=null;W.busy=false;W.reducing=false;effects=[]},
+    cancel(){transactionEpoch++;pendingCommit=null;W.busy=false;W.currentAction=null;W.reducing=false;effects=[]},
     migrate(s){
       s.schemaVersion=7;s.moonUnlocked=!!s.moonUnlocked;s.mothershipUnlocked=!!s.mothershipUnlocked;
       s.totemInventory=s.totemInventory&&typeof s.totemInventory==='object'?s.totemInventory:{};
@@ -3983,9 +3970,22 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
       if(W.awaitingHome&&!active()){if(action!=='tick')showToast('Reconnecting to your saved world…');return false}
       if(pendingCommit&&!W.reducing){W.pull();if(action!=='tick')showToast('Checking the previous action…');return false}
       if(W.reducing)return reducer();
-      if(W.busy){if(action!=='tick'&&action!=='placement-heartbeat')showToast('Syncing — try again in a moment.');return false}
-      const live=active(),sid=mp()?.sessionId,epoch=++transactionEpoch;
-      W.busy=true;effects=[];let result=true,lease=null,committed=false,client=null;
+      const live=active(),background=action==='tick'||action==='placement-heartbeat';
+      if(live&&action==='tick'){
+        const n=Date.now();
+        if(n-lastLiveTickTxn<5000||W.busy||n-lastUserActionAt<1800)return false;
+        lastLiveTickTxn=n;
+      }
+      if(!background)lastUserActionAt=Date.now();
+      if(W.busy){
+        if(!background&&(W.currentAction==='tick'||W.currentAction==='placement-heartbeat')){
+          const deadline=Date.now()+2500;
+          while(W.busy&&Date.now()<deadline)await new Promise(r=>setTimeout(r,35));
+        }
+        if(W.busy){if(!background)showToast('Syncing — try again in a moment.');return false}
+      }
+      const sid=mp()?.sessionId,epoch=++transactionEpoch;
+      W.busy=true;W.currentAction=action;effects=[];let result=true,lease=null,committed=false,client=null;
       const previous=clone(state);
       try{
         if(live){
@@ -4017,7 +4017,7 @@ body.user-reduced-motion *,body.user-reduced-motion *::before,body.user-reduced-
         if(epoch===transactionEpoch){W.reducing=false;if(live&&W.confirmed)W.apply(W.confirmed,false);else state=previous;effects=[];if(action!=='tick')showToast('Action not confirmed. Reconnecting…');pullQueued=true}
       }finally{
         if(epoch===transactionEpoch){
-          W.reducing=false;W.busy=false;
+          W.reducing=false;W.busy=false;W.currentAction=null;
           if(!committed&&live&&lease?.acquired&&client)client.rpc('zoogle_v1_abort',{p_session_id:sid,p_token:lease.token}).catch(()=>{});
           const queued=committed?effects:[];effects=[];
           W.refresh();for(const fn of queued){try{fn()}catch(e){console.warn('Presentation effect failed',e)}}
@@ -4473,6 +4473,40 @@ body[data-space-area="moon"]{background:radial-gradient(circle at 80% 18%,rgba(2
   #island.moon .moon-boulder.b3{left:59%;top:27%;transform:scale(.72)}
 }
 </style>
+
+
+<script id="zoogle-core-stability-fix">
+(()=>{
+  const order=['main','rocky','moon','storage','tribal','cave','lab','mothership'];
+  const names={main:'Main Island',rocky:'Rocky Island',moon:'Moon',storage:'Storage Cliffs',tribal:'Tribal Island',cave:'Breeding Cave',lab:'Mutation Lab',mothership:'Mothership'};
+  const existing=new Map(AREAS.map(a=>[a.id,a]));
+  for(const id of order)if(!existing.has(id))existing.set(id,{id,name:names[id],system:id==='moon'||id==='mothership'});
+  AREAS.splice(0,AREAS.length,...order.map(id=>existing.get(id)),...([...existing.values()].filter(a=>!order.includes(a.id))));
+  const routedRenderArea=renderArea;
+  function normalizeAreaShell(){
+    const id=AREAS.some(a=>a.id===state.currentArea)?state.currentArea:'main';
+    if(id!==state.currentArea)state.currentArea=id;
+    const area=AREAS.find(a=>a.id===id);
+    els.areaName.textContent=area?.name||names[id]||'Main Island';
+    document.body.dataset.spaceArea=(id==='moon'||id==='mothership')?id:'';
+    const moon=$('moonScreen'),ship=$('mothershipScreen'),lab=$('mutationLabScreen');
+    if(moon)moon.hidden=id!=='moon';
+    if(ship)ship.hidden=id!=='mothership';
+    if(lab)lab.style.display=id==='lab'?'block':'none';
+    els.caveScreen.style.display=id==='cave'?'block':'none';
+    if(['main','rocky','storage','tribal','moon'].includes(id)){els.island.style.display='block';els.islandShadow.style.display='block'}
+    else{els.island.style.display='none';els.islandShadow.style.display='none'}
+    els.island.classList.toggle('moon',id==='moon');
+    const craft=$('moonMerchantCraft');if(craft)craft.hidden=id!=='moon';
+    els.hatchSlot.style.display=['cave','lab','moon','mothership'].includes(id)?'none':'';
+  }
+  renderArea=function(...args){let out;try{out=routedRenderArea.apply(this,args)}finally{normalizeAreaShell();requestAnimationFrame(normalizeAreaShell)}return out};
+  switchArea=function(dir){if(placement){showToast('Finish placing your Zoogle first!');return}let i=AREAS.findIndex(a=>a.id===state.currentArea);if(i<0)i=0;state.currentArea=AREAS[(i+dir+AREAS.length)%AREAS.length].id;closeZoogleMenu();renderArea();save()};
+  setArea=function(id){if(!AREAS.some(a=>a.id===id))id='main';state.currentArea=id;renderArea();save()};
+  els.prevArea.onclick=()=>switchArea(-1);els.nextArea.onclick=()=>switchArea(1);
+  normalizeAreaShell();renderArea();
+})();
+</script>
 
 </body>
 </html>
